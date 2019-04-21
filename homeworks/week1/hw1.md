@@ -1,5 +1,5 @@
-##交作業流程
-###下載作業檔案
+## 交作業流程
+### 下載作業檔案
 1. 到老師的GitHub Classroom [邀請連結](https://classroom.github.com/a/V4hZopA2)
 進入後會自動複製一個 repository 名為mentor-program-3rd-**studentsName**，但管理員權限還是在老師身上。
 1. 按下右上角綠色的clone or download鍵 出現一連結，複製連結![green buttom](https://raw.githubusercontent.com/lagom0327/Markdownphotos/master/week1/hw1/cloneordownload.png?token=ALZTNIJOB4256BIXCGHXXSS4XLMW6) 
@@ -24,9 +24,9 @@
 1. 每周要寫作業前都要建立一條新的 Branch 名為 weekx ，x = 第幾周。像第一周要寫作業輸入 `git branch week1` ，建立名為 week1 的 Branch。
 1. 建立好新的 Branch 後使用 `git checkout week1` 轉換指標到 week1 才能開始寫作業。
 -------
-###寫作業中 ~~~~~~~~~~~
+### 寫作業中 ~~~~~~~~~~~
 -------
-###寫完作業後步驟
+### 寫完作業後步驟
 
 1. 寫完後會到 CLI 用 `gst` 查看有哪些檔案被修改了。然後用 `git commit –am "message"` 存新版本，如果有新增沒在暫存區的檔案要用 `git add .` 加上 `git commit -m "message"` 存儲新版本。 CLI 會跑一下下等 *Eslint* 檢查提交的程式有無符合規範，有錯誤的話會跳出提示要修改哪些地方，修改完後再輸入一次 `git commit –am "message"` 提交 comit 。
 1. 確定作業都沒問題後提使用 `git push origin week1` 交作業到遠端的網路上。
@@ -39,6 +39,6 @@
 1. 當老師看完作業後，會同意 *merge pull request* ，刪除同學的 week1 的 Branch，並關掉在 homework-3rd 的 Issue。看到是老師 **aszx87410** 關的 Issue 就代表這周的作業已經大功到成啦!
 1. 但如果作業老師有留言要改哪裡，要重新從[開始寫作業前步驟](#here)做一次。
 ------
-###老師確認完作業後(不論是否還要修改)
+### 老師確認完作業後(不論是否還要修改)
 1. 因為老師已經幫忙把遠端的 Branch 都整合到 master ，所以我們自己要把最新的 master 拉到本地。先用 `git checkout master` 轉換指標位置，再用 `git pull origin master` 得到最新版本。
 1. 刪除已被整合的 Brach， `git branch -d week1`
