@@ -41,4 +41,4 @@
 ------
 ### 老師確認完作業後(不論是否還要修改)
 1. 因為老師已經幫忙把遠端的 Branch 都整合到 master ，所以我們自己要把最新的 master 拉到本地。先用 `git checkout master` 轉換指標位置，再用 `git pull origin master` 得到最新版本。
-1. 刪除已被整合的 Brach， `git branch -d week1`
+1. 刪除已被整合的 Branch， `git branch -d week1`
