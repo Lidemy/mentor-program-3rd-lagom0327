@@ -16,7 +16,7 @@ h0w 哥的電腦內就有內建可使用 CLI 的工具 cmd.exe ，但它的[缺�
 
 如果下面有指令不能用，請按右下角綠底白十字按扭右方的黑色倒三角形，挑選一個 Shell 使用，如果系統是 Windows 推薦使用 {bash} 。
 
-至於為甚麼要用不同的 Shell，可以先認識 [Shell 是甚麼](https://ithelp.ithome.com.tw/articles/10207473?sc=iThelpR) 。簡單來說，雖然不同的系統都是用類似的語言建立，譬如大家都會說英語，但如果我們想流利地和外國人溝通，單純只會使用英語是不夠，必須了解當地的生活用語和**縮寫**，才能溝通無礙。就像如果用訊息傳 wtf (輸入) 給只學過教科書上英語的人(系統)，他並不會明白他被罵了(不會產生輸出)。但這個縮寫如果用另一通訊軟體 (Shell) 傳出，此通訊軟體會默默地將 wtf 翻譯成 what the fuck 給對方，此時我就死定了。
+至於為甚麼要用不同的 Shell，可以先認識 [Shell 是甚麼](https://ithelp.ithome.com.tw/articles/10207473?sc=iThelpR) 。簡單來說，雖然不同的系統都是用類似的語言建立，譬如大家都會說英語，但如果我們想流利地和外國人溝通，單純只會使用英語是不夠，必須了解當地的生活用語和**縮寫**，才能溝通無礙。就像如果用訊息傳 wtf (輸入) 給只學過教科書上英語的人(系統/核心)，他並不會明白他被罵了(不會產生輸出)。但這個縮寫如果用另一通訊軟體 (Shell) 傳出，此通訊軟體會默默地將 wtf 翻譯成 what the fuck 給對方，此時我就死定了。
       
 
       
@@ -93,7 +93,7 @@ lrwxrwxrwx 1 userName 197609  21 八月 26  2017 'My Videos' -> /c/Users/userNam
 <tr>
 <td " align='center' valign="middle"><br><font color=#FF6A6A> rm<br> <br></td>
 <td>rm test<br>rm -r test <br> rm -r -f test</td>
-<td>刪除名為 test 的檔案 <br> 刪除名為 test 的資料夾，r為資料夾意思<br>強制刪除名為 test 的資料夾，不論裡面有無檔案，f為強迫意思 </td>
+<td>刪除名為 test 的檔案 <br> 刪除名為 test 的資料夾，r 為資料夾意思<br>強制刪除名為 test 的資料夾，不論裡面有無檔案，f 為強迫意思 </td>
 </tr>
 <tr>
 <td " align='center' valign="middle"><font color=#FF6A6A>mkdir </td>
@@ -123,5 +123,8 @@ lrwxrwxrwx 1 userName 197609  21 八月 26  2017 'My Videos' -> /c/Users/userNam
    1. 按 `i` 或 `Insert` 開啟普通模式
    1. 輸入想修改的內容
    1. 按 `Esc` 後再輸入 `:wq` 存儲離開
+
+- 小訣竅
+   - 要輸入檔案名稱時，可以先打前面幾個字再按 `tab` 鍵就會自動補全檔案名稱 
 
  
