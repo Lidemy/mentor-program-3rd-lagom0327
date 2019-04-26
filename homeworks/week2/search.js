@@ -15,6 +15,8 @@ const search = (arr, n) => {
   if (i <= maxTimes) return index;
   return -1;
 };
-
+const arr = [];
+for (let i = 0; i < 100000; i += 1) arr.push(i);
+console.log(search(arr, 122));
 console.log(search([1, 3, 10, 14, 39], 14));
 console.log(search([1, 3, 10, 14, 39], 299));
