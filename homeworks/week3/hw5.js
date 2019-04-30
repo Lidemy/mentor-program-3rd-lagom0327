@@ -1,17 +1,17 @@
-const reverse = (str) => {
+function reverse(str) {
   let newStr = '';
   for (let i = 0; i < str.length; i++) newStr += str[str.length - 1 - i];
   return newStr;
-};
+}
 function sort(a, b) {
   if (a.length > b.length) return [a, b];
   return [b, a];
 }
-const sameLength = (num) => {
+function sameLength(num) {
   const newNum = [num[0]];
   newNum[1] = '0'.repeat(num[0].length - num[1].length) + num[1];
   return newNum;
-};
+}
 function add(a, b) {
   let str = '';
   let num = sort(a, b);
@@ -31,5 +31,5 @@ function add(a, b) {
   str = reverse(str);
   return str;
 }
-
+// console.log(add("12312383813881381381", "129018313819319831" ));
 module.exports = add;
