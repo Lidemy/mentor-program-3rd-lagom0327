@@ -31,5 +31,5 @@ function add(a, b) {
   str = reverse(str);
   return str;
 }
-// console.log(add("12312383813881381381", "129018313819319831" ));
+
 module.exports = add;
