@@ -7,7 +7,6 @@ const search = (arr, n) => {
   let index = range;// index of first time
   while (arr[index] !== n && i <= maxTimes) {
     range = Math.floor(range / 2);
-    // console.log('array[',index,'] = ', arr[index])
     if (range === 0) range = 1;// range can not be 0
     if (n > arr[index]) index += range;// the index will be check at next loop
     else index -= range;

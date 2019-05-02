@@ -1,10 +1,10 @@
-const add = require('./hw5.4');
+const add = require('./hw5');
 
 function multi(a, b) {
   if (a === '0' || b === '0') return '0';
   const arrMult = Array(a.length).fill(0).map(Array(b.length).fill(0));
   // 不用 fill(0) 會出現 [ [ <4 empty items> ], [ <4 empty items> ] ] 後面用push 順序不確定
-  // a 為 n 位數形成 n 個陣列 ，兩個陣列相加是答案
+  // a 為 n 位數和 b 相乘後形成 n 個陣列 ，兩個陣列相加是答案
   /* 後面的陣列要加 0
      33
     *12
