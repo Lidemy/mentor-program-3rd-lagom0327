@@ -7,18 +7,18 @@ function add(a, b) {
   const arrA = add0(a.split(''), a.length - b.length);
   const arrB = add0(b.split(''), b.length - a.length);
   const arrAdd = [];
-  let resume = 0;
+  let overflow = 0;
   for (let i = length - 1; i >= 0; i--) {
-    const ad = parseInt(arrA[i], 10) + parseInt((arrB[i]), 10) + resume;
+    const ad = parseInt(arrA[i], 10) + parseInt((arrB[i]), 10) + overflow;
     if (ad > 9) {
       arrAdd.unshift(ad - 10);
-      resume = 1;
+      overflow = 1;
     } else {
       arrAdd.unshift(ad);
-      resume = 0;
+      overflow = 0;
     }
   }
-  if (resume === 1) arrAdd.unshift('1');
+  if (overflow === 1) arrAdd.unshift('1');
   return arrAdd.join('');
 }
 

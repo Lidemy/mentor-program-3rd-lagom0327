@@ -1,4 +1,4 @@
-const add = require('./hw5_arr');
+const add = require('./hw5.4');
 
 function multi(a, b) {
   if (a === '0' || b === '0') return '0';
@@ -14,18 +14,18 @@ function multi(a, b) {
     ----
     396  */
   for (let i = a.length - 1; i >= 0; i--) {
-    let resume = 0;
+    let overflow = 0;
     for (let j = b.length - 1; j >= 0; j--) {
-      const mult = parseInt(a[i], 10) * parseInt((b[j]), 10) + resume;
+      const mult = parseInt(a[i], 10) * parseInt((b[j]), 10) + overflow;
       if (mult > 9) {
         arrMult[a.length - 1 - i][j] = mult % 10;
-        resume = Math.floor(mult / 10);
+        overflow = Math.floor(mult / 10);
       } else {
         arrMult[a.length - 1 - i][j] = mult;
-        resume = 0;
+        overflow = 0;
       }
     }
-    if (resume !== 0) arrMult[a.length - 1 - i].unshift(resume);
+    if (overflow !== 0) arrMult[a.length - 1 - i].unshift(overflow);
   }
   /* 後面的陣列補 0
      33

@@ -4,8 +4,7 @@ function reverse(str) {
   return newStr;
 }
 function sort(a, b) {
-  if (a.length > b.length) return [a, b];
-  return [b, a];
+  return a.length > b.length ? [a, b] : [b, a];
 }
 function sameLength(num) {
   const newNum = [num[0]];
@@ -16,18 +15,18 @@ function add(a, b) {
   let str = '';
   let num = sort(a, b);
   num = sameLength(num);
-  let resume = 0;
+  let overflow = 0;
   for (let i = num[0].length - 1; i >= 0; i--) {
-    const ad = parseInt(num[0][i], 10) + parseInt((num[1][i]), 10) + resume;
+    const ad = parseInt(num[0][i], 10) + parseInt((num[1][i]), 10) + overflow;
     if (ad > 9) {
       str += (ad - 10).toString();
-      resume = 1;
+      overflow = 1;
     } else {
       str += ad.toString();
-      resume = 0;
+      overflow = 0;
     }
   }
-  if (resume === 1) str += '1';
+  if (overflow === 1) str += '1';
   str = reverse(str);
   return str;
 }
