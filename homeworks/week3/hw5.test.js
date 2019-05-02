@@ -1,4 +1,4 @@
-const add = require('./hw5');
+const add = require('./hw5.3');
 
 describe('hw5', () => {
   it('should return correct answer when a=11 and b=999', () => {
