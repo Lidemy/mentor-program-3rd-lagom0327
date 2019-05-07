@@ -7,7 +7,7 @@ if (process.argv[2] === 'list') {
   request.get(`https://lidemy-book-store.herokuapp.com/books?_limit=${max}`,
     (error, response, body) => {
       const json = JSON.parse(body);
-      const length = json.length < max ? json.length : max;
+      const length = json.length < max ? json.length : max; // 用 delete 後長度可能小於 20
       for (let i = 0; i < length; i++) console.log(`${json[i].id} ${json[i].name}`);
     });
 }
@@ -30,7 +30,7 @@ if (process.argv[2] === 'create') {
   let lastId;
   request.get('https://lidemy-book-store.herokuapp.com/books', (error, response, body) => {
     const json = JSON.parse(body);
-    const { length } = json;
+    const { length } = json; // Use object destructuring
     lastId = json[length - 1].id;
     // 得到最後一位 id
     request.post(
