@@ -22,9 +22,7 @@ const topStreamsOfLOL = () => {
   }, 1000);
 };
 const getTopStreamsOfLOL = (num) => {
-  for (let i = 0; i < num / 100; i++) {
-    topStreamsOfLOL();
-  }
+  for (let i = 0; i < num / 100; i++) topStreamsOfLOL();
 };
 
 getTopStreamsOfLOL(200);
