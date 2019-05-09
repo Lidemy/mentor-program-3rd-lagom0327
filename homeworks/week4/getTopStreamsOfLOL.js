@@ -2,7 +2,7 @@ const request = require('request');
 // from https://discuss.dev.twitch.tv/t/node-js-using-api-example/16904
 
 let after = '';
-const requestTimes = 2;
+const requestTimes = 4;
 let counterTimes = 0;
 
 const options = {
