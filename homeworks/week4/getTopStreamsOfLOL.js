@@ -20,24 +20,13 @@ const getStreams = (callback) => {
     const json = JSON.parse(body);
     after = json.pagination.cursor;
     json.data.forEach(el => console.log(`${el.id} ${el.title}`));
-    callback();
+    if (counterTimes < requestTimes) callback();
   });
 };
-const lastTimeToGetStreams = () => {
-  request(options, (error, response, body) => {
-    const json = JSON.parse(body);
-    after = json.pagination.cursor;
-    json.data.forEach(el => console.log(`${el.id} ${el.title}`));
-  });
-};
+
 const changeURL = () => {
-  if (counterTimes < requestTimes - 1) {
-    options.url = `https://api.twitch.tv/helix/streams?game_id=21779&first=100&after=${after}`;
-    getStreams(changeURL);
-  } else { // 最後一次不用再呼叫一次 changURL
-    options.url = `https://api.twitch.tv/helix/streams?game_id=21779&first=100&after=${after}`;
-    lastTimeToGetStreams();
-  }
+  options.url = `https://api.twitch.tv/helix/streams?game_id=21779&first=100&after=${after}`;
+  getStreams(changeURL);
 };
 
 changeURL(); // changeURL(requestTimes) 還沒想到
