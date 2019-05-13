@@ -9,7 +9,7 @@ API 像電視遙控器，提供一個使用者如何和電視機上盒溝通的�
 
 ## 請找出三個課程沒教的 HTTP status code 並簡單介紹
 - 414 URI Too Long
-要求讀取的 URL 太久，超過伺服器能編譯的長度，所以拒絕使用者的要求。
+要求讀取的 URL 太長，超過伺服器能編譯的長度，所以拒絕使用者的要求。
 - 451 Unavailable For Legal Reasons
 想要讀取的網站因為法律的規定 EX : 違反著作權、隱私權 ...，或有政府要求刪除此網頁，而拒絕使用者訪問。雖然拒絕被訪問，但網頁的內容並沒有被刪除，通常使用其他方法可看到網頁內容。https://theinitium.com/article/20160628-mainland-githubcensor/
 
