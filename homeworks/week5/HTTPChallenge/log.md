@@ -17,12 +17,12 @@ request('https://lidemy-http-challenge.herokuapp.com/lv1?token={GOGOGO}',(err,re
 ```
 看了之前 week4 hw4 以為要把 name 放在 header 發送 request ，但都不成功，所以只好偷看 hint。
 
->用 GET 方式傳送的資料會被附在 URL 上面當作，所以傳了 token 就會變 ?token=xxx
+> hint: 用 GET 方式傳送的資料會被附在 URL 上面當作，所以傳了 token 就會變 ?token=xxx
 現在只要多傳一個 name 就行囉
 ?token=xxx&name=xxx
 
 ```
-啊...原來你叫 jk 啊！下一關的 token 是 {HellOWOrld}
+啊...原來你叫 xx 啊！下一關的 token 是 {HellOWOrld}
 ```
 ## Lv2
 ```js
@@ -35,13 +35,13 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv2?token={HellOWO
 我只記得那本書的 id 是兩位數，介於 54~58 之間，你可以幫幫我嗎？
 找到是哪一本之後把書的 id 用 GET 傳給我就行了。
 ```
-一開始想到 week4 挑戰題的寫法，要使用 Callback 讓程式能夠遞迴，但想要快點闖關玩，而且數字範圍不大，所以直接一個一個搜尋XD
+一開始想到 week4 挑戰題的寫法，要使用 Callback 讓程式能夠遞迴，但想要快點闖關，而且數字範圍不大，所以直接一個一個搜尋XD
 ```js
 request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv2?token={HellOWOrld}&id=56'}, function (e, r, body) {
     console.log(body)
   })
-  ```
-  ```sh
+```
+```sh
 好像不是這本書耶...
 ```
 ```sh
@@ -68,7 +68,7 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv2?token={HellOWO
 request.get({url:'https://lidemy-http-challenge.herokuapp.com/api/books'}, function (e, r, body) {
     console.log(body)
   })
-  ```
+```
 文件有提示在用 POST 和 PATCH 時要用 form 格式，在 [Simplified HTTP request client](https://github.com/request/request) 裡搜尋 form 就可以看到範例，套用此範例便能成功新增。
 
 ```js
@@ -83,9 +83,9 @@ request.post({url:'https://lidemy-http-challenge.herokuapp.com/api/books',
 ```
 response 的 body 便會提示 id 號碼
 
- ```
+```
  {"message":"新增成功","id":"1989"}
- ```
+```
 
 
 ```js
@@ -97,12 +97,13 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv3?token={5566NO1
  這樣子讀者就能趕快看到這本新書了，謝謝！下一關的 token 為 {LEarnHOWtoLeArn}
  ```
 ## Lv4
- ```js
+
+```js
  request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv4?token={LEarnHOWtoLeArn}'}, function (e, r, body) {
     console.log(body)
   })
-  ```
-  ```
+ ```
+```
   我翻了一下你之前幫我找的那本書，發現我記錯了...這不是我朝思暮想的那一本。
 我之前跟你講的線索好像都是錯的，我記到別本書去了，真是抱歉啊。
 我記得我想找的那本書，書名有：「世界」兩字，而且是村上春樹寫的，可以幫我找到書的 id 並傳給我嗎？
@@ -111,28 +112,33 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv3?token={5566NO1
 |--------|--------|------------|----------------------|----------------|
 | 獲取所有書籍 | GET    | /books     | q: 查詢書籍              | /books?q=hello |
 | 獲取單一書籍 | GET    | /books/:id | 無                    | /books/10      |
-在 node.js 裡查詢書籍如果使用中文的話，返回的結果都是 `undefined`，但如果是輸入英文或數字，body 是 `[]`
+在 node.js 裡查詢書籍如果使用中文的話，返回的結果都是 `undefined`，但如果是輸入英文或數字，body 是 `[]`，代表 request 是有成功運作的。
 ```js
 request.get({url:'https://lidemy-http-challenge.herokuapp.com/api/books?q=世界'},
   function (e, r, body) {
     console.log(body)
   })
-  ``` 
+``` 
 所以我在瀏覽器上輸入上方的 url ，發現正常運作
 https://lidemy-http-challenge.herokuapp.com/api/books?q=%E4%B8%96%E7%95%8C"
-此網址複製到 js 裡會發現 `世界` 變成了 `%E4%B8%96%E7%95%8C` ，原來是轉碼的原因。
+此網址複製到 js 裡會發現 `世界` 變成了 `%E4%B8%96%E7%95%8C` ，原來是轉碼的原因啊 !
+
 ```
 [{"id":2,"name":"當我想你時，全世界都救不了我","author":"肆一","ISBN":"5549173495"},{"id":27,"name":"從你的全世界路過","author":"張嘉佳","ISBN":"8426216529"},{"id":79,"name":"世界末日與冷酷異境","author":"村上春樹","ISBN":"9571313408"},{"id":90,"name":"文學的40堂公開課：從神話到當代暢銷書，文學如何影響我們、帶領我們理解這個世界","author":"約翰．薩德蘭","ISBN":"7978376866"}]
 ```
 
-  ```js
+```js
    request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv4?token={LEarnHOWtoLeArn}&id=79'}, function (e, r, body) {
     console.log(body)
   })
-  ```
-  ```
+```
+
+
+```
   沒錯！這次我很確定了，就是這本！下一關的 token 為 {HarukiMurakami}
-  ```
+```
+
+
 ## Lv5
   ```js
   request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv5?token={HarukiMurakami}'}, function (e, r, body) {
@@ -145,7 +151,7 @@ https://lidemy-http-challenge.herokuapp.com/api/books?q=%E4%B8%96%E7%95%8C"
 跟他溝通過後，我就把他捐過來的書還他了，所以現在要把這本書從系統裡面刪掉才行。
 
 那本書的 id 是 23，你可以幫我刪掉嗎？
-```
+ ```
 
 ```js
 request.delete({url:'https://lidemy-http-challenge.herokuapp.com/api/books/23'},
@@ -161,7 +167,7 @@ request.delete({url:'https://lidemy-http-challenge.herokuapp.com/api/books/23'},
 使用 GET 查看圖書館，發現沒刪掉 id: 23 的資料，而且詳細資料為
  `{"id":23,"name":"鄭家純 2018泰國個人寫真書","author":"鄭家純","ISBN":"4717480186860"}`
 原來是這本書啊 ~ 難怪要拿回去，不過圖書館進書竟然沒有審查機制XDD
-CHICKENCUTLET = 雞排 ，雖然知道不是指吃的雞排，但 GOOGLE 這單字出來是吃的，深夜看到這些圖片很餓QQ
+CHICKENCUTLET = 雞排 ，雖然知道不是指吃的雞排，但 GOOGLE 這單字出來是吃的，深夜看到這些圖片很餓 QQ
 ## Lv6
 ```js
 request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv6?token={CHICKENCUTLET}'}, function (e, r, body) {
@@ -180,9 +186,11 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv6?token={CHICKEN
 
 帳號：admin
 密碼：admin123
-```
-GOOGLE 完 `http basic authorization` 還是不知道要怎麼做，所以換 google `http basic authorization js` 找到一個 [blog](https://www.cnblogs.com/QLeelulu/archive/2009/11/22/1607898.html) 有提供各種程式語言的範例。
-node_modules 資料夾裡有 atob 的 module 可解碼 base64，但沒有可將字串轉換 base64 的 module，所以要自己寫或安裝。
+ ```
+
+
+google 完 `http basic authorization` 還是不知道實際要怎麼做，所以換 google `http basic authorization js` 找到一個 [blog](https://www.cnblogs.com/QLeelulu/archive/2009/11/22/1607898.html) 有提供各種程式語言的範例。
+`node_modules` 資料夾裡有 `atob` 的 module 可解碼 `base64`，但沒有可將字串轉換 `base64` 的 module，所以要自己寫或安裝。
 
 
 ```js
@@ -261,7 +269,7 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv8?token={HsifnAe
 那本書的名字裡面有個「我」，作者的名字是四個字，key 錯的 ISBN 最後一碼為 7，只要把最後一碼改成 3 就行了。
 對了！記得要用新的系統喔，舊的已經完全廢棄不用了。
 ```
-又遇到國字要轉碼，竟然遇到第二次了那就不該繼續偷吃步用瀏覽器幫忙轉，查了轉碼的資料發現 URL 中文的地方使用 UTF-8 編碼，UTF-8 的特色就是以 `%字母數字` 規律出現。在 JavaScipt 中可使用 `encodeURI` 將字串轉換成 UTF-8，此方法不會轉換對 URI 有特殊意義的字元，所以下方的字母和標點符號不會被轉成 UTF-8 格式。
+又遇到國字要轉碼，竟然遇到第二次了那就不該繼續偷吃步使用瀏覽器幫忙轉，查了轉碼的資料發現 URL 中文的地方使用 UTF-8 編碼，UTF-8 的特色就是以 `%大寫字母數字` 規律出現。在 JavaScipt 中可使用 `encodeURI` 將字串轉換成 UTF-8，此方法不會轉換對 URI 有特殊意義的字元，所以下方的字母和標點符號不會被轉成 UTF-8 格式。
 [[Guide] 瞭解網頁中看不懂的編碼：Unicode 在 JavaScript 中的使用](https://pjchender.blogspot.com/2018/06/guide-unicode-javascript.html)
 ```js
 const url = encodeURI('https://lidemy-http-challenge.herokuapp.com/api/v2/books?q=我'); 
@@ -291,8 +299,8 @@ import {auth} from './auth'
 const search = (str, authorsLength, lastNumOfISBN, callback) => {
   const url = encodeURI(`https://lidemy-http-challenge.herokuapp.com/api/v2/books?q=${str}`); 
   request.get({
-    url : url,
-    headers : { 
+    url,
+    headers: { 
       Authorization: auth,}},(err,res,body) => {
     const json = JSON.parse(body)
     const result = json.filter(el => el.author.length === authorsLength && el.ISBN[el.ISBN.length - 1] === lastNumOfISBN.toString());
@@ -302,7 +310,7 @@ const search = (str, authorsLength, lastNumOfISBN, callback) => {
 };
 
 const changeISBN = (result) => {
-  const isbn = result[0].ISBN - 4;
+  const isbn = result[0].ISBN - 4; // 7 - 4 = 3
 
   request.patch({
     url : `https://lidemy-http-challenge.herokuapp.com/api/v2/books/${result[0].id}`,
@@ -336,13 +344,13 @@ API 文件裡面有個獲取系統資訊的 endpoint 你記得嗎？
 
 順利拿到系統資訊之後應該會有個叫做 version 的欄位，把裡面的值放在 query string 給我吧。
 ```
-搜尋 `pretend ie6 request js` ，從 [stackover](https://stackoverflow.com/questions/27652543/how-to-use-python-requests-to-fake-a-browser-visit)中的問題找到物件 `User Agent` 的格式，接下來的問題就是要如何找到 IE6.0 的版本。
-在 [MDN User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) 中看到**Internet Explorer UA string**這個關鍵字，用 `The IE6 User-Agent String` 搜尋就可以找到 IE6.0 的 UA string。
+搜尋 `pretend ie6 request js` ，從 [stackover](https://stackoverflow.com/questions/27652543/how-to-use-python-requests-to-fake-a-browser-visit) 中的問題找到物件 `User Agent` 的格式，接下來的問題就是要如何找到 IE6.0 的版本。
+在 [MDN User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) 中看到 **Internet Explorer UA string** 這個關鍵字，用 `The IE6 User-Agent String` 搜尋就可以找到 IE6.0 的 UA string。
 看資料的時候發現 IE6.0 原來是 Window XP 預設的瀏覽器，這兩個都是時代的眼淚啊。
 
 
 ```js
-  var url = encodeURI('https://lidemy-http-challenge.herokuapp.com/api/v2/sys_info'); 
+var url = encodeURI('https://lidemy-http-challenge.herokuapp.com/api/v2/sys_info'); 
 request.get({
     url : url,
     headers : { 
@@ -385,7 +393,7 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv10?token={duZDsG
 開始吧，把你要猜的數字放在 query string 用 num 當作 key 傳給我。
 ```
 這應該只是單純的猜數字遊戲吧 ? 還是還要寫一個程式來猜數字 ? 不管了，當作單純的猜數字遊戲 ~~
-看到老師在別同學作業的回應，單純是遊戲
+
 ```js
 request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv10?token={duZDsG3tvoA}&num=9613'}, function (e, r, body) {
   console.log(body)
@@ -409,7 +417,7 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv11?token={IhateC
   console.log(body)
 });
 ```
-token = I hate CORS 原來token 有提醒關鍵字，破完才發現 QwQ
+`token` = I hate CORS 原來token 有提醒關鍵字，破完才發現 QwQ
 ```
 嘿！很開心看到你願意回來繼續幫忙，這次我們接到一個新的任務，要跟在菲律賓的一個中文圖書館資訊系統做串連
 這邊是他們的 API 文件，你之後一定會用到：https://gist.github.com/aszx87410/0b0d3cabf32c4e44084fadf5180d0cf4。
@@ -420,7 +428,7 @@ token = I hate CORS 原來token 有提醒關鍵字，破完才發現 QwQ
 > 您的 origin 不被允許存取此資源，請確認您是從 lidemy.com 送出 request。
 
 
-直接把出現的錯誤訊息拿去 google ， 查到的文章也是老師撰寫的[輕鬆理解 Ajax 與跨來源請求](https://blog.techbridge.cc/2017/05/20/api-ajax-cors-and-jsonp/)裡面有提到 簡單請求的 MDN ，看完 CORS 的 MDN 其實就找到 Origin 如何使用。事實上的 google 的第一筆資料就是 CORS 的 MDN，但我那時完全忽略掉他了。
+直接把出現的錯誤訊息拿去 google ， 查到的文章是老師撰寫的[輕鬆理解 Ajax 與跨來源請求](https://blog.techbridge.cc/2017/05/20/api-ajax-cors-and-jsonp/)，裡面有提到 簡單請求的 MDN ，看完 CORS 的 MDN 其實就找到 Origin 如何使用。事實上的 google 的第一筆資料就是 CORS 的 MDN，但我那時完全忽略掉他了，果然還是要有看 MDN 的習慣。
 
 ```js
 const request = require('request');
@@ -453,18 +461,18 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv12?token={r3d1r3
 
 現在請你幫我把運送要用的 token 給拿回來吧，要有這個 token 我們才能繼續往下一步走
 ```
-獲取運送 token	GET	/deliver_token
 
+
+https://lidemy-http-challenge.herokuapp.com/api/v3/deliver_token
 
 > 我已經把運送要用的 token 給你囉，請你仔細找找
 
-'https://lidemy-http-challenge.herokuapp.com/api/v3/deliver_token'
 
-不知道要去哪裡找，所以只好把 response 印出來大概看完，但還是沒有看到 token 在哪，不過有發現後面出現的網址變成 result 。
+不知道要去哪裡找，所以只好把 response 印出來大概看完，但還是沒有看到 token 在哪，不過有發現後面出現的網址變成 _result 。
 > hint : 你會發現你呼叫 API 以後它並沒有直接回傳結果，而是轉址到其他地方（或許中間還經歷不只一個地方）
 仔細研究這些地方吧！
 
-使用 node.js 能看的東西我都看完了，根據提示，只好使用 Chrome DevTools 看到底轉址中發生甚麼事，才發現原來轉了兩次網址，中間網址的 headers 有 token `X-Lv13-Token: {qspyz}`。奇怪的是使用 node.js 得到的 response 不是全部的內容嗎 ? 只有用 Chrome DevTools 才能看到全部的 headers 。
+使用 node.js 能看的東西我都看完了，根據提示，只好使用 Chrome DevTools 看到底轉址中發生甚麼事，才發現原來轉了兩次網址，中間網址的 headers 有 token `X-Lv13-Token: {qspyz}`。奇怪的是使用 node.js 得到的 response 不是包含轉址的內容嗎 ? 只有用 Chrome DevTools 才能看到全部的 headers ?
 
 ## Lv13
 > https://lidemy-http-challenge.herokuapp.com/lv13?token={qspyz}
@@ -478,11 +486,11 @@ request.get({url:'https://lidemy-http-challenge.herokuapp.com/lv12?token={r3d1r3
 此 request 不是來自菲律賓，禁止存取系統資訊。
 
 
-看到提示要來自菲律賓，想到應該是要使用 VPN 參考了[Node.js - Programmatically Connect to a VPN or route HTTP Requests via VPN](https://stackoverflow.com/questions/32048832/%20node-js-programmatically-connect-to-a-vpn-or-route-http-requests-via-vpn) 中的解答，在 headers 中加 `localAddress: 'ip'` 。 
+看到提示要來自菲律賓，想到應該是要使用 VPN 參考 [Node.js - Programmatically Connect to a VPN or route HTTP Requests via VPN](https://stackoverflow.com/questions/32048832/%20node-js-programmatically-connect-to-a-vpn-or-route-http-requests-via-vpn) 中的解答，在 headers 中加 `localAddress: 'ip'` ，結果失敗。 
 
 > hint: 你有聽過代理伺服器 proxy 嗎？
 
-node.js request 沒有付 ip 那 header
+
 
 ```js
 var proxy = 'http://203.177.135.133:8080';
@@ -498,7 +506,8 @@ request.get({
 ```
 
 ## Lv14
-https://lidemy-http-challenge.herokuapp.com/lv14?token={SEOisHard}
+> https://lidemy-http-challenge.herokuapp.com/lv14?token={SEOisHard}
+
 跟那邊的溝通差不多都搞定了，真是太謝謝你了，關於這方面沒什麼問題了！
 不過我老大昨天給了我一個任務，他希望我去研究那邊的首頁內容到底是怎麼做的
 為什麼用 Google 一搜尋關鍵字就可以排在第一頁，真是太不合理了
@@ -506,18 +515,18 @@ https://lidemy-http-challenge.herokuapp.com/lv14?token={SEOisHard}
 他們的網站明明就什麼都沒有，怎麼會排在那麼前面？
 難道說他們偷偷動了一些手腳？讓 Google 搜尋引擎看到的內容跟我們看到的不一樣？
 算了，還是不要瞎猜好了，你幫我們研究一下吧！
-一開始以為改 就可以了Origin: 'googlebot.com/bot.html',
+一開始以為改 Origin 就可以了 `Origin: 'google.com'`
 
 >hint: 伺服器是怎麼辨識是不是 Google 搜尋引擎的？仔細想想之前我們怎麼偽裝自己是 IE6 的
 
 https://devco.re/blog/2014/06/19/client-ip-detection/
 
-http://enter3017sky.tw/article.php?id=124
-從這偷看同學的思路，所以看了一堆SEO 文章，後來直接看 wiki 的頁面 有斗蓬法（cloaking) 和題目情況相符，搜尋 "how to Cloaking" 想要知道在程式中要怎麼實際使用斗蓬法引導 googlebot 看到不一樣的網站，但都看不太懂。
-介紹 SEO 和 Cloaking 文章裡但都有介紹 googlebot，想到關鍵字 "fake googlebot" 結果第一筆就是解答了。
-雖然一開始有想到"fake google"這個關鍵字，但應該是覺得這個字太籠統了最後沒有查，繞了一些路看如何針對 SEO　優化網頁內容的文章，但也從裡面了解的以後要如何架網站，以及從中想到googltbot 這個關鍵字。
-https://log-hero.com/docs/detect-fake-googlebots
-其實 User Agent 英文版的維基百科有稍微介紹 Googlebot，中文版沒有介紹。
+
+從這[Lidemy HTTP 圖書館小弟加班(V2)](http://enter3017sky.tw/article.php?id=124)偷看同學的思路，所以看了一堆SEO 文章，後來直接看 wiki 的頁面有斗蓬法（cloaking) 介紹和題目情況相符，搜尋 `how to Cloaking` 想要知道在程式中要怎麼實際使用斗蓬法引導 googlebot 看到不一樣的網站，知道怎麼操作應該就會知道要怎麼把 request 假裝從是 google 搜尋引擎，但都看不太懂。
+介紹 SEO 和 Cloaking 文章裡但都有介紹 googlebot，想到關鍵字 `fake googlebot` 結果[第一筆](https://log-hero.com/docs/detect-fake-googlebots)就是解答了。
+雖然一開始有想到 `fake google` 這個關鍵字，但應該是覺得這個字太籠統了最後沒有查，繞了一些路看如何針對 SEO　優化網頁內容的文章，但也從裡面了解的以後要如何架網站，以及從中想到 googltbot 這個關鍵字。
+
+其實 User Agent 英文版的維基百科有稍微介紹 Googlebot 的存在，但中文版沒有介紹。
 > Format for automated agents (bots)
 Automated web crawling tools can use a simplified form, where an important field is contact information in case of problems. By convention the word "bot" is included in the name of the agent[citation needed]. 
 >For example:
@@ -548,6 +557,8 @@ The End，恭喜破關！
 Author: huli@lidemy.com
 https://www.facebook.com/lidemytw/
 ```
+
 熟悉 Headers 的使用
 GOOGLE 能力
+
 了解網頁如何運作

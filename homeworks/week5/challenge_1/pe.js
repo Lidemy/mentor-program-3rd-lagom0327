@@ -11,7 +11,7 @@ function sumOfFactor(n) {
 function pe(n) {
   // if (n < 2 && n > 1000000) return '0'
   const m = sumOfFactor(n);
-  if (m === n) return `=${n}`;
+  if (m === n) return `=${n}`; // from test ...
   if (sumOfFactor(m) === n) return m.toString();
   return '0';
 }

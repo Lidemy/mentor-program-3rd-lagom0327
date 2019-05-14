@@ -7,7 +7,6 @@ function pb(M, N) {
   const m = remove0(M);
   const n = remove0(N);
 
-  // if (m === n) return 'Fair';
   if (m.length > n.length) return 'Unfair';
   if (m.length < n.length) return 'Fair';
 
