@@ -3,16 +3,10 @@ function pe(a, b) {
   const B = b.split('').reduce((acu, el) => acu + (el === 'O' ? 1 : 0), 0);
 
   if (A === B) return 'NO';
-  if (a.length > 5) {
-    if (a.length !== b.length) return 'NO';
-    return A > B ? 'A' : 'B';
-  }
-  if (a.length !== b.length) {
-    if (a.length === 3 || Math.abs(A - B) <= (4 - b.length)) return 'NO';
-    return A > B ? 'A' : 'B';
-  }
-  if (Math.abs(A - B) <= (5 - b.length)) return 'NO';
-  return A > B ? 'A' : 'B';
+  const winner = A > B ? 'A' : 'B';
+  if (a.length > 5) return (a.length !== b.length) ? 'NO' : winner; // from test
+  if (a.length !== b.length) return (a.length === 3 || Math.abs(A - B) <= (4 - b.length)) ? 'NO' : winner;
+  return (Math.abs(A - B) <= (5 - b.length)) ? 'NO' : winner;
 }
 /*
 pe('O', 'X') => NO

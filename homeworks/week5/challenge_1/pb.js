@@ -1,9 +1,6 @@
 function pb(M, N) {
-  function remove0(str) {
-    if (str[0] !== '0') return str;
-    const newStr = str.slice(1);
-    return remove0(newStr);
-  }
+  const remove0 = str => (str[0] !== '0' ? str : remove0(str.slice(1)));
+
   const m = remove0(M);
   const n = remove0(N);
 
