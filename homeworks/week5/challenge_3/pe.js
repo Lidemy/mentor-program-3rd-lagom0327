@@ -1,5 +1,5 @@
 function checkLength(arr, N) {
-  const arr2 = arr;
+  const arr2 = arr.slice(0);
   if (arr.length % N === 0) {
     arr2.push(1);
     arr2[arr2.indexOf(Math.max(arr2))] -= 1;
@@ -7,7 +7,7 @@ function checkLength(arr, N) {
   return arr2; // from test
 }
 function deleteN(arr, N, K) {
-  const arr2 = arr;
+  const arr2 = arr.slice(0);
   const indexN = [];
   arr.forEach((el, index) => (el % N === 0 ? indexN.push(index) : null));
 
@@ -21,12 +21,12 @@ function deleteN(arr, N, K) {
 }
 function makeArr(N, M, K) {
   const num = M < K ? M : K;
-  const arr2 = Array(Math.ceil(M / num)).fill(0)
+  const arr = Array(Math.ceil(M / num)).fill(0)
     .map((el, index) => ((index <= Math.floor(M / num) - 1) ? el + num : el + (M % num)));
-  return deleteN(checkLength(arr2, N), N, K); // from test
+  return deleteN(checkLength(arr, N), N, K); // from test
 }
 function longArr(arr, N, K) {
-  const arr2 = arr;
+  const arr2 = arr.slice(0);
   arr2.push(1);
   arr2[0] -= 1;
   return deleteN(checkLength(arr2, N), N, K);

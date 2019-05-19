@@ -532,6 +532,8 @@ Automated web crawling tools can use a simplified form, where an important field
 >For example:
 Googlebot/2.1 (+http://www.google.com/bot.html)
 
+不過為甚麼 Google 要主動提供 googlebot 的 UA string ，如果他不提供的話，網頁就不能使用 cloaking 針對 googlebot 顯示不同的內容了。還是因為網頁可以選擇拒絕搜尋引擎建立的檢索所以 Google 必須提供 User Agent string。
+
 ```js
 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 ```
