@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1em;
+  color: black;
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+nav {
+  background: black;
+  top: 0px;
+  position: sticky;
+  z-index: 2;
+}
+
+.nav__buttom {
+  color: gray;
+  display: inline-block;
+  margin-right: 0.3em;
+  padding: 0.7em;
+}
+
+.nav__buttom:hover {
+  color: white;
+}
+#bar {
+  color: white;
+  font-size: 1.3em;
+  margin-left: 0.5em;
+}
+
+.top {
+  background: rgba(178, 229, 250,0.3);
+}
+
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.top > .wrapper {
+  padding-top: 2.5em;
+  padding-bottom: 2em;
+}
+
+.top__title {
+  font-size: 5em;
+  margin-bottom: 0.2em;
+}
+
+.text {
+  margin-bottom: 1em;
+}
+
+.heading {
+  font-size: 2em;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.buttom {
+  background: rgb(163, 163, 163);
+  width: 9em;
+  height: 2.5em;
+  border-radius: 5px;
+  border:0px  solid;
+  line-height: 2.5em;
+  text-align: center;
+  color: white;
+}
+
+.buttom:hover {
+  background: rgb(119, 118, 118);
+  cursor:pointer;
+}
+
+.top > .wrapper > .buttom {
+  background: rgb(119, 184, 238);
+  font-size:1.25em;
+}
+
+.top > .wrapper > .buttom:hover {
+  background: rgb(94, 153, 201);
+  cursor:pointer;
+}
+
+.bottom {
+  margin-bottom: 2em;
+}
+
+.bottom > .wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  max-width: 300px;
+}
+
+#line {
+  background: rgb(184, 182, 182);
+  height: 1px;
+}
+
+footer {
+  padding-top:1.5em;
+  padding-bottom:4em;
+
+}
+
+@media (max-width:960px) {
+  .wrapper {
+    width: 90%;
+  }
+  .box {
+    width: 31.333%;
+  }
+}
+@media (max-width:569px) {
+.wrapper {
+    width: 75%;
+}
+
+.box {
+  width: 100%;
+}
+
+.bottom > .wrapper {
+  display: block;
+  justify-content: space-between;
+}
+}
+
+
