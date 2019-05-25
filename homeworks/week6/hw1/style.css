@@ -1,6 +1,13 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 0px;
+  font-weight: normal;
+  list-style-type:none;
 }
+/* clear user agent stylesheet */
 
 body {
   font-size: 1em;
@@ -11,7 +18,7 @@ body {
 }
 
 nav {
-  background: black;
+  background: rgb(10, 22, 59);
   top: 0px;
   position: sticky;
   z-index: 2;
@@ -21,12 +28,13 @@ nav {
   color: gray;
   display: inline-block;
   margin-right: 0.3em;
-  padding: 0.7em;
+  padding: 0.6em;
 }
 
 .nav__buttom:hover {
   color: white;
 }
+
 #bar {
   color: white;
   font-size: 1.3em;
@@ -37,19 +45,19 @@ nav {
   background: rgba(178, 229, 250,0.3);
 }
 
-.wrapper {
+section {
   max-width: 960px;
   margin: 0 auto;
 }
 
-.top > .wrapper {
+.top__wrapper {
   padding-top: 2.5em;
   padding-bottom: 2em;
 }
 
 .top__title {
   font-size: 5em;
-  margin-bottom: 0.2em;
+  margin-block-start: 0em;
 }
 
 .text {
@@ -79,13 +87,13 @@ nav {
   cursor:pointer;
 }
 
-.top > .wrapper > .buttom {
-  background: rgb(119, 184, 238);
+.top__wrapper > .buttom {
+  background: rgb(79, 129, 236);
   font-size:1.25em;
 }
 
-.top > .wrapper > .buttom:hover {
-  background: rgb(94, 153, 201);
+.top__wrapper > .buttom:hover {
+  background: rgb(54, 88, 161);
   cursor:pointer;
 }
 
@@ -93,7 +101,7 @@ nav {
   margin-bottom: 2em;
 }
 
-.bottom > .wrapper {
+section > ul {
   display: flex;
   justify-content: space-between;
 }
@@ -110,29 +118,29 @@ nav {
 footer {
   padding-top:1.5em;
   padding-bottom:4em;
-
 }
 
 @media (max-width:960px) {
-  .wrapper {
+  section {
     width: 90%;
   }
   .box {
-    width: 31.333%;
+    width: 30%;
   }
 }
-@media (max-width:569px) {
-.wrapper {
+
+@media (max-width:750px) {
+section {
     width: 75%;
 }
 
 .box {
-  width: 100%;
+  max-width: none;
+  width:100%;
 }
 
-.bottom > .wrapper {
+.bottom > section > ul {
   display: block;
-  justify-content: space-between;
 }
 }
 

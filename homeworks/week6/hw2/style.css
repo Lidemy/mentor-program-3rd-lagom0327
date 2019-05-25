@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+body {
+  margin: 0;
+}
+
+article {
+  max-width: 900px;
+  margin: 3.5em auto;
+}
+
+article > h1 {
+  font-size:3em;
+  font-weight: normal;
+}
+
+article > div {
+  font-size:1.3em;
+}
+
+aside {
+  position: fixed;
+  top: 150px;
+  left:3%;
+  height: 3.8em;
+  width: 3.8em;
+  border: 1px rgb(190, 189, 189) solid;
+  border-radius: 50%;
+  align-items: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+aside:hover {
+  border: 1px rgb(36, 35, 35) solid;
+}
+
+@media (max-width:1100px) {
+  aside {
+    display: none;
+  }
+}
+
+@media (max-width:960px) {
+  * {
+    font-size: 0.95em;
+  }
+  article {
+    width: 76%;
+  }
+
+  article > h1 {
+    font-size:2.3em;
+  }
+}
