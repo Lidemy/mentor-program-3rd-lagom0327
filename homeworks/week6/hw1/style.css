@@ -1,21 +1,17 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-  padding-inline-start: 0px;
-  font-weight: normal;
-  list-style-type:none;
-}
-/* clear user agent stylesheet */
-
-body {
-  font-size: 1em;
-  color: black;
+  margin-block-start: 0;
+  margin-block-end: 0;
   padding: 0;
-  margin: 0;
+  /* ul padding-left @ IE */
+  font-weight: normal;
+  font-size: 1em;
+  list-style-type:none;
+  color: black;
   font-family: sans-serif;
 }
+/* clear user agent stylesheet */
 
 nav {
   background: rgb(10, 22, 59);
@@ -45,19 +41,19 @@ nav {
   background: rgba(178, 229, 250,0.3);
 }
 
-section {
+.wrapper {
   max-width: 960px;
   margin: 0 auto;
 }
 
-.top__wrapper {
+.top > .wrapper {
   padding-top: 2.5em;
   padding-bottom: 2em;
 }
 
 .top__title {
   font-size: 5em;
-  margin-block-start: 0em;
+  margin-bottom: 0.2em;
 }
 
 .text {
@@ -87,18 +83,14 @@ section {
   cursor:pointer;
 }
 
-.top__wrapper > .buttom {
+.top > .wrapper > .buttom {
   background: rgb(79, 129, 236);
   font-size:1.25em;
 }
 
-.top__wrapper > .buttom:hover {
+.top > .wrapper > .buttom:hover {
   background: rgb(54, 88, 161);
   cursor:pointer;
-}
-
-.bottom {
-  margin-bottom: 2em;
 }
 
 section > ul {
@@ -113,6 +105,7 @@ section > ul {
 #line {
   background: rgb(184, 182, 182);
   height: 1px;
+  margin-top: 2em;
 }
 
 footer {
@@ -121,7 +114,7 @@ footer {
 }
 
 @media (max-width:960px) {
-  section {
+  .wrapper {
     width: 90%;
   }
   .box {
@@ -130,8 +123,8 @@ footer {
 }
 
 @media (max-width:750px) {
-section {
-    width: 75%;
+.wrapper {
+    width: 85%;
 }
 
 .box {
@@ -139,7 +132,7 @@ section {
   width:100%;
 }
 
-.bottom > section > ul {
+.bottom > ul {
   display: block;
 }
 }
