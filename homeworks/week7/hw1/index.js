@@ -5,7 +5,7 @@ let endTime;
 let result = true;
 let succeed = false;
 
-const startChangeColor = () => {
+const changeColor = () => {
   if (result) {
     body.classList.add('colored');
     startTime = performance.now();
@@ -14,8 +14,9 @@ const startChangeColor = () => {
 
 function gameStart() {
   const time = Math.floor(Math.random() * 3000);
-  setTimeout(() => startChangeColor(), time);
+  setTimeout(() => changeColor(), time);
 }
+
 body.addEventListener('onload', gameStart());
 
 body.addEventListener('click',
