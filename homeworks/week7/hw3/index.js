@@ -1,7 +1,6 @@
 
 const wrap = document.querySelector('.wrapper');
 let dot = false;
-// const num = [];
 let num1 = '';
 let num2 = '';
 let operator = '';

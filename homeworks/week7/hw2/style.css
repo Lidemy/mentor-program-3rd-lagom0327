@@ -169,6 +169,7 @@ main {
 
 .keyin{
   background:none;
+  height: 1em;
   /* margin-bottom: 1px; */
   box-sizing: content-box;
   /* padding: 0; */
@@ -185,6 +186,8 @@ main {
   margin-bottom: 0px;
   border-bottom:  2px solid #d97625;
 }
+
+
 
 .long_answer {
   width:100%;
@@ -210,6 +213,7 @@ section {
   border-radius: 3px;
   background: rgb(68, 133, 218);
   color: white;
+  cursor: pointer;
 }
 
 h2 + p {
@@ -221,6 +225,18 @@ h2 + p {
 color: rgba(0,0,0,0.54);
 font-weight: 400;
 font-size: 0.8em;
+}
+
+.red_line {
+  border-bottom: 2px solid red;
+}
+
+.red_bg {
+  background: #fce8e6;
+}
+
+.show_notation {
+  display: block;
 }
 
 @media (max-width:769px) {

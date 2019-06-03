@@ -39,13 +39,25 @@ body {
   width: 7em;
   height: 2.5em;
   display: none;
-  background: #FF5FA2;
-  background: #48A9C5;
-  border: 1px solid #A0D1CA;
+  border: 1px solid;
   box-shadow: 3px 3px 2px rgb(95, 93, 93);
   cursor: pointer;
 }
 
+.show_btn {
+  display: inline-block;
+}
+.show_btn {
+  display: inline-block;
+}
+
+.hidden_btn {
+  display: none;
+}
+.who {
+  margin-top: 1em;
+  font-size: 12px;
+}
 
 #text {
   /* align-content: center; */
