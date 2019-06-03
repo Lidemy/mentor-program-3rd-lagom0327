@@ -63,3 +63,31 @@ body {
   /* align-content: center; */
   align-items: center;
 }
+
+aside {
+  /* color: gray; */
+  height: 4em;
+  width: 4em;
+  padding: 0.5em;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  text-align: right;
+  /* margin-bottom: 1em; */
+  border: 2px solid;
+  border-radius: 20px;
+}
+
+aside > p {
+  /* color: gray; */
+  font-size: 20px;
+}
+li {
+  /* color: gray; */
+  margin-top: 1em;
+  font-size: 12px;
+}
+
+.color_of_rank {
+  border: 2px solid;
+}
