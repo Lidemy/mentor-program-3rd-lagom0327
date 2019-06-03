@@ -4,26 +4,40 @@ const notation = document.querySelectorAll('.notation');
 const section = document.querySelectorAll('.problem');
 const redBg = (index) => {
   section[index].style.background = '#fce8e6';
-  // console.log(section[index])
 };
 
 form.addEventListener('submit', (e) => {
-  // console.log('sub');
+  let isOk = true;
   const text = document.querySelectorAll('.keyin:not(:last-child)');
   for (let i = 0; i < text.length; i++) {
     if (!text[i].value) {
+      isOk = false;
       redBg(i);
       e.preventDefault();
-      // console.log(notation[i])
       notation[i].style.display = 'block';
     }
   }
   const select = document.querySelectorAll('input[name=class]');
   if (!select[0].checked && !select[1].checked) {
-    e.preventDefault();
+    isOk = false;
     const selectProblem = document.querySelector('.select_problem');
     selectProblem.style.background = '#fce8e6';
     selectProblem.querySelector('.select__notation').style.display = 'block';
+    e.preventDefault();
   }
-  // alert('提交成功');
+  // console.log(select[0]);
+  if (isOk === true) {
+    const input = document.querySelectorAll('input');
+    for (let i = 0; i < input.length - 1; i++) {
+      if (i === 2 || i === 3) {
+        if (input[i].checked) {
+          console.log(input[i].closest('section').children[0].innerText,
+            input[i].closest('.opt').children[1].innerText);
+        }
+      } else {
+        console.log(input[i].closest('section').children[0].innerText, input[i].value);
+      }
+    }
+    alert('提交成功');
+  }
 });
