@@ -20,7 +20,7 @@ function isEmail(strEmail) {
     return true;
   }
   changeStyle(email);
-  email.closest('section').querySelector('.notation').innerText = '請輸入有效的電子郵件地址';
+  email.closest('section').querySelector('.notation').innerText = '請輸入有效的電子郵件地址'; // 應要用 classList.add()
   return false;
 }
 
@@ -43,7 +43,7 @@ form.addEventListener('click',
           e.target.addEventListener('input',
             (event) => {
               if (e.target.id === 'q1') {
-                isEmail(event.target.value);
+                isEmail(email.value);
               } else ifValue(event.target);
             });
         }
@@ -85,6 +85,5 @@ form.addEventListener('submit', (e) => {
   } else {
     lastClickInput = '';
     e.preventDefault();
-    isOk = true;
   }
 });
