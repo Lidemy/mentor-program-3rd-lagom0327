@@ -85,4 +85,8 @@ document.addEventListener('keydown',
     else if (e.keyCode === 82) reStart();
   });
 
-bg.addEventListener('click', e => (e.target.id === 'btn' ? reStart() : check()));
+bg.addEventListener('click',
+  (e) => {
+    if (e.target.id === 'btn') reStart();
+    else if (ifGameStart) check();
+  });
