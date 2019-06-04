@@ -23,7 +23,7 @@ const selectColor = () => {
 
 const changeColor = (color) => {
   if (!ifFall) {
-    rank.color = `${color[1]}`;
+    // rank.color = `${color[1]}`;
     rank.style.borderColor = `${color[1]}`;
     bg.style.background = `${color[0]}`;
     startTime = performance.now();
@@ -63,7 +63,10 @@ const reStart = () => {
 };
 
 const check = () => {
+  endTime = performance.now();
+  ifGameStart = false;
   if (!ifColored) {
+    ifFall = true;
     alert('還沒變色喔 ~ 失敗!');
   } else {
     const time = ((endTime - startTime) / 1000).toFixed(2);
@@ -78,22 +81,8 @@ document.addEventListener('onload', gameStart());
 
 document.addEventListener('keydown',
   (e) => {
-    if (e.keyCode === 32) {
-      if (ifGameStart === true) {
-        endTime = performance.now();
-        ifGameStart = false;
-        check();
-      }
-    }
-    if (e.keyCode === 82) reStart();
+    if (e.keyCode === 32 && ifGameStart) check();
+    else if (e.keyCode === 82) reStart();
   });
 
-bg.addEventListener('click',
-  (e) => {
-    if (e.target.id === 'btn') reStart();
-    else {
-      endTime = performance.now();
-      ifGameStart = false;
-      check();
-    }
-  });
+bg.addEventListener('click', e => (e.target.id === 'btn' ? reStart() : check()));
