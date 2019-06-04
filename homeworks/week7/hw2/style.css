@@ -54,6 +54,7 @@ h2 {
   position: relative;
   display: block;
   padding-left: 30px;
+  transition: all 2s;
 }
 
 .magic-radio + label:before {
@@ -70,6 +71,7 @@ h2 {
 
 .magic-radio:checked + label:after {
   display: block;
+  /* border: 15px solid rgba(186, 70, 8, 0.527); */
 }
 
 .magic-radio + label:after {
@@ -83,16 +85,19 @@ h2 {
   border-radius: 999px;
   background: rgb(186, 71, 8);
   transform: translate(-50%, -50%);
+  transition: all 0.5s;
 }
 
 .magic-radio:checked + label:before {
   border: 1px solid rgb(186, 71, 8); }
 
+
+
 .magic-radio:checked[disabled] + label:before {
   border: 1px solid #c9e2f9; }
 
-.magic-radio:checked[disabled] + label:after {
-  background: #c9e2f9; }
+/* .magic-radio:checked[disabled] + label:after { */
+  /* background: #c9e2f9; } */
 
 
 #top_bg {

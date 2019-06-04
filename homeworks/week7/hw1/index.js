@@ -21,6 +21,17 @@ const selectColor = () => {
   return [`${func[numForFunc][0]}(${func[numForFunc][1][numForType]}, ${colorCollection[numForColor]})`, colorCollection[numForColor][0], colorCollection[numForColor][1], numForColor];
 };
 
+const changeColor = (color) => {
+  if (!ifFall) {
+    rank.color = `${color[1]}`;
+    rank.style.borderColor = `${color[1]}`;
+    bg.style.background = `${color[0]}`;
+    startTime = performance.now();
+    ifColored = true;
+    bg.querySelector('.who').innerText = `這是 ${name[color[3]]} 的應援色`;
+  }
+};
+
 const timeCollection = [];
 const addRank = () => {
   bg.querySelector('.rank').innerText = '';
@@ -30,17 +41,6 @@ const addRank = () => {
     const li = document.createElement('li');
     li.innerText = `${timeCollection[i]} s`;
     bg.querySelector('.rank').appendChild(li);
-  }
-};
-
-const changeColor = (color) => {
-  if (!ifFall) {
-    rank.color = `${color[1]}`;
-    rank.style.borderColor = `${color[1]}`;
-    bg.style.background = `${color[0]}`;
-    startTime = performance.now();
-    ifColored = true;
-    bg.querySelector('.who').innerText = `這是 ${name[color[3]]} 的應援色`;
   }
 };
 
@@ -87,6 +87,7 @@ document.addEventListener('keydown',
     }
     if (e.keyCode === 82) reStart();
   });
+
 bg.addEventListener('click',
   (e) => {
     if (e.target.id === 'btn') reStart();

@@ -39,6 +39,12 @@ const calculate = (a, b, meth) => {
   return num2 === 0 ? 'Error!' : (num1 / num2).toFixed(5);
 };
 
+const del = (num) => {
+  const newnum = num.slice(0, -1);
+  if (num.slice(-1) === '.') dot = false;
+  return newnum.length > 0 ? newnum : '0';
+};
+
 wrap.addEventListener('click', (e) => {
   if (e.target.classList.contains('btn')) {
     const screen = document.querySelector('#screen');
@@ -47,9 +53,7 @@ wrap.addEventListener('click', (e) => {
       operator = '';
       clearScreen();
     } else if (e.target.id === 'del') {
-      const newnum = number.slice(0, -1);
-      if (number.slice(-1) === '.') dot = false;
-      screen.innerText = newnum.length > 0 ? newnum : '0';
+      screen.innerText = del(number);
     } else if (e.target.classList.contains('num')) numOnScreen(e, number);
     else if (e.target.classList.contains('operator')) {
       dot = false;
@@ -58,11 +62,9 @@ wrap.addEventListener('click', (e) => {
       clearScreen();
     } else if (e.target.id === 'equal') {
       num2 = number;
-      console.log('num2', num2);
-      console.log('num1', num1);
-      console.log('opera', operator);
       dot = false;
-      document.querySelector('#screen').innerText = calculate(num1, num2, operator);
+      num1 = calculate(num1, num2, operator);
+      document.querySelector('#screen').innerText = num1;
     }
   }
 });
