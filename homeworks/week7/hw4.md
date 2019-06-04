@@ -1,39 +1,39 @@
 ## 什麼是 DOM？
 Document Object Model(文件物件模型) ，把一份 HTML 文件當成之前學過的一個大型 Object 物件，可利用類似取 Object 裡面的值或 Object，一份簡單的 HTML 文件例如這周的 hw1 ，寫成 Object 如下，每個 DOM 的名稱一定是 `document`。
 ```js
-var  document {
+var  document = {
   head: {
-    title: 'Week7 hw1';
+    title: 'Week7 hw1',
     meta: {
-      charset: "utf-8";
-      name: "viewport";
-      content: "width=device-width,initial-scale=1.0"
-    }
+      charset: 'utf-8',
+      name: 'viewport',
+      content: 'width=device-width,initial-scale=1.0',
+    },
     link: {
-      rel: "stylesheet";
-      href: "./style.css";
-    }
-  }
+      rel: 'stylesheet',
+      href: './style.css',
+    },
+  },
   body: {
     section: {
-      class: 'bg';
-      section {
-        class: 'container';
+      class: 'bg',
+      section: {
+        class: 'container',
         article: {
-          id: text;:
-          Text: '畫面變色請點擊';
+          id: text,
+          Text: '畫面變色請點擊',
           button: {
-            class: btn;
-            Text: '再玩一次'
-          }
-        }
-      }
-    }
+            class: 'btn',
+            Text: '再玩一次',
+          },
+        },
+      },
+    },
     script: {
-      src: 'index.js'
-    }
-  }
-}
+      src: 'index.js',
+    },
+  },
+};
 ```
 
 
