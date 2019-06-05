@@ -82,7 +82,7 @@ document.addEventListener('onload', gameStart());
 document.addEventListener('keydown',
   (e) => {
     if (e.keyCode === 32 && ifGameStart) check();
-    else if (e.keyCode === 82) reStart();
+    else if (e.keyCode === 82 && !ifGameStart) reStart();
   });
 
 bg.addEventListener('click',
