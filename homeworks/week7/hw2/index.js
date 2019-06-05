@@ -30,7 +30,7 @@ const ifValue = (input) => {
   else if (input.value) cancelStyle(input);
 };
 let lastClickInput = '';
-form.addEventListener('click',
+window.addEventListener('click',
   (e) => {
     if (e.target.nodeName !== 'INPUT' && lastClickInput !== '') {
       ifValue(form.querySelector(`#${lastClickInput}`));
