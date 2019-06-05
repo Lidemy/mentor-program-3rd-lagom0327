@@ -1,0 +1,141 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+  color: white;
+  font-family: monospace;
+  font-weight: 500;
+}
+
+body {
+  background: grey;
+  height: 100vh;
+}
+.bg {
+  
+  /* position:fixed; */
+  /* height: 600px; */
+  height: 100vh;
+  background: grey;
+  font-size: 3em;
+}
+
+
+.colored {
+  /* background: -webkit-radial-gradient(circle,#FF5FA2, #ECCBA6); */
+  background: -webkit-radial-gradient(circle,#48A9C5, #A0D1CA, #B4B5DF);
+}
+.container {
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  text-align: center; 
+}
+
+.btn {
+  font-size: 16px;
+  border-radius: 9px;
+  font-weight: bold;
+  width: 7em;
+  height: 2.5em;
+  display: none;
+  border: 1px solid;
+  box-shadow: 3px 3px 2px rgb(95, 93, 93);
+  cursor: pointer;
+}
+
+.show_btn {
+  display: inline-block;
+}
+.show_btn {
+  display: inline-block;
+}
+
+.hidden_btn {
+  display: none;
+}
+.who {
+  margin-top: 1em;
+  font-size: 12px;
+}
+
+#text {
+  /* align-content: center; */
+  align-items: center;
+}
+
+aside {
+  /* color: gray; */
+  height: 4em;
+  width: 4em;
+  padding: 0.5em;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  text-align: right;
+  /* margin-bottom: 1em; */
+  border: 2px solid;
+  border-radius: 20px;
+}
+
+aside > p {
+  /* color: gray; */
+  font-size: 20px;
+}
+li {
+  /* color: gray; */
+  margin-top: 1em;
+  font-size: 12px;
+}
+
+.color_of_rank {
+  border: 2px solid;
+}
+
+@media (max-width:550px) {
+  * {
+    font-size: 20px;
+  }
+  .btn {
+    margin-top: 1em;
+    font-size: 12px;
+    border-radius: 7px;
+    /* font-weight: bold; */
+    width: 6em;
+    height: 2.5em;
+}
+  aside {
+    /* color: gray; */
+    height: 4.8em;
+    width: 4em;
+    padding: 0.2em;
+    /* padding-left: 0.5em; */
+    border: 1px solid;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  aside > p {
+    /* color: gray; */
+    font-size: 12px;
+    margin-bottom: 0.5em;
+  }
+  li {
+    /* color: gray; */
+    margin-top: 1em;
+    font-size: 10px;
+    text-align: right;
+  }
+  ol {
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0;
+    margin-inline-start: 1em;
+    margin-inline-end: 0px;
+    padding-inline-start: 0;
+}
+  
+  .color_of_rank {
+    border: 2px solid;
+}
+}

@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+main {
+  background: rgb(1, 1, 82);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width:100%;
+  height: 70%;
+  max-width: 600px;
+  max-height: 800px;
+  border: 1px solid rgb(5, 5, 139);
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  padding: 1.5%;
+  box-shadow:3px 3px 6px rgb(95, 93, 93);
+}
+
+#screen {
+  width: 100%;
+  height: 20%;
+  background: rgb(236, 236, 236);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+  margin: 0% auto;
+  font-size: 2.1em;
+  text-align: right;
+  padding: 0 8px;
+  box-shadow: inset 3px 3px 2px rgb(95, 93, 93);
+}
+
+.wrapper {
+  width: 100%;
+  height: 68%;
+  margin: 3% 0;
+}
+.row {
+  display: flex;
+  height: 23%;
+  justify-content: space-between;
+}
+
+
+.btn {
+  width: 23%;
+  background: rgb(236, 236, 236);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1% 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  line-height: 150%;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn:active {
+  background: rgb(173, 171, 171);
+}
+
+#equal {
+  color: white;
+  width: 48.5%;
+  background: rgba(14, 18, 218, 0.911);
+  border-color: rgba(15, 18, 201, 0.911);
+}
+
+#equal:active {
+  background: rgba(13, 16, 185, 0.911)
+}
+
+#ac,#del, .operator {
+  color: white;
+  background: rgba(20, 114, 238, 0.952);
+  border-color: rgba(14, 97, 206, 0.952);
+}
+
+#ac:active,#del:active, .operator:active {
+  background: rgba(13, 90, 192, 0.952);
+}
+
+#space {
+  visibility:hidden;
+}
+
+@media (max-width:426px) {
+  #screen {
+    border-radius: 0;
+  }
+  main {
+    width:100%;
+    height: 100%;
+    padding: 0;
+    border-radius: 0;
+  }
+  .wrapper{
+    margin:0;
+    height:69.5%;
+  }
+  .btn {
+    width: 25%;
+    margin: 1px;
+    border: none;
+    border-radius: 0px;
+    line-height: 150%;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+#space {
+  display: none;
+}
+#ac {
+  width: 50.4%;
+}
+#equal {
+  width:50.4%;
+}
+}
