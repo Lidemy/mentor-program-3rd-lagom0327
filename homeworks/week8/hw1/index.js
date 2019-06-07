@@ -34,7 +34,7 @@ const dataOfAllPrizes = [
 const getPositionAtDataOfAllPrizes = (str) => {
   let i;
   for (i = 0; i < dataOfAllPrizes.length; i++) {
-    if (str === dataOfAllPrizes[i].header) return 0;
+    if (str === dataOfAllPrizes[i].header) return i;
   }
   return i;
 };
