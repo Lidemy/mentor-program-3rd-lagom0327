@@ -2,8 +2,8 @@
   --base: #c4191f;
   --baseBg: #bd8e5357;
   --textColor: black;
-  --prizeBg: #ff7600;
-  --prizeBorder: orange;
+  --prizeBg: #c4191f;
+  --prizeBorder: #ff5e00;
 }
 :root[theme='dark']{
   --base: black;
@@ -171,7 +171,7 @@ h3 {
 .flight {
   background-size: cover;
   position: absolute;
-  top: 21%;
+  top: 14%;
   margin: 0px;
   right: 0px;
   width: 0px;
@@ -182,11 +182,11 @@ h3 {
 
 .flight.show_flight {
   display: block;
-  top: 21%;
+  top: 14%;
   right: 0px;
   max-width: 100%;
   width: 817px;
-  max-height: 66%;
+  max-height: 75%;
   height: 414px;
 }
 
@@ -212,6 +212,8 @@ h3 {
   top: -200%;
   filter:drop-shadow(10px 10px 3px rgba(0,0,0,.5));
   right: 5%;
+  left: 50%;
+  transform: translate(-50%, 0);
   width: 400px;
   height: 100px;
   transition: all 1s;
