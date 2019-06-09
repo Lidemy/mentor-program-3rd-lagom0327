@@ -1,3 +1,4 @@
+const numOfMessages = 10;
 const swiper = document.querySelector('.swiper');
 swiper.addEventListener('click',
   (e) => {
@@ -12,10 +13,10 @@ swiper.addEventListener('click',
 const showMessages = (data, page) => {
   const container = document.querySelector('.message_board__all_messages');
   container.innerHTML = '';
-  let i = (page - 1) * 5;
-  let indexOfLast = i + 5;
+  let i = (page - 1) * numOfMessages;
+  let indexOfLast = i + numOfMessages;
 
-  if ((data.length - i) < 5) indexOfLast = data.length;
+  if ((data.length - i) < numOfMessages) indexOfLast = data.length;
   for (i; i < indexOfLast; i++) {
     const section = document.createElement('section');
     section.classList.add('each_message');
@@ -41,7 +42,7 @@ const loadMessages = (page) => {
     if (request.status >= 200 && request.status < 400) {
       const response = request.responseText;
       const data = JSON.parse(response);
-      const totalPage = Math.floor((data.length - 1) / 5) + 1;
+      const totalPage = Math.floor((data.length - 1) / numOfMessages) + 1;
       pageNum('updat', page, totalPage);
       showMessages(data, page);
     } else status = false;
@@ -62,7 +63,7 @@ const postComment = (comment) => {
     if (request.status >= 200 && request.status < 400) {
       const data = JSON.parse(request.responseText);
       status = true;
-      loadMessages(Math.floor((data.id - 1) / 5) + 1);
+      loadMessages(Math.floor((data.id - 1) / numOfMessages) + 1);
     } else status = false;
     request.onerror = () => { status = false; };
   };
@@ -92,7 +93,7 @@ changePage.addEventListener('click',
       if (pageNum('get')[0] === pageNum('get')[1]) alert('已經在最後一頁');
       else loadMessages(Number(pageNum('get')[0]) + 1);
     } else if (e.target.id === 'first_page__btn') loadMessages(1);
-    else if (e.target.id === 'last_page__btn') loadMessages(pageNum('get')[1]);
+    else if (e.target.id === 'last_page__btn') loadMessages(Number(pageNum('get')[1]));
   });
 
 loadMessages(1);
