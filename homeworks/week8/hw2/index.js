@@ -23,8 +23,10 @@ const pageNum = (method, page, totalPage) => {
   const pageNow = document.querySelector('.page_now');
   const total = document.querySelector('.total_page');
   if (method === 'get') return [pageNow.innerHTML, total.innerHTML];
-  pageNow.innerHTML = page < 10 ? `0${page}` : `${page}`;
-  total.innerHTML = totalPage < 10 ? `0${totalPage}` : `${totalPage}`;
+  if (method === 'update') {
+    pageNow.innerHTML = page < 10 ? `0${page}` : `${page}`;
+    total.innerHTML = totalPage < 10 ? `0${totalPage}` : `${totalPage}`;
+  }
   return 0;
 };
 
@@ -36,7 +38,7 @@ const loadMessages = (page) => {
       const response = request.responseText;
       const data = JSON.parse(response);
       const totalPage = Math.floor((data.length - 1) / numOfMessages) + 1;
-      pageNum('updat', page, totalPage);
+      pageNum('update', page, totalPage);
       showMessages(data, page);
     } else status = false;
     request.onerror = () => { status = false; };

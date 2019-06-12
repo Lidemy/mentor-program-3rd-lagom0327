@@ -146,4 +146,4 @@ inputBtn.addEventListener('click',
 
 window.addEventListener('scroll', scrollEvent);
 
-load(700, getAllGamesName);
+load(800, getAllGamesName);
