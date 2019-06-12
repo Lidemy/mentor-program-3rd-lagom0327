@@ -1,3 +1,4 @@
+// eslint 'no-underscore-dangle':  ['error', { 'allow': ['_total'] }]
 let index = 0;
 const gamesName = [];
 let isShowStreams = false;
@@ -13,20 +14,23 @@ const changeLiBg = (gameName) => {
     else el.classList.remove('selected');
   });
 };
-const showStreams = (data, startIndex) => {
+
+const isStreamsEnd = (offset, totalStreams) => {
+  if (offset >= totalStreams) loadMoreBtn.classList.add('more_streams__btn__hidden');
+  else loadMoreBtn.classList.remove('more_streams__btn__hidden');
+};
+
+const showStreams = (data, startIndex, totalStreams) => {
   input.value = '';
   const container = document.querySelector('.display_streams');
-  if (data.length === 0) {
-    alert('No such game');
-    return false;
-  }
+  if (data.length === 0) return false;
   if (startIndex === 0) {
     index = 0;
     container.innerHTML = '';
     document.querySelector('.game_name').innerHTML = data[0].channel.game;
     changeLiBg(data[0].channel.game);
   }
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < data.length; i++) {
     const a = document.createElement('a');
     a.classList.add('each_stream');
     a.href = data[i].channel.url;
@@ -41,7 +45,8 @@ const showStreams = (data, startIndex) => {
     </div>`;
     container.appendChild(a);
   }
-  index += 20;
+  index += data.length;
+  isStreamsEnd(index, totalStreams);
   isShowStreams = true;
   return true;
 };
@@ -53,11 +58,11 @@ const getStreams = (gameName, startIndex) => {
       const json = JSON.parse(request.responseText);
       console.log(json);
       const data = json.streams;
-      showStreams(data, startIndex);
+      showStreams(data, startIndex, json._total);
     } else console.log('err', request.status, request.responseText);
     request.onerror = () => console.log('error');
   };
-  request.open('GET', `https://api.twitch.tv/kraken/streams?client_id=rjwb8zewf0hx6k2wdskymmxmzy7tpa&game=${encodeURI(gameName)}&offset=${startIndex}`);
+  request.open('GET', `https://api.twitch.tv/kraken/streams?client_id=rjwb8zewf0hx6k2wdskymmxmzy7tpa&game=${encodeURI(gameName)}&limit=20&offset=${startIndex}`);
   request.send();
 };
 
@@ -121,7 +126,9 @@ nav.addEventListener('click',
     }
   });
 
-loadMoreBtn.addEventListener('click', () => { getStreams(document.querySelector('.game_name').innerText, index); });
+loadMoreBtn.addEventListener('click', () => {
+  getStreams(document.querySelector('.game_name').innerText, index);
+});
 
 input.addEventListener('keyup',
   (e) => {

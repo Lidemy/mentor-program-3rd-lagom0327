@@ -129,6 +129,10 @@ body {
   background: #6b686882;
 }
 
+.more_streams__btn__hidden {
+  display: none;
+}
+
 .each_stream__preview {
   width: 100%;
   height: auto;

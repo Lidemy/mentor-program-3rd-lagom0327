@@ -21,6 +21,7 @@ module.exports = {
   ],
   rules: {
     "no-console": "off",
-    'no-plusplus': [2, { allowForLoopAfterthoughts: true }]
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+    'no-underscore-dangle':  ['error', { 'allow': ['_total'] }]
   },
 };
