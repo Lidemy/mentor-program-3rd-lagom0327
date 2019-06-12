@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint / esl ./homeworks/**/*.js ", 
+    "lint": "eslint / esl ./homeworks/**/*.js ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
@@ -30,6 +30,7 @@
   "dependencies": {
     "eslint": "^5.15.1",
     "js-base64": "^2.5.1",
+    "normalize.css": "^8.0.1",
     "request": "^2.88.0"
   },
   "devDependencies": {

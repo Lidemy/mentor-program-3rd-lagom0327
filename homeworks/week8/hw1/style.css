@@ -1,0 +1,344 @@
+:root{
+  --base: #c4191f;
+  --baseBg: #bd8e5357;
+  --textColor: black;
+  --prizeBg: #c4191f;
+  --prizeBorder: #ff5e00;
+}
+:root[theme='dark']{
+  --base: black;
+  --baseBg: black;
+  --textColor: white;
+}
+
+:root[theme='sky'] {
+  --base: rgb(9, 9, 103);
+  --baseBg: rgba(9, 156, 253, 0.37);
+  --prizeBg: #0077ff;
+  --prizeBorder: #00a1ff;
+}
+
+body {
+  margin: 0px;
+  background: var(--baseBg);
+}
+
+footer, .lottery__info__wrapper > h1, .lottery__info__wrapper > ol >li  {
+  color: var(--textColor);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+* {
+  font-family: 'Noto Sans TC';
+  box-sizing: border-box;
+  offset: none;
+  border: none;
+  outline: none;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--base);
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  height: 50px;
+  z-index: 1;
+}
+.nav__list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.nav__item {
+  color: white;
+  text-align: center;
+  margin-right: 1em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav__item:hover {
+  color: #d6b9ba;
+}
+.nav__item > a:hover {
+  color: #d6b9ba;
+}
+
+header {
+  height: 300px;
+  margin-top: 50px;
+  color: white;
+  background: url("https://video-images.vice.com/articles/58acd88a8d3a0dc580a30035/lede/1545260294225-1491938162705-hot-pot-recipe-3.jpeg?crop=1xw:0.7875xh;center,center&resize=1200:*") center;
+  background-size: cover;
+  position: relative;
+}
+
+header.change_bg {
+  background: url("https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_863,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/kfuagw1qg6qhpqnz4toc/TaiwaneseHotPotinTsimShaTsui.jpg") top center;
+}
+
+.wrapper {
+  max-width: 690px;
+  margin-left: 1em; 
+}
+
+header h1 {
+  text-shadow: #333 0.05em 0.05em 0.2em;
+  font-size: 72px;
+  color: white;
+  margin: 0;
+}
+
+header p {
+  color: white;
+  text-shadow: #333 0.1em 0.1em 0.2em;
+}
+
+.swiper {
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  transform: translate(50%, 0);
+}
+
+.swiper__btn {
+  background: white;
+  width: 5em;
+  height: 0.4em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.6;
+}
+
+.swiper__btn:active {
+  background: var(--base);
+}
+
+.swiper__red_btn {
+  background: var(--base);
+}
+
+
+.lottery {
+  display: flex;
+}
+.lottery__info__wrapper.lottery__info_hidden {
+  display: none;
+}
+
+.lottery__app {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.lottery__info {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  width: 45%;
+  max-width: 660px;
+  padding: 0px 0px;
+}
+
+ol {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+ol > li {
+  margin-top: 1em;
+  font-size: 14px;
+}
+.prize {
+  text-align: center;
+  color: var(--textColor);
+  display: none;
+  transition:all 0.2s; 
+}
+
+.prize.show_prize {
+  display: block;
+}
+h3 {
+  margin-top: 0em;
+}
+
+.flight {
+  background-size: cover;
+  position: absolute;
+  top: 14%;
+  margin: 0px;
+  right: 0px;
+  width: 0px;
+  height: 400px;
+  z-index: 0;
+  transition: all 2s cubic-bezier(0, 0.85, 0.92, 0.55);
+}
+
+.flight.show_flight {
+  display: block;
+  top: 14%;
+  right: 0px;
+  max-width: 100%;
+  width: 817px;
+  max-height: 75%;
+  height: 414px;
+}
+
+.tv {
+  position: absolute;
+  top: -300%;
+  z-index: -1;
+  max-width: 90%;
+  max-height: 87%;
+  filter:drop-shadow(10px 10px 15px rgba(0,0,0,.5));
+  transition: all 1s cubic-bezier(0.02, 1.05, 1, 1.17);
+}
+
+.tv.show_tv {
+  z-index: 1;
+  display: block;
+  top: 10%;
+}
+
+.youtube {
+  z-index: -1;
+  position: absolute;
+  top: -200%;
+  filter:drop-shadow(10px 10px 3px rgba(0,0,0,.5));
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 100%;
+  height: 100px;
+  transition: all 1s;
+}
+
+.youtube.show_youtube {
+  z-index: 1;
+  max-width: 90%;
+  width: 400px;
+  right: 5%;
+  top: 34%;
+  display: block;
+}
+
+.win_the_prize {
+  margin: 3em auto;
+  max-width: 90%;
+  color: var(--textColorLight);
+  padding: 30px;
+  box-shadow: 4px 4px 3px rgb(95, 93, 93);
+  text-align: center;
+  color: white;
+  background: var(--prizeBg);
+  display: block;
+  font-size: 22px;
+  border:1px var(--prizeBorder) solid;
+  border-radius: 15px;
+}
+
+.win_the_prize > p {
+  margin-bottom: 0;
+}
+
+.lottery__btn {
+  color: white;
+  font-size: 16px;
+  background: var(--base);
+  border:0px  solid;
+  border-radius: 0.5em;
+  box-shadow: 4px 4px 3px rgb(95, 93, 93);
+  width: 9em;
+  height: 3em;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+
+.lottery__btn:hover {
+  font-size: 24px;
+}
+.lottery__btn:active {
+  background: #922a2d;
+}
+
+.lottery__btn.lottery__btn__hidden {
+  display: none;
+}
+
+footer {
+  max-width: 90%;
+  margin: 0 auto;
+  color: var(--textColor);
+  border-top: 1px solid rgba(51, 51, 51, 0.568);
+  padding: 1em 1em;
+}
+
+#none_prize {
+  width: 5em;
+  height: 2em;
+  color: var(--textColor);
+  background: var(--baseBg);
+  font-size: 22px;
+}
+
+@media (max-width: 800px) {
+  header h1 {
+    font-size: 50px;
+  }
+
+  header p {
+    font-size: 12px;
+  }
+  .lottery {
+    display: block;
+  }
+  .lottery__app {
+    width: 100%;
+    height: 300px;
+  }
+  .lottery__info {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    min-height: 210px;
+  }
+
+  .lottery__info__wrapper {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .flight.show_flight {
+    top: 0%;
+  }
+
+  .tv.show_tv {
+    top: -15%;
+    /* width: 90%; */
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+  header {
+    height: none;
+    width: 100vw;
+
+  }
+}

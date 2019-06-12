@@ -1,0 +1,354 @@
+:root{
+  /* --base: #c4191f; */
+  --base: #f5878a;
+  --baseBg: #bd8e5357;
+  --textColor: black;
+  --prizeBg: #ff7600;
+  --prizeBorder: orange;
+}
+:root[theme='dark']{
+  --base: black;
+  --baseBg: black;
+  --textColor: white;
+}
+
+:root[theme='sky'] {
+  --base: rgb(9, 9, 103);
+  --baseBg: rgba(9, 156, 253, 0.37);
+  --prizeBg: #0077ff;
+  --prizeBorder: #00a1ff;
+}
+
+body {
+  margin: 0px;
+  background: var(--baseBg);
+}
+
+footer {
+  color: var(--textColor);
+}
+
+* {
+  font-family: 'Noto Sans TC';
+  box-sizing: border-box;
+  offset: none;
+  border: none;
+  outline: none;
+}
+
+
+header.top {
+  height: 300px;
+  /* margin-top: 50px; */
+  color: white;
+  background: url("https://video-images.vice.com/articles/58acd88a8d3a0dc580a30035/lede/1545260294225-1491938162705-hot-pot-recipe-3.jpeg?crop=1xw:0.7875xh;center,center&resize=1200:*") center;
+  background-size: cover;
+  position: relative;
+}
+
+header.top.change_bg {
+  background: url("https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_863,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/kfuagw1qg6qhpqnz4toc/TaiwaneseHotPotinTsimShaTsui.jpg") top center;
+}
+
+.wrapper {
+  max-width: 690px;
+  margin-left: 1em; 
+}
+
+header.top h1 {
+  text-shadow: #333 0.05em 0.05em 0.2em;
+  font-size: 72px;
+  color: white;
+  margin: 0;
+}
+
+header.top p {
+  color: white;
+  text-shadow: #333 0.1em 0.1em 0.2em;
+}
+
+.swiper {
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  transform: translate(50%, 0);
+}
+
+.swiper__btn {
+  background: white;
+  width: 5em;
+  height: 0.4em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.6;
+}
+
+.swiper__btn:active {
+  background: var(--base);
+}
+
+.swiper__red_btn {
+  background: var(--base);
+}
+
+.message_board {
+  max-width:50%;
+  margin: 1em auto;
+  /* justify-content: center; */
+}
+
+.message_board__all_messages {
+  background: rgba(252, 251, 239, 0.73);
+  border-radius: 3px;
+  padding: 0.8em 0.5em;
+}
+
+.each_message {
+  display: flex;
+  background: #fbfaf9;
+  margin-bottom: 0.5em;
+  height: 45px;
+  border: 0px #ccc solid;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: 2px;
+  /* box-shadow: 1px 1px 0px rgb(95, 93, 93); */
+}
+
+.each_message:last-child {
+  margin: 0;
+}
+
+.each_message__id {
+  background: var(--base);
+  color: white;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50%;
+  margin-right: 0.7em;
+  box-shadow: 1px 1px 1px rgb(95, 93, 93);
+
+}
+
+.message_board__change_page {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0;
+}
+
+.change_page__btn {
+  background: var(--base);
+  color: white;
+  height: 2em;
+  width: 6em;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgb(95, 93, 93);
+  margin: 0 1em;
+  cursor: pointer;
+}
+
+.change_page__btn:active {
+  background: #971318;
+}
+
+.message_board__comment_board {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+
+.message_board__comment_board_input {
+  background: rgba(252, 251, 239, 0.73);
+  height: 45px;
+  border: 0px orange solid;
+  border-radius: 3px;
+  padding: 0.5em;
+  vertical-align:text-top
+}
+
+.message_board__comment__board_btn {
+  background: var(--base);
+  color: white;
+  height: 2em;
+  width: 4em;
+  cursor: pointer;
+  align-self: center;
+  margin: 1em 0;
+  border: 0px red solid;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgb(95, 93, 93);
+}
+
+.message_board__comment__board_btn:active {
+  background: #971318;
+}
+
+footer {
+  max-width: 90%;
+  margin: 0 auto;
+  color: var(--textColor);
+}
+
+.navi > h1, .navi > p {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+header.navi {
+  background: var(--base);
+  padding: 15px 20px;
+}
+
+/*shorter clearfix http://nicolasgallagher.com/micro-clearfix-hack/*/
+header:before,
+header:after {
+  content:"";
+  display:table;
+}
+
+header:after {
+  clear:both;
+}
+      
+/* For IE 6/7 (trigger hasLayout) */
+/* header {
+  zoom:1;
+} */
+
+h1.logo a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 22px;
+  float: left;
+  letter-spacing: 0.2em;
+}
+a.to_nav {
+  float: right;
+  color: white;
+  background: #db575c;
+  text-decoration: none;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 22px;
+  height: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+a.to_nav:hover,
+a.to_nav:focus {
+    color: #1c1c1c;
+    background: #ccc;
+}
+a {
+  cursor: pointer;
+}
+
+#primary_nav ul {
+  list-style: none;
+  background: var(--base);
+  color: white;
+  padding: 5px 0;
+}
+
+#primary_nav li a {
+  display: block;
+  padding: 0 20px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  letter-spacing: 0.1em;
+  line-height: 2em;
+  height: 2em;
+  border-bottom: 1px solid pink;
+}
+
+#primary_nav li:last-child a {
+  border-bottom: none;
+}
+
+#primary_nav li a:hover,
+#primary_nav li a:focus {
+  color: #1c1c1c;
+  background: #ccc;
+}
+
+ul {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  /* height: 30px;; */
+}
+@media (max-width: 800px) {
+  header.top h1 {
+    font-size: 50px;
+  }
+
+  header.top p {
+    font-size: 12px;
+  }
+  .message_board {
+    max-width:90%;
+  }
+}
+
+@media (min-width: 768px) {
+
+  a.to_nav {
+      display: none;
+  }
+/* https://webdesign.tutsplus.com/zh-hant/articles/a-simple-responsive-mobile-first-navigation--webdesign-6074 */
+
+  footer {
+    border-top: 1px solid rgba(51, 51, 51, 0.568);
+  }
+  a.to_nav {
+      display: none;
+  }
+  #primary_nav {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: none;
+  }
+
+  #primary_nav li {
+      display: inline;
+  }
+
+  #primary_nav li a {
+      float: left;
+      border: none;
+      padding: 0 10px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+  }
+  #primary_nav li.top__nav {
+    display: none;
+  }
+
+}
+
+@media (max-width: 376px) {
+  .message_board__change_page {
+    height: 4em;
+    align-items: flex-start;
+  }
+  .page_data {
+    align-self: flex-end;
+  }
+  .change_page__btn {
+    margin: 0 0.2em;
+}
+
+}

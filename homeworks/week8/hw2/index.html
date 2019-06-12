@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>week8 hw1 Lottery</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  </head>
+  <body id="home">
+    <header class="navi">
+      <h1 class="logo"><a href="">Mrs. Wang</a></h1>
+      <a class="to_nav" href="#primary_nav">Menu</a>
+    </header>
+    <header class="top">
+      <div class="wrapper">
+        <h1>Taiwanese Hot Pot</h1>
+        <p>Taiwanese hot pot ( usually called 火鍋 in Mandarin or Taiwanese ) is also called shabu-shabu when the food is prepared in Japanese style.[citation needed] It is very common to eat the food with a dipping sauce consisting of shacha sauce and raw egg yolk.</p>
+        <!-- https://en.wikipedia.org/wiki/Hot_pot -->
+      </div>
+      <div class="swiper">
+        <button class="swiper__btn swiper__red_btn"></button>
+        <button class="swiper__btn"></button>
+      </div>
+    </header>
+    <main class="message_board">
+      <section class="message_board__all_messages">
+
+      </section>
+      <section class="message_board__change_page">
+        <button class='change_page__btn' id='first_page__btn'>第一頁</button>
+        <button class='change_page__btn' id='previous_page__btn'>上一頁</button>
+        <div class=page_data><span class="page_now"></span>/<span class='total_page'></span></div>
+        <button class='change_page__btn' id='next_page__btn'>下一頁</button>
+        <button class='change_page__btn' id='last_page__btn'>最後頁</button>
+      </section>
+
+     <section class='message_board__comment_board' >
+       <input class='message_board__comment_board_input' type="text" > 
+       <!-- placeholder="What do you want to say ?" -->
+       <button class="message_board__comment__board_btn" >送出</button>
+     </section>
+    </main>
+    <nav class="nav" id="primary_nav">
+      <!-- <div class="nav__title">Navbar</div> -->
+      <ul class="nav__list">
+        <li class="nav__item"><a href="../hw1/index.html">Home</a></li>
+        <li class="nav__item"><a>News</a></li>
+        <li class="nav__item"><a>Message Board</a></li>
+        <li class="nav__item"><a>Location</a></li>
+        <li class="nav__item top__nav"><a href="#home">Top</a></li>
+      </ul>
+    </nav>
+    <footer>
+        <p>Copyright &copy;2019 </p>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>
