@@ -1,7 +1,6 @@
-
 const lotteryBtn = document.querySelector('.lottery__btn');
 const prizes = document.querySelectorAll('.prize');
-
+const swiper = document.querySelector('.swiper');
 const dataOfAllPrizes = [
   {
     header: 'FIRST',
@@ -122,8 +121,6 @@ lotteryBtn.addEventListener('click',
     lotteryBtn.classList.add('lottery__btn__hidden');
     drawLosts();
   });
-
-const swiper = document.querySelector('.swiper');
 
 swiper.addEventListener('click',
   (e) => {

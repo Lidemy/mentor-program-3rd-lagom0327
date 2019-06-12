@@ -1,7 +1,7 @@
 body {
   margin: 0px;
-  background: url('Starry-stars-space-night_5120x2880.jpg');
-  
+  background: url(Starry-stars-space-night_5120x2880.jpg) center top;
+  background-size: contain;
 }
 
 * {
@@ -12,7 +12,6 @@ body {
 .game_name {
   font-family: fantasy;
   letter-spacing: 0.3em;
-  text-shadow: #333 6px 3px 5px;
   font-size:  3em;
   color: #eaebefc2;
 }
@@ -24,14 +23,12 @@ body {
 .navbar {
   background: #00000082;
   display: flex;
-  /* border: 2px white solid; */
   height: 50px;
 }
 
 .navbar > h1 {
   font-size: 1.5em;
   text-decoration: none;
-  /* text-align: center; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,21 +81,18 @@ body {
   width: 16%;
 }
 .search > input {
+  background: #ffffffb0;;
   color: black;
   outline:none;
   width: 84%;
 }
 .search_btn {
-  /* background: #00000082; */
   background: #4a5071;
   border: none;
   outline:none;
   cursor: pointer;
   text-align: center;
   width: 23%;
-}
-svg {
-  display: block;
 }
 
 .search_btn:hover {
@@ -112,12 +106,10 @@ svg {
 .wrapper {
   width: 90%;
   margin: 0 auto;
-
 }
 
 .more_streams__btn {
   background: #00000082;
-  /* color: white; */
   width: 9em;
   height: 3em;
   margin: 0 auto;
@@ -137,13 +129,6 @@ svg {
   background: #6b686882;
 }
 
-
-a {
-  /* color: -webkit-link; */
-  /* cursor: pointer; */
-  text-decoration: none;
-}
-
 .each_stream__preview {
   width: 100%;
   height: auto;
@@ -160,6 +145,7 @@ a {
   max-width: 50%;
   text-align: center;
 }
+
 .display_streams {
   width: 100%;
   margin: 0 auto;
@@ -170,12 +156,11 @@ a {
 
 .each_stream {
   display:flex;
-align-items:center;
-justify-content:flex-start;
-flex-direction: column;
+  align-items:center;
+  justify-content:flex-start;
+  flex-direction: column;
   background: #00000082;
   width: 18%;
-  /* height: 500px; */
   border: 3px #00000082 solid;
   border-radius: 5px;
   box-shadow: black 5px 5px 5px ;
@@ -188,6 +173,7 @@ flex-direction: column;
   transform: scale(1.1);
   background: #353333cb;
 }
+
 .profile {
   display: flex;
   width: 100%;
@@ -212,12 +198,12 @@ flex-direction: column;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  /* height: 1em; */
 } 
 
 .profile__display_name {
   font-size: 0.8em;
 }
+
 .navbar-brand{
   display: inline-block;
   width: 200px;
@@ -238,38 +224,6 @@ flex-direction: column;
   }
   .each_stream {
     width: 30%;
-  }
-  .navbar-header {
-      float: none;
-  }
-  .navbar-toggle {
-      display: block;
-  }
-
-  .navbar-collapse {
-      border-top: 1px solid transparent;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-  }
-  .navbar-collapse.collapse {
-      display: none!important;
-  }
-  .navbar-nav>li {
-      float: none;
-  }
-  .navbar-nav>li>a {
-      padding-top: 10px;
-      padding-bottom: 10px;
-  }
-  .navbar-text {
-      float: none;
-      margin: 15px 0;
-  }
-  /* since 3.1.0 */
-  .navbar-collapse.collapse.in { 
-      display: block!important;
-  }
-  .collapsing {
-      overflow: hidden!important;
   }
 }
 
@@ -334,9 +288,8 @@ flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
   }
-  .navbar__nav > li {  /* width: 100%; */
+  .navbar__nav > li {
     width: 33.333%;
     height: 50px;
-    /* display: block; */
   }
 }

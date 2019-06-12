@@ -1,14 +1,7 @@
 const numOfMessages = 10;
 const swiper = document.querySelector('.swiper');
-swiper.addEventListener('click',
-  (e) => {
-    if (!e.target.classList.contains('swiper__red_btn')) {
-      const swiperBtns = document.querySelectorAll('.swiper__btn');
-      swiperBtns[0].classList.toggle('swiper__red_btn');
-      swiperBtns[1].classList.toggle('swiper__red_btn');
-      document.querySelector('.top').classList.toggle('change_bg');
-    }
-  });
+const commentBtn = document.querySelector('.message_board__comment__board_btn');
+const changePage = document.querySelector('.message_board__change_page');
 
 const showMessages = (data, page) => {
   const container = document.querySelector('.message_board__all_messages');
@@ -70,7 +63,16 @@ const postComment = (comment) => {
   return status;
 };
 
-const commentBtn = document.querySelector('.message_board__comment__board_btn');
+swiper.addEventListener('click',
+  (e) => {
+    if (!e.target.classList.contains('swiper__red_btn')) {
+      const swiperBtns = document.querySelectorAll('.swiper__btn');
+      swiperBtns[0].classList.toggle('swiper__red_btn');
+      swiperBtns[1].classList.toggle('swiper__red_btn');
+      document.querySelector('.top').classList.toggle('change_bg');
+    }
+  });
+
 commentBtn.addEventListener('click',
   () => {
     const comment = document.querySelector('.message_board__comment_board_input');
@@ -83,7 +85,7 @@ commentBtn.addEventListener('click',
     }
   });
 
-const changePage = document.querySelector('.message_board__change_page');
+
 changePage.addEventListener('click',
   (e) => {
     if (e.target.id === 'previous_page__btn') {
