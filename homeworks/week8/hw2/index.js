@@ -53,7 +53,7 @@ const postComment = (comment) => {
   let status = true;
   request.open('POST', 'https://lidemy-book-store.herokuapp.com/posts');
   request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  request.send(`content=${comment}`);
+  request.send(`content=${encodeURIComponent(comment)}`); // encodeURIComponent('1&a=2')
   request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
       const data = JSON.parse(request.responseText);
