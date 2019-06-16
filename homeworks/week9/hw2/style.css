@@ -1,0 +1,136 @@
+
+body {
+  margin: 0;
+  background: #13094b;
+}
+
+* {
+  color: white;
+}
+
+nav {
+  /* text-align: center; */
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  /* margin: 0 auto; */
+}
+nav > a:first-child {
+  /* justify-self: flex-start; */
+}
+nav > a {
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+nav > p {
+  justify-self: flex-start;
+
+}
+input, textarea {
+  color: black;
+}
+.container {
+  max-width: 90%;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 2em;
+}
+
+.container > h1 {
+  text-align: center;
+}
+.message {
+  border: 2px dotted grey;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+.message:not(:first-child) {
+  margin-top: 10px;
+}
+
+.message__content {
+  white-space: pre-line;
+}
+
+.message > header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment_board {
+  /* background: rgb(154, 154, 226);
+   */
+  margin: 20px 0;
+  /* display: flex; */
+  /* flex-basis: column; */
+}
+
+.comment_board_nickname, .comment_board_input {
+  display: flex;
+  flex-direction: column;
+  /* width: 95%; */
+  margin: 0 auto;
+}
+
+input, textarea {
+  width: 100%;
+  color: black;
+  /* margin: 0 2.5%; */
+  border-radius: 5px;
+  /* margin-top: 10px; */
+}
+
+.comment_board_input {
+  margin-top: 10px;
+}
+
+.btn {
+  background: rgb(119, 166, 236);
+  color: white;
+  height: 2em;
+  width: 4em;
+  margin: 0 auto;
+  cursor: pointer;
+  /* align-self: center; */
+  margin: 10px 50%;
+  border: 0px red solid;
+  border-radius: 5px;
+  transform: translate(-50%, 0);
+  /* box-shadow: 1px 1px 1px rgb(95, 93, 93); */
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.message_board__comment_board_input {
+  background: rgba(252, 251, 239, 0.73);
+  height: 45px;
+  border: 0px orange solid;
+  border-radius: 3px;
+  padding: 0.5em;
+  vertical-align:text-top
+}
+
+.message_board__comment__board_btn {
+  background: var(--base);
+  color: white;
+  height: 2em;
+  width: 4em;
+  cursor: pointer;
+  align-self: center;
+  margin: 1em 0;
+  border: 0px red solid;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgb(95, 93, 93);
+}
+
+.message_board__comment__board_btn:active {
+  background: #971318;
+}
