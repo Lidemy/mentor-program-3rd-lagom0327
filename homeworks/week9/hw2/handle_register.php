@@ -1,18 +1,20 @@
 <?php
   require_once('./conn.php');
-
+  $maxLength = 16;
   $username = $_POST['username'];
-  $nickname = $_POST['nickname'];
+  $nickname =  str_replace("'","''", $_POST['nickname']);
   $password = $_POST['password'];
   $password2 = $_POST['password2'];
 
-  // echo $username . ' ' . $nickname . ' ' . $password . ' ' . $password;
   if (empty($username) || empty($nickname) || empty($password) || empty($password2)) {
-    // if ($password === $password2) die("兩次密碼不相同")
-    die('請檢查資料'); // 之後的 php 程式都不會執行
+    die('請檢查資料'); 
   } else if ($password !== $password2) {
     header('Location: ./register.php?password=1');
     die();
+  } else if (strlen($username) > $maxLength || strlen($password) > $maxLength ||  strlen($nickname) > $maxLength * 4) {
+    
+    header('Location: ./register.php?length=1');
+    die(strlen($username));
   }
 
   $sql_username = "SELECT username FROM lagom0327_users";

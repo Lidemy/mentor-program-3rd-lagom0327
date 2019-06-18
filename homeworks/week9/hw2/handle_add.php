@@ -2,9 +2,7 @@
 
 require_once('./conn.php');
 
-// $nickname = $_POST['nickname'];
-$content = $_POST['content'];
-// $category_id = $_POST['category_id'];
+$content = str_replace("'","''", $_POST['content']);
 
 if (empty($content) || empty($_COOKIE["user_id"])) {
   die('empty data');

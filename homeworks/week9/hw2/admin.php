@@ -23,9 +23,7 @@
             echo    "<h3 class='message__nickname'>暱稱 : $nickname</h3>";
             echo    "<h4 class='message__time'>$created_at</h4>";
             echo  "</header>";
-            echo  "<p>$content</p>";
-
-    
+            echo  "<p>$content</p>";   
             echo "</div>";
           }
         } else die("fail:" . $conn->error);
