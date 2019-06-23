@@ -31,6 +31,5 @@
         <input class="btn" type="submit" value="送出"/>
       </form>
     </section>
-    <h1></h1>
   </body>
 </html>
