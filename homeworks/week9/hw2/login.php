@@ -24,11 +24,10 @@
         // if (isset($_GET['is_fail']) && $_GET['is_fail']) echo "<p>帳號或密碼輸入錯誤</p>";
         if (isset($_GET['username'])) echo "<p>帳號或密碼輸入錯誤</p>";
       ?>
-        帳號 <input name="username" required>
-        密碼 <input name="password" type="password" required>
+        <div>帳號</div> <input name="username" required>
+        <div>密碼</div> <input name="password" type="password" required>
         <input class="btn" type="submit" value="送出"/>
       </form>
     </section>
-    <h1></h1>
   </body>
 </html>

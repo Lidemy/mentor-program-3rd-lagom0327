@@ -124,10 +124,15 @@ input, textarea {
   color: white;
   height: 2em;
   width: 4em;
-  margin: 0 auto;
+  margin: 10px auto;
+  display: block;
   cursor: pointer;
-  margin: 10px 50%;
   border: 0px solid;
   border-radius: 5px;
-  transform: translate(-50%, 0);
+}
+
+@media (max-width: 400px) {
+  .form {
+    width: 100%;
+  }
 }
