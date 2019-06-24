@@ -40,11 +40,11 @@ php 有很多實戰演示比第六週直接自己切版真好很多，想做什�
 ### week10 遊戲
 ####綜合能力測驗
 只有短短幾關不像上次複習周有 10 幾關，最後出現 `flag = XXX` 時我還以為 flag 也是 token 的一種。為了研究還有沒有下一關，試著破破看原本的法文網頁，但到其中一關跳出的提示如下: 
-翻譯後發現好像要設定 ip 和時間，就想不出來了。
 
 ```
 Étape #7 : Precision importante : N'oubliez pas d'indiquer votre adresse IP, votre cheminement et le temps que vous avez mis ;)
 ```
+翻譯後發現好像要設定 ip 和時間，還沒想到如何只有瀏覽器解決。還有老師是看的懂法文嗎 XDD
 
 #### r3:0 異世界網站挑戰
 第五關本來以為是轉址的原因，但在 Dev tool Network 中發現所有有關 Lv5 的 Request 的 Response 都是 200 OK ，不知道實際上到底是在哪裡轉址，也不知道怎麼樣才能讓瀏覽器停止轉址。最後只好用 CLI 的 curl 直接把 lv5 的網頁抓下才看到 token。後來看 hint 發現提示是 Javascript ，發現檔案中只寫了 `window.location='./lv6.php?token=fail';`。從 Dev tool 看 `lv5.php?token=csspersona!` 這個 Request 的 response 是 `failed to load response data` ， 所以這題是無法只靠 Dev tool 解決嗎 ?
