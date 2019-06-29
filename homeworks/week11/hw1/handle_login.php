@@ -15,10 +15,10 @@
     // session_start([
       // 'cookie_lifetime' => 86400,
   // ]);
-    session_start();
-    // echo session_id();
-    // $_SESSION['session_id'] = session_create_id();
+
+    if (!isset($_SESSION)) session_start();
     $session = session_id();
+    
     if (islogin($session)) header('Location: ./index.php');
     $_SESSION['user_id'] = $data['id'];
     $_SESSION['nickname'] = $data['nickname'];
@@ -27,7 +27,10 @@
     $result = $conn->query($sql);
     if ($result) {
       return true;
-    } else return false;
+    } else {
+      echo ('fail : ' . $conn->error);
+      return false;
+    }
   }
 
   function setIPSession() {
@@ -52,12 +55,12 @@
   if (empty($username) || empty($password)) {
     die('請檢查資料');
   } 
-  $sql = "SELECT * FROM lagom0327_users";
+  $sql = "SELECT * FROM lagom0327_users WHERE username='$username'";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-      if ($row['username'] === $username && password_verify($password, $row['password'])) {
-        // deleteSession($row['id']);
+      if (password_verify($password, $row['password'])) {
+        echo 'same pass';
         if (setSession($row)) {
           setIPSession();
           header('Location: ./index.php');

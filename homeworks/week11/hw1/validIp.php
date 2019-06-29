@@ -10,10 +10,10 @@ function validIp() {
     $user2_ip = $_SERVER["REMOTE_ADDR"];
   }
 
-  echo "<BR />原來 session 的IP:".$_SESSION["user_ip"];
+  if (isset($_SESSION["user_ip"])) echo "<BR />原來 session 的IP:".$_SESSION["user_ip"];
   echo "<br />目前使用者IP : $user2_ip ";
 
-  if ( $_SESSION["user_ip"] !== $user2_ip ) {
+  if (isset($_SESSION["user_ip"]) && $_SESSION["user_ip"] !== $user2_ip ) {
     echo "<script>alert('您不是原來登入的 IP，請正常登入!!');</script>";
     session_destroy ();
     return false;

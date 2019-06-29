@@ -6,7 +6,8 @@
   function deleteComment($row) {
     include('./conn.php');
     if ($row['user_id'] === $_SESSION['user_id']) {
-      $sql = "DELETE FROM lagom0327_comments WHERE id=" . $row['id'];
+      // $sql = "DELETE FROM lagom0327_comments WHERE id=" . $row['id'];
+      $sql = "UPDATE lagom0327_comments SET is_deleted=1 WHERE id={$_GET['id']}";
       $result = $conn->query($sql);
       return ($result);
     } else die('you are not the author');

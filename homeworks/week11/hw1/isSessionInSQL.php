@@ -8,6 +8,7 @@ function isSessionInSQL() {
     if (isset($_SESSION)) {
       // session_start();
       // $id = $_SESSION['session_id'];
+      if (!isset($_SESSION['nickname'])) return false;
       $id = session_id();
       $sql = "SELECT * FROM lagom0327_users_certificate WHERE id='$id'";
       $result =$conn->query($sql);

@@ -7,6 +7,11 @@ body {
 
 * {
   color: white;
+  outline:none;
+}
+
+a {
+  text-decoration: none;
 }
 
 nav {
@@ -104,6 +109,41 @@ input, textarea {
 
 }
 
+.message__edite.hidden {
+  display: none;
+}
+.btn.edite_btn, .btn.delete_btn,.btn.edite__send_btn {
+  margin: 5px 0px;
+  background: none;
+  width: auto;
+  height: auto;
+}
+
+.btn.edite__send_btn {
+  margin: 5px auto;
+}
+
+.edite_btn.icon::before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f044";
+  font-size: 14px; 
+}
+
+.delete_btn.icon::before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f2ed";
+  font-size: 14px;
+}
+
+.edite__send_btn.icon::before {
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900; 
+  content: "\f0c7";
+  font-size: 30px;
+}
+
 
 .comment_board {
   margin: 20px 0;
@@ -129,6 +169,7 @@ input, textarea {
   background: rgb(119, 166, 236);
   color: white;
   height: 2em;
+  line-height: 2em;
   width: 4em;
   margin: 10px auto;
   display: block;
@@ -136,6 +177,25 @@ input, textarea {
   border: 0px solid;
   border-radius: 5px;
 }
+
+.page_btn__section {
+  display: flex;
+  justify-content: center;
+}
+
+.btn.page_btn {
+  width: 2em;
+  margin: 10px 10px;
+}
+
+.btn.page_btn.active {
+  background: #352590;
+}
+
+.icon:before {
+
+}
+
 
 @media (max-width: 400px) {
   .form {

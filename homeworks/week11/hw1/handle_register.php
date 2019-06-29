@@ -31,7 +31,7 @@
     echo 'fail'. $conn->error;
   }
   
-  $hash = password_hash('$password', PASSWORD_DEFAULT, ['cost' => 11]);
+  $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 11]);
 
   $sql = "INSERT INTO lagom0327_users(username, password, nickname) VALUES('$username', '$hash','$nickname')";
   $result = $conn->query($sql);
