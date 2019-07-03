@@ -2,26 +2,20 @@
   require_once('./conn.php');
   // require_once('./getSessionId.php');
   require_once('./sessionStatus.php');
+  require_once('./isCommentAuthor.php');
+  require_once('./isAdmin.php');
 
-  function deleteComment($row) {
+  function deleteComment() {
     include('./conn.php');
-    if ($row['user_id'] === $_SESSION['user_id']) {
-      // $sql = "DELETE FROM lagom0327_comments WHERE id=" . $row['id'];
-      $sql = "UPDATE lagom0327_comments SET is_deleted=1 WHERE id={$_GET['id']}";
-      $result = $conn->query($sql);
-      return ($result);
-    } else die('you are not the author');
+    $sql = "UPDATE lagom0327_comments SET is_deleted=1 WHERE id={$_GET['id']}";
+    $result = $conn->query($sql);
+    return ($result);
   }
 
 
   if ($sessionStatus) {
-    $commentId = $_GET['id'];
-    $sql = "SELECT id ,user_id FROM lagom0327_comments WHERE id=$commentId";
-    $result = $conn->query($sql);
-    if ($result) {
-      $row = $result->fetch_assoc();
-      if (deleteComment($row)) header("Location: ./index.php");
-    } else die("fail:" . $conn->error);
-  }
+    if (isCommentAuthor() && deleteComment()) header("Location: ./index.php");
+    else if (isAdmin() && deleteComment()) header("Location: ./admin.php");
+  } else die("fail:" . $conn->error);
 
 ?>

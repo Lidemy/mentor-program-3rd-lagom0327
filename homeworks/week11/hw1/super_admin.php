@@ -1,9 +1,8 @@
 <?php 
 require_once('./conn.php'); 
 require_once('./sessionStatus.php');
-require_once('./isAdmin.php');
-if (!isAdmin()) header('Location: ./index.php');
-// require_once('./validIp.php');
+require_once('./isSuperAdmin.php');
+if (!isSuperAdmin()) header('Location: ./index.php');
 ?>
 
 
@@ -30,9 +29,10 @@ if (!isAdmin()) header('Location: ./index.php');
     echo "<h1 class='notation'>Hello ~ " . $nickname . "</h1>";
   }
 
-function countPage () {
+
+function countUser () {
   include('./conn.php');
-  $sql = "SELECT count(*) FROM lagom0327_comments WHERE is_deleted=0";
+  $sql = "SELECT count(*) FROM lagom0327_users";
   $result = $conn->query($sql);
   if ($result) {
     $row = $result->fetch_assoc();
@@ -46,7 +46,7 @@ function printPageBtn($pageNow, $totalPage) {
   echo "<section class='page_btn__section'>";
     for ($i = 1; $i <= $totalPage; $i++) {
       if ($i === (int)$pageNow) echo "<button class='page_btn btn active' data-page='$i' >$i</button>";
-      else echo "<a href='./admin.php?page=$i'><button class='page_btn btn' data-page='$i' >$i</button></a>";
+      else echo "<a href='./super_admin.php?page=$i'><button class='page_btn btn' data-page='$i' >$i</button></a>";
     }
   echo "</section>";
 }
@@ -54,19 +54,20 @@ function printPageBtn($pageNow, $totalPage) {
 function printEditeSession ($row) {
   echo "<div class='message__edite'>";
   echo   "<button class='edite_btn btn icon' title='edite' data-id={$row['id']}></button>";
-  echo   "<a href='./handle_delete.php?id={$row['id']}'><button title='delete' class='btn delete_btn icon'></button></a>";
+  echo   "<a href='./handle_delete_user.php?id={$row['id']}'><button title='delete' class='btn delete_btn icon'></button></a>";
   echo "</div>";
 }
 
-function printMessage($row) {
-  echo "<div class='message'>";
-  echo  "<header>";
-  echo    "<h3 class='message__nickname'>From: {$row['nickname']}</h3>";
-  echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
-  echo  "</header>";
-  echo  "<p>{$row['content']}</p>";
-      printEditeSession($row);
-  echo "</div>";
+function printUser($row) {
+  echo "<tr class='user_data'>
+          　<td class='user_table__td'>{$row['id']}</td>
+          　<td class='user_table__td'>{$row['username']}</td>
+          　<td class='user_table__td'>{$row['nickname']}</td>
+          　<td class='user_table__td permission__th'>{$row['permission']}</td>
+            <td class='user_table__td'>";
+            if ($row['permission'] !== 'super admin')printEditeSession($row);
+      echo "</td>
+        </tr>";
 }
 
   if ($sessionStatus) {    
@@ -77,24 +78,32 @@ function printMessage($row) {
 
   ?>
     <section class="container">
-      <h1>Message board  管理後台</h1>
+      <h1>Message board  管理權限後台</h1>
 
-      <div class="messages">
         <?php 
         if ((isset($_GET['page']))) $page = $_GET['page'];
         else $page = 1;
         $offset = ($page - 1) * 20;
-        $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
+        $sql = "SELECT * FROM lagom0327_users WHERE is_deleted='0' ORDER BY id LIMIT  $offset, 20";
 
         $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
+          echo "<table class='users_table'>";
+          echo "<tr>
+          　<th class='user_table__th'>Id</th>
+          　<th class='user_table__th'>Username</th>
+          　<th class='user_table__th'>Nickname</th>
+          　<th class='user_table__th '>Permission</th>
+            <th class='user_table__th'>Edite</th>
+          　</tr>";
           while ($row = $result->fetch_assoc()) {
-            printMessage($row);
+            printUser($row);
           }
-        } else die();
-        printPageBtn($page, countPage());
+          echo "</table>";
+          echo "<p>按下 Esc 可取消編輯</p>";
+        } else die('fail : ' . $conn->error);
+        printPageBtn($page, countUser());
         ?> 
-      </div>
     </section>
     <script src='index.js'></script>
   </body>

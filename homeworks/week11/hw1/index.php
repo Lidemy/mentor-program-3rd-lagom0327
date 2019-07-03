@@ -44,17 +44,10 @@ require_once('./sessionStatus.php');
   function printCommentBoard() {
 
     echo "<form method='POST' action='handle_add.php'>
-            <div class='comment_board_input'>留言<textarea name='content' rows='10' placeholder='What do you want to say ?' required></textarea></div>";
-    echo "  <input type='submit' class='btn' value='送出' />";
+            <div class='comment_board_input'><textarea name='content' rows='10' placeholder='What do you want to say ?' required></textarea></div>";
+    echo "  <input type='submit' class='btn' value='Send' />";
     echo "</form>";
   }
-
-function printUserComment() {
-  echo "<form method='POST' action='handle_add.php'>
-  <div class='comment_board_input'>留言<textarea name='content' rows='10' placeholder='What do you want to say ?' required></textarea></div>";
-echo "  <input type='submit' class='btn' value='送出' />";
-echo "</form>";
-}
 
 function countPage () {
   include('./conn.php');
@@ -71,13 +64,8 @@ function countPage () {
 function printPageBtn($pageNow, $totalPage) {
   echo "<section class='page_btn__section'>";
     for ($i = 1; $i <= $totalPage; $i++) {
-      // echo "pagenow : " . $pageNow;
-      // echo "page i  : " . $i;
-      // $status = ()
-      // echo ($i === $pageNow);
-
       if ($i === (int)$pageNow) echo "<button class='page_btn btn active' data-page='$i' >$i</button>";
-      else echo "<button class='page_btn btn' data-page='$i' >$i</button>";
+      else echo "<a href='./index.php?page=$i'><button class='page_btn btn' data-page='$i' >$i</button></a>";
     }
   echo "</section>";
 }
@@ -88,7 +76,20 @@ function printEditeSession ($row) {
   echo   "<a href='./handle_delete.php?id={$row['id']}'><button title='delete' class='btn delete_btn icon'></button></a>";
   echo "</div>";
 }
-  // $status = sessionStatus();
+
+function printMessage($row) {
+  echo "<div class='message'>";
+  echo  "<header>";
+  echo    "<h3 class='message__nickname'>From: {$row['nickname']}</h3>";
+  echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
+  echo  "</header>";
+  echo  "<p>{$row['content']}</p>";
+    if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
+      printEditeSession($row);
+    }
+
+  echo "</div>";
+}
   if ($sessionStatus) {    
     printLoginNav($_SESSION['nickname']);
   } else {
@@ -102,7 +103,6 @@ function printEditeSession ($row) {
       <?php 
         if ($sessionStatus) {
           printCommentBoard();
-          // echo $id;
         } 
       ?>
     </section>
@@ -112,27 +112,12 @@ function printEditeSession ($row) {
         else $page = 1;
         $offset = ($page - 1) * 20;
         $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
-        // echo "offset: " . $offset; 
-        // $sql = "SELECT * FROM lagom0327_comments ORDER BY created_at DESC";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
-            echo "<div class='message'>";
-            echo  "<header>";
-            echo    "<h3 class='message__nickname'>From: {$row['nickname']}</h3>";
-            echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
-            echo  "</header>";
-            echo  "<p>{$row['content']}</p>";
-              if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
-                printEditeSession($row);
-              }
-        
-            echo "</div>";
+            printMessage($row);
           }
         } else die();
-        // echo "<h1>offset: </h1>offset: ";
-        // echo  $offset; 
-        // echo "page : " . $page;
         printPageBtn($page, countPage());
         ?> 
       </div>

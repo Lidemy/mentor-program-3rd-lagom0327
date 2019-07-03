@@ -1,11 +1,14 @@
 <?php
   require_once('./conn.php');
+  require_once('./isAdmin.php');
+  require_once('./isSuperAdmin.php');
 
   function islogin($sessionId) {
     include('./conn.php');
     $sql = "SELECT id FROM lagom0327_users_certificate WHERE id='$sessionId'";
     $result = $conn->query($sql);
-    return ($result);
+    print_r($result);
+    return $result->num_rows === 1 ? true : false;
   }
 
   function setSession($data) {
@@ -15,11 +18,11 @@
     // session_start([
       // 'cookie_lifetime' => 86400,
   // ]);
-
     if (!isset($_SESSION)) session_start();
     $session = session_id();
-    
-    if (islogin($session)) header('Location: ./index.php');
+    echo 'in set session';
+    if (islogin($session)) return true;
+    echo 'in set session 2';
     $_SESSION['user_id'] = $data['id'];
     $_SESSION['nickname'] = $data['nickname'];
     $sql = "INSERT INTO lagom0327_users_certificate(id, user_id) VALUES ('$session', {$data['id']})";
@@ -57,19 +60,24 @@
   } 
   $sql = "SELECT * FROM lagom0327_users WHERE username='$username'";
   $result = $conn->query($sql);
-  if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      if (password_verify($password, $row['password'])) {
-        echo 'same pass';
-        if (setSession($row)) {
-          setIPSession();
+  if ($result->num_rows ===  1) {
+    $row = $result->fetch_assoc();
+    if (password_verify($password, $row['password'])) {
+      if (setSession($row)) {
+        setIPSession();
+        if (isAdmin()) {
+            header('Location: ./admin.php');
+            die();
+          } else if (isSuperAdmin()) {
+            header('Location: ./super_admin.php');
+            die();
+          }
           header('Location: ./index.php');
         }
-        die();
-      }
+      die();
     }
-    header('Location: ./login.php?username=' . $username);
-  } else {
+  } else if ($result->num_rows === 0) header('Location: ./login.php?username=' . $username);
+  else {
     echo 'fail'. $conn->error;
   }
 

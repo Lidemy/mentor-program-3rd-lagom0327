@@ -1,4 +1,7 @@
+:root {
+  --white: rgb(201, 201, 209);;
 
+}
 body {
   margin: 0;
   background: #13094b;
@@ -6,16 +9,26 @@ body {
 }
 
 * {
-  color: white;
+  font-family: sans-serif;
+  color: var(--white);
   outline:none;
 }
 
+textarea {
+  background: var(--white);
+}
 a {
   text-decoration: none;
 }
 
+h1 {
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  text-shadow: 0.1em 0.1em 0.2em black
+}
+
 nav {
-  background: #372a81;
+  background: black;
   position: fixed;
   top: 0;
   display: flex;
@@ -47,7 +60,7 @@ nav > ul {
   transition: all 0.3s;
 }
 .nav__list:hover {
-  background: #9384e9;
+  border-bottom: 1px solid var(--white);
 }
 .notation {
   text-align: center;
@@ -64,6 +77,52 @@ h1.notation {
 
 input, textarea {
   color: black;
+  margin: 0.5em auto;
+  width: 100%;
+  background: var(--white);
+  border-radius: 2px;
+  padding: 5px;
+  display: block;
+}
+
+input {
+
+}
+
+.icon_in_input {
+  position: relative;
+  display:inline-block;
+}
+label {
+  width: 95%;
+  margin: 0 auto;
+}
+
+label.icon_in_input::before {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+}
+.form__input_username.icon::before {
+  content: "\f007";
+}
+.form__input_password.icon::before {
+  content: "\f084";
+}
+
+.form__input_nickname.icon::before {
+  content: "\f21b";
+}
+
+
+.icon > input {
+  text-indent: 20px;
+}
+
+input:-internal-autofill-selected {
+  background: #000;
 }
 .container {
   max-width: 90%;
@@ -80,8 +139,14 @@ input, textarea {
   width: 300px;
   margin: 0 auto;
 }
+
+form > p {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
 .message {
-  border: 2px dotted grey;
+  background: #1a0e5d8a;;
+  border: 2px solid #251d1d5e;
   padding: 0 10px;
   border-radius: 5px;
 }
@@ -112,36 +177,56 @@ input, textarea {
 .message__edite.hidden {
   display: none;
 }
-.btn.edite_btn, .btn.delete_btn,.btn.edite__send_btn {
+.btn.edite_btn, .btn.delete_btn,.btn.edite__send_btn,.btn.edite_permission_btn {
   margin: 5px 0px;
   background: none;
   width: auto;
   height: auto;
 }
 
+.btn.edite_permission_btn {
+  margin: 0px 0px;
+}
+
 .btn.edite__send_btn {
   margin: 5px auto;
 }
 
-.edite_btn.icon::before {
+.icon::before {
   font-family: "Font Awesome 5 Free"; 
   font-weight: 900; 
+  font-size: 14px;
+  color: rgb(201, 201, 209);
+}
+.edite_btn.icon::before,.edite_permission_btn.icon::before {
   content: "\f044";
-  font-size: 14px; 
 }
 
 .delete_btn.icon::before {
-  font-family: "Font Awesome 5 Free"; 
-  font-weight: 900; 
   content: "\f2ed";
-  font-size: 14px;
 }
 
 .edite__send_btn.icon::before {
-  font-family: "Font Awesome 5 Free"; 
-  font-weight: 900; 
   content: "\f0c7";
   font-size: 30px;
+}
+
+.edite__user > .edite__send_btn {
+  margin: 0 auto;
+}
+.edite__user > .edite__send_btn {
+  display: inline-block;
+}
+.edite__user > .edite__send_btn.icon::before {
+  font-size: 14px;
+}
+
+.edite__user {
+  margin-block-end: 0em;
+}
+
+.edite__user > select {
+  background : black;
 }
 
 
@@ -155,27 +240,24 @@ input, textarea {
   margin: 0 auto;
 }
 
-input, textarea {
-  width: 100%;
-  color: black;
-  border-radius: 5px;
-}
-
 .comment_board_input {
   margin-top: 10px;
 }
 
 .btn {
-  background: rgb(119, 166, 236);
-  color: white;
-  height: 2em;
-  line-height: 2em;
+  background: black;
+  color: var(--white);
   width: 4em;
   margin: 10px auto;
   display: block;
   cursor: pointer;
   border: 0px solid;
   border-radius: 5px;
+  transition: 0.3s all;
+}
+
+.btn:hover {
+  font-size: 1.2em;
 }
 
 .page_btn__section {
@@ -184,16 +266,41 @@ input, textarea {
 }
 
 .btn.page_btn {
+  background: none;
   width: 2em;
   margin: 10px 10px;
 }
 
 .btn.page_btn.active {
-  background: #352590;
+  background: black;
 }
 
-.icon:before {
+.users_table {
+  
+    width: 500px;
+    border:1px solid #000; 
+    font-family: sans-serif;; 
+    font-size:16px; 
+    border:1px solid #000;
+    text-align:center;
+    border-collapse:collapse;
+}
 
+.user_table__th { 
+  background-color: #065c74;
+  padding:10px;
+  border:1px solid #000;
+  color:#fff;
+} 
+
+
+.user_table__td { 
+  border:1px solid #000;
+  padding:5px;
+} 
+
+.user_table__td > .message__edite {
+  justify-content: space-around;
 }
 
 
