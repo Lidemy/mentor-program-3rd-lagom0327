@@ -2,9 +2,7 @@
 
 require_once('./conn.php');
 require_once('./sessionStatus.php');
-// require_once('./getSessionId.php');
-
-
+if (!$_GET['id']) die(header("Location: ./index.php"));
 
 function addComment($content) {
   include('./conn.php');
@@ -22,8 +20,5 @@ else {
   if (empty($content)) die('empty data');
   addComment($content);
 }
-
-
-
 
 ?>

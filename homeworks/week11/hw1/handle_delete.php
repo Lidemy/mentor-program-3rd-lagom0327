@@ -9,7 +9,7 @@
     include('./conn.php');
     $sql = "UPDATE lagom0327_comments SET is_deleted=1 WHERE id={$_GET['id']}";
     $result = $conn->query($sql);
-    return ($result);
+    return $result;
   }
 
 

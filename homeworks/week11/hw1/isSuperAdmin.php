@@ -10,4 +10,5 @@
       return false;
     } else die("fail:" . $conn->error);
   }
+  return isSuperAdmin();
 ?>

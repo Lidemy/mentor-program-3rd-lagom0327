@@ -1,45 +1,47 @@
 <?php
-  require_once('./conn.php');
-  $maxLength = 16;
   $username = $_POST['username'];
   $nickname =  str_replace("'","''", $_POST['nickname']);
   $password = $_POST['password'];
   $password2 = $_POST['password2'];
 
-  if (empty($username) || empty($nickname) || empty($password) || empty($password2)) {
-    die('請檢查資料'); 
-  } else if ($password !== $password2) {
-    header('Location: ./register.php?password=1');
-    die();
-  } else if (strlen($username) > $maxLength || strlen($password) > $maxLength ||  strlen($nickname) > $maxLength * 4) {
-    
-    header('Location: ./register.php?length=1');
-    die(strlen($username));
-  }
-
-  $sql_username = "SELECT username FROM lagom0327_users";
-  $result_username = $conn->query($sql_username);
-  if ($result_username->num_rows > 0) {
-    while ($row = $result_username->fetch_assoc()) {
-      if ($row['username'] === $username) {
-        header('Location: ./register.php?username=' . $username);
-        die();
-      }
+  function validData($username, $nickname,$password, $password2) {
+    $maxLength = 16;
+    if (empty($username) || empty($nickname) || empty($password) || empty($password2)) {
+      echo ('請檢查資料');
+      return false;
+    } else if ($password !== $password2) {
+      header('Location: ./register.php?password=1');
+      return false;
+    } else if (strlen($username) > $maxLength || strlen($password) > $maxLength ||  strlen($nickname) > $maxLength * 4) {
+      header('Location: ./register.php?length=1');
+      return false;
     }
-    header('Location: ./register.php');
-  } else {
-    echo 'fail'. $conn->error;
+    return true;
   }
-  
-  $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 11]);
 
-  $sql = "INSERT INTO lagom0327_users(username, password, nickname) VALUES('$username', '$hash','$nickname')";
-  $result = $conn->query($sql);
+  function sameUsername($name) {
+    include('./conn.php');
+    $sql_username = "SELECT username FROM lagom0327_users WHERE username='$name'";
+    $result_username = $conn->query($sql_username);
+    if ($result_username->num_rows > 0) return true;
+    else echo 'fail'. $conn->error;
+  }
 
-  if ($result) {
-    header('Location: ./login.php');
-  } else {
+  function setSessionInSql($name, $pass, $nickname) {
+    include('./conn.php');
+    $hash = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 11]);
+    $sql = "INSERT INTO lagom0327_users(username, password, nickname) VALUES('$name', '$hash','$nickname')";
+    $result = $conn->query($sql);
+
+    if ($result) header('Location: ./login.php');
+    else {
     var_dump($result);
     echo 'fail'. $conn->error;
+    }
   }
+
+  if (!validData($username, $nickname, $password, $password2)) die();
+  if (sameUsername($username)) return header('Location: ./register.php?username=' . $username);
+  setSessionInSql($username, $password, $nickname);
+  
 ?>

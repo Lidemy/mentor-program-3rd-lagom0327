@@ -1,4 +1,24 @@
-<?php require_once('./conn.php'); ?>
+<?php 
+  require_once('./conn.php'); 
+  require_once('./sessionStatus.php');
+  if ($sessionStatus) {
+    header('Location: ./index.php');
+    die();
+  }
+  /* function islogin($sessionId) {
+    if (isset($_SESSION) && $_SESSION['nickname']) return false;
+    else {
+      include('./conn.php');
+      $sql = "SELECT id FROM lagom0327_users_certificate WHERE id='$sessionId'";
+      $result = $conn->query($sql);
+      print_r($result);
+      return $result->num_rows === 1 ? true : false;
+    }
+  }
+  if (!isset($_SESSION)) session_start();
+  $session = session_id();
+  if (islogin($session)) return header('Location: ./index.php'); */
+?>
 <!DOCTYPE html>
 <html>
   <head>

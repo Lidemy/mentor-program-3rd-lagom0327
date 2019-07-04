@@ -19,7 +19,8 @@ if (!$sessionStatus) die('no session');
 else {
   $id = $_GET['id'];
   $selectOption = $_POST['permissionOption'];
-  if ($selectOption === 'super admin' || idIsSuperAdmin($id)) die();
+  if ($selectOption !== 'normal' && $selectOption !== 'admin') die();
+  if (idIsSuperAdmin($id)) die("super admin can not change.");
   if (isSuperAdmin() && editePermission($selectOption)) header("Location: ./super_admin.php");
 }
 
