@@ -10,7 +10,6 @@
     // session_start([
       // 'cookie_lifetime' => 86400,
   // ]);
-    echo "in set session";
     $_SESSION['user_id'] = $data['id'];
     $_SESSION['nickname'] = $data['nickname'];
     $sql = "INSERT INTO lagom0327_users_certificate(id, user_id) VALUES ('$session', {$data['id']})";
