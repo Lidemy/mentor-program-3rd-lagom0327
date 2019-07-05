@@ -39,8 +39,7 @@ function printCommentBoard() {
   echo "</section>";
 }
 
-function countPage () {
-include('./conn.php');
+function countPage ($conn) {
 $sql = "SELECT count(*) FROM lagom0327_comments WHERE is_deleted=0";
 $result = $conn->query($sql);
 if ($result) {
@@ -81,7 +80,7 @@ echo  "<p>{$row['content']}</p>";
 echo "</div>";
 }
 
-function printNav($sessionStatus) {
+function printNav($sessionStatus, $conn) {
   if ($sessionStatus) {
     $permission = 'normal';
     if(include('./isAdmin.php')) $permission = 'admin';
@@ -118,16 +117,17 @@ function printMessages($page) {
   <body>
   <?php 
 
-  printNav($sessionStatus) ?>
+  printNav($sessionStatus, $conn) ?>
     <section class="container">
       <h1>Message board</h1>   
       <?php if ($sessionStatus) printCommentBoard(); ?>
       <div class="messages">
         <?php 
-          if ((isset($_GET['page']))) $page = $_GET['page'];
-          else $page = 1;
+          $page = isset($_GET['page']) ? $_GET['page'] : 1;
+          // if (()) $page = ;
+          // else $page = 1;
           printMessages($page);
-          printPageBtn($page, countPage());
+          printPageBtn($page, countPage($conn));
         ?> 
       </div>
     </section>

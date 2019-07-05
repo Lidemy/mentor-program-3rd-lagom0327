@@ -2,7 +2,7 @@
 require_once('./conn.php'); 
 require_once('./sessionStatus.php');
 require_once('./isSuperAdmin.php');
-if (!isSuperAdmin()) header('Location: ./index.php');
+if (!isSuperAdmin($conn)) header('Location: ./index.php');
 ?>
 
 

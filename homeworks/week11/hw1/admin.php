@@ -2,36 +2,19 @@
 require_once('./conn.php'); 
 require_once('./sessionStatus.php');
 require_once('./isAdmin.php');
-if (!isAdmin()) header('Location: ./index.php');
-// require_once('./validIp.php');
-?>
+if (!isAdmin($conn)) header('Location: ./index.php');
 
+function printLoginNav($nickname) {
+  echo "<nav>
+  <ul>
+    <li class='nav__list'><a href='./index.php'>Message board</a></li>
+    <li class='nav__list'><a href='./handle_logout.php'>登出</a></li>
+  </ul>
+  </nav>";
+  echo "<h1 class='notation'>Hello ~ " . $nickname . "</h1>";
+}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Message Board</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href='./style.css' />
-  </head>
-  <body>
-  <?php 
-
-
-  function printLoginNav($nickname) {
-    echo "<nav>
-    <ul>
-      <li class='nav__list'><a href='./index.php'>Message board</a></li>
-      <li class='nav__list'><a href='./handle_logout.php'>登出</a></li>
-    </ul>
-    </nav>";
-    echo "<h1 class='notation'>Hello ~ " . $nickname . "</h1>";
-  }
-
-function countPage () {
-  include('./conn.php');
+function countPage ($conn) {
   $sql = "SELECT count(*) FROM lagom0327_comments WHERE is_deleted=0";
   $result = $conn->query($sql);
   if ($result) {
@@ -68,7 +51,20 @@ function printMessage($row) {
       printEditeSession($row);
   echo "</div>";
 }
+?>
 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Message Board</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href='./style.css' />
+  </head>
+  <body>
+  <?php 
   if ($sessionStatus) {    
     printLoginNav($_SESSION['nickname']);
   } else {
@@ -92,7 +88,7 @@ function printMessage($row) {
             printMessage($row);
           }
         } else die();
-        printPageBtn($page, countPage());
+        printPageBtn($page, countPage($conn));
         ?> 
       </div>
     </section>

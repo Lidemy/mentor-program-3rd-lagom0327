@@ -41,7 +41,7 @@
   }
 
   if (!validData($username, $nickname, $password, $password2)) die();
-  if (sameUsername($username)) return header('Location: ./register.php?username=' . $username);
+  if (sameUsername($username)) die(header('Location: ./register.php?username=' . $username));
   setSessionInSql($username, $password, $nickname);
   
 ?>

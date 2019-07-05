@@ -1,10 +1,7 @@
 <?php
   require_once('./conn.php');
 
-
-
-  function setSession($data, $session) {
-    include('./conn.php');
+  function setSession($data, $session, $conn) { 
     // ini_set('session.save_path', '/group6/lagom0327')
     // session_save_path('/');
     // session_start([
@@ -15,12 +12,7 @@
     $sql = "INSERT INTO lagom0327_users_certificate(id, user_id) VALUES ('$session', {$data['id']})";
     echo $sql;
     $result = $conn->query($sql);
-    if ($result) {
-      return true;
-    } else {
-      echo ('fail : ' . $conn->error);
-      return false;
-    }
+    if (!$result) die('fail : ' . $conn->error);
   }
 
   function setIPSession() {
@@ -54,11 +46,10 @@
   if (!isset($_SESSION)) session_start();
   $session = session_id();
   $row = isCorrectUser($username, $password);
-  if (setSession($row, $session)) {
-    setIPSession();
-    if (include('./isAdmin.php')) return header('Location: ./admin.php');
-    else if (include('./isSuperAdmin.php')) return  header('Location: ./super_admin.php');
-    return header('Location: ./index.php');
-  }
+  setSession($row, $session, $conn);
+  setIPSession();
+  if (include('./isAdmin.php')) header('Location: ./admin.php');
+  else if (include('./isSuperAdmin.php')) header('Location: ./super_admin.php');
+  else header('Location: ./index.php');
 
 ?>
