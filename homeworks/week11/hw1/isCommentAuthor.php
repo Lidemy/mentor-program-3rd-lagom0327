@@ -1,6 +1,7 @@
 <?php
-function isCommentAuthor () {
-  include('./conn.php');
+require_once('./conn.php');
+
+function isCommentAuthor ($conn) {
     $commentId = $_GET['id'];
     $sql = "SELECT user_id FROM lagom0327_comments WHERE id=$commentId";
     $result = $conn->query($sql);

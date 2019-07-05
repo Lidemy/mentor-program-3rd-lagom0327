@@ -2,8 +2,7 @@
   require_once('./conn.php'); 
   require_once('./sessionStatus.php');
   if ($sessionStatus) {
-    header('Location: ./index.php');
-    die();
+    die(header('Location: ./index.php'));
   }
 
 ?>

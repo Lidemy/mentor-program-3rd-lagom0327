@@ -1,5 +1,4 @@
 <?php
-require_once('./conn.php'); 
 
 function isSessionInSQL() {
   include('./conn.php');

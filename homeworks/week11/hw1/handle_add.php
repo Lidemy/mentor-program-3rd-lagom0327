@@ -1,11 +1,9 @@
 <?php
-
 require_once('./conn.php');
 require_once('./sessionStatus.php');
-if (!$_GET['id']) die(header("Location: ./index.php"));
+if (!$sessionStatus) die(header("Location: ./index.php"));
 
-function addComment($content) {
-  include('./conn.php');
+function addComment($content,$conn) {
   $sql = "INSERT INTO lagom0327_comments(user_id, content) VALUES ({$_SESSION['user_id']}, '$content')";
   $result = $conn->query($sql);
   if ($result) {
@@ -13,12 +11,8 @@ function addComment($content) {
   } else die("fail:" . $conn->error);
 }
 
-if (!$sessionStatus) die('no session');
-
-else {
-  $content = str_replace("'","''", $_POST['content']);
-  if (empty($content)) die('empty data');
-  addComment($content);
-}
+$content = str_replace("'","''", $_POST['content']);
+if (empty($content)) die('empty data');
+addComment($content,$conn);
 
 ?>

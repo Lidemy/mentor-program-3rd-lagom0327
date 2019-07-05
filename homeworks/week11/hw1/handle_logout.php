@@ -1,7 +1,7 @@
 <?php
   function deleteSession($sessionId) {
     if ($sessionId) {
-      include_once('./conn.php');
+      include('./conn.php');
       $sql = "DELETE FROM lagom0327_users_certificate WHERE id='$sessionId'";
       $result = $conn->query($sql);
       if ($result) {
