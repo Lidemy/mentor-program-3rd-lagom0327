@@ -1,8 +1,10 @@
 <?php
   function idIsSuperAdmin($id) {
     include('./conn.php');
-    $sql = "SELECT permission FROM lagom0327_users WHERE id=$id";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT permission FROM lagom0327_users WHERE id=?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result) {
       $row = $result->fetch_assoc();
       return ($row['permission'] === 'super admin');

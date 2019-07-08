@@ -67,17 +67,17 @@ echo "</div>";
 }
 
 function printMessage($row) {
-echo "<div class='message'>";
-echo  "<header>";
-echo    "<h3 class='message__nickname'>From: {$row['nickname']}</h3>";
-echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
-echo  "</header>";
-echo  "<p>{$row['content']}</p>";
-  if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
+  echo "<div class='message'>";
+  echo  "<header>";
+  echo    "<h3 class='message__nickname'>From: " . htmlspecialchars($row['nickname']) . "</h3>";
+  echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
+  echo  "</header>";
+  echo  "<p>" . htmlspecialchars($row['content']) . "</p>";
+  if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === (int)$row['user_id']) {
     printEditeSession($row);
   }
 
-echo "</div>";
+  echo "</div>";
 }
 
 function printNav($sessionStatus, $conn) {

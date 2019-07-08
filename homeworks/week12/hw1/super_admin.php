@@ -81,8 +81,7 @@ function printUser($row) {
       <h1>Message board  管理權限後台</h1>
 
         <?php 
-        if ((isset($_GET['page']))) $page = $_GET['page'];
-        else $page = 1;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * 20;
         $sql = "SELECT * FROM lagom0327_users WHERE is_deleted='0' ORDER BY id LIMIT  $offset, 20";
 

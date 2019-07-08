@@ -44,10 +44,10 @@ function printEditeSession ($row) {
 function printMessage($row) {
   echo "<div class='message'>";
   echo  "<header>";
-  echo    "<h3 class='message__nickname'>From: {$row['nickname']}</h3>";
+  echo    "<h3 class='message__nickname'>From: " . htmlspecialchars($row['nickname']) . "</h3>";
   echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
   echo  "</header>";
-  echo  "<p>{$row['content']}</p>";
+  echo  "<p>" . htmlspecialchars($row['content']) . "</p>";
       printEditeSession($row);
   echo "</div>";
 }
@@ -77,8 +77,7 @@ function printMessage($row) {
 
       <div class="messages">
         <?php 
-        if ((isset($_GET['page']))) $page = $_GET['page'];
-        else $page = 1;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * 20;
         $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
 

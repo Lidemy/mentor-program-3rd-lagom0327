@@ -5,9 +5,10 @@ require_once('./isSuperAdmin.php');
 require_once('./idIsSuperAdmin.php');
 
 function editePermission($content, $conn) {
-  $sql = "UPDATE lagom0327_users SET permission='$content' WHERE id={$_GET['id']}";
-  $result = $conn->query($sql);
-  if (!$result) die("fail:" . $conn->error);
+  $stmt = $conn->prepare("UPDATE lagom0327_users SET permission=? WHERE id=?");
+  $stmt->bind_param("si", $content,$_GET['id']);
+  $stmt->execute();
+  $stmt->close();
 }
 
 if (!$_GET['id'] || !$sessionStatus || !isSuperAdmin($conn)) {

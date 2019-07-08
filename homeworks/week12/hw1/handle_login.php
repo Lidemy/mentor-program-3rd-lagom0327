@@ -26,15 +26,21 @@
     $_SESSION['user_ip'] = $user_ip;
   }
   
-  function isCorrectUser($name, $pass) {
-    include('./conn.php');
-    $sql = "SELECT * FROM lagom0327_users WHERE username='$name'";
-    $result = $conn->query($sql);
+  function isCorrectUser($name, $pass, $conn) {
+    $stmt = $conn->prepare("SELECT * FROM lagom0327_users WHERE username=?");
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
     if ($result) {
       if ($result->num_rows ===  1) {
         $row = $result->fetch_assoc();
+        $stmt->free_result();
+        $stmt->close();
         if (password_verify($pass, $row['password'])) return $row;
       }
+      $stmt->free_result();
+      $stmt->close();
       die(header('Location: ./login.php?username=' . $name));
     } else die('fail : '. $conn->error);
   }
@@ -45,7 +51,7 @@
   if (empty($username) || empty($password)) die('請檢查資料');
   if (!isset($_SESSION)) session_start();
   $session = session_id();
-  $row = isCorrectUser($username, $password);
+  $row = isCorrectUser($username, $password, $conn);
   setSession($row, $session, $conn);
   setIPSession();
   if (include('./isAdmin.php')) header('Location: ./admin.php');

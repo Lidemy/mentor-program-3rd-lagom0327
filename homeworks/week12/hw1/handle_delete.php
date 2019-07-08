@@ -5,9 +5,9 @@
   require_once('./isAdmin.php');
 
   function deleteComment($conn) {
-    $sql = "UPDATE lagom0327_comments SET is_deleted=1 WHERE id={$_GET['id']}";
-    $result = $conn->query($sql);
-    return $result;
+    $stmt = $conn->prepare("UPDATE lagom0327_comments SET is_deleted=1 WHERE id=?");
+    $stmt->bind_param("i", $_GET['id']);
+    $stmt->execute();
   }
 
   if (!$_GET['id'] || !$sessionStatus) {

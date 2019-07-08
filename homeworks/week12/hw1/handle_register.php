@@ -21,27 +21,25 @@
 
   function sameUsername($name) {
     include('./conn.php');
-    $sql_username = "SELECT username FROM lagom0327_users WHERE username='$name'";
-    $result_username = $conn->query($sql_username);
-    if ($result_username->num_rows > 0) return true;
+    $stmt = $conn->prepare("SELECT username FROM lagom0327_users WHERE username=?");
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result= $stmt->get_result();
+    if ($result->num_rows > 0) return true;
     else echo 'fail'. $conn->error;
   }
 
   function setSessionInSql($name, $pass, $nickname) {
     include('./conn.php');
     $hash = password_hash($pass, PASSWORD_DEFAULT, ['cost' => 11]);
-    $sql = "INSERT INTO lagom0327_users(username, password, nickname) VALUES('$name', '$hash','$nickname')";
-    $result = $conn->query($sql);
-
-    if ($result) header('Location: ./login.php');
-    else {
-    var_dump($result);
-    echo 'fail'. $conn->error;
-    }
+    $stmt = $conn->prepare("INSERT INTO lagom0327_users(username, password, nickname) VALUES(?, ?, ?)");
+    $stmt->bind_param("sss", $name, $hash, $nickname);
+    $stmt->execute();
+    $stmt->close();
   }
 
   if (!validData($username, $nickname, $password, $password2)) die();
   if (sameUsername($username)) die(header('Location: ./register.php?username=' . $username));
   setSessionInSql($username, $password, $nickname);
-  
+  header('Location: ./login.php');
 ?>

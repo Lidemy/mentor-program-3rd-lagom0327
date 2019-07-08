@@ -5,9 +5,9 @@
   require_once('./isCommentAuthor.php');
 
   function editeComment($content, $conn) {
-    $sql = "UPDATE lagom0327_comments SET content='$content' WHERE id={$_GET['id']}";
-    $result = $conn->query($sql);
-    if (!$result) die("fail:" . $conn->error);
+    $stmt = $conn->prepare("UPDATE lagom0327_comments SET content=? WHERE id=?");
+    $stmt->bind_param("si", $content, $_GET['id']);
+    $stmt->execute();
   }
 
   $content = str_replace("'","''", $_POST['content']);

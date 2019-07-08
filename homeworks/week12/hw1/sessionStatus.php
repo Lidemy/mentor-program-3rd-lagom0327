@@ -11,9 +11,9 @@ function isSessionInSQL() {
     if ($result) {
         $row = $result->fetch_assoc();
         $userid= $row['user_id'];
+        $result->close();
         return $userid;
     } else {
-      var_dump($result);
       echo 'fail'. $conn->error;
       return false;
     }
