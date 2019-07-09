@@ -30,6 +30,21 @@ const printEditeMessForm = (data, selector, btn, text) => {
   </form>`;
 };
 
+const printAddCommentFram = (target) => {
+  toggleShowBtn(target.closest('.message_edite_wrapper'));
+  const section = document.createElement('section');
+  section.classList.add('comment_board');
+  section.innerHTML = `    
+  <form method='POST' action ='handle_add_child.php'>
+  <div class='comment_board_intput'>
+  <input name='parentId' value=${target.dataset.id} >
+  <textarea name='content' rows='5' placeholder='What do you want to say ?' required></textarea>
+  </div>
+  <input type='submit' class='btn' value='Send' />
+</form>`;
+  target.closest('.message').appendChild(section);
+};
+
 const showEditeFrame = (type, btn) => {
   const selector = (type === 'user') ? ['.user_data', '.permission__th'] : ['.message', 'p'];
   const data = btn.closest(selector[0]);
@@ -51,18 +66,35 @@ const reverseShowEditeFrame = (type, target, text) => {
   else data.querySelector(selector[1]).outerHTML = `<p>${text}</p>`;
 };
 
+const reverseShowAddFrame = (target) => {
+  const board = target.closest('.message').querySelector('.comment_board');
+  board.outerHTML = '';
+  toggleShowBtn(target.closest('.message_edite_wrapper'));
+};
+
+const reverseOrigin = (type) => {
+  if (originTarget) {
+    if (originTarget.classList.contains('edite_btn')) reverseShowEditeFrame(type, originTarget, originText);
+    else if (originTarget.classList.contains('add_btn')) reverseShowAddFrame(originTarget);
+  }
+};
+
 const changeForm = (type, e) => {
   if (e.target.classList.contains('edite_btn')) {
-    if (originTarget) reverseShowEditeFrame(type, originTarget, originText);
+    reverseOrigin(type);
     originTarget = e.target;
     originText = showEditeFrame(type, e.target);
+  } else if (e.target.classList.contains('add_btn')) {
+    reverseOrigin(type);
+    originTarget = e.target;
+    printAddCommentFram(e.target);
+    originText = '';
   }
   window.addEventListener('keydown',
     (el) => {
-      if (el.keyCode === 27 && originTarget) {
-        reverseShowEditeFrame(type, originTarget, originText);
+      if (el.keyCode === 27) {
+        reverseOrigin(type);
         originTarget = null;
-        originText = '';
       }
     });
 };

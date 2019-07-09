@@ -66,7 +66,36 @@ echo   "<a href='./handle_delete.php?id={$row['id']}'><button title='delete' cla
 echo "</div>";
 }
 
-function printMessage($row) {
+function printAddComentBtn($row) {
+  echo "<div class='message_edite_wrapper'>";
+  echo "<div class='message__edite'>";
+  echo   "<button class='add_btn btn icon' title='Add Comment' data-id={$row['id']}></button>";
+  echo "</div>";
+  echo "</div>";
+}
+function printChildMessage($parentData, $conn) {
+  $parentId = $parentData['id'];
+  $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=1 AND A.parent_layer_id=$parentId ORDER BY A.created_at ASC";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      echo "<div class='child_message message";
+      if ($parentData['user_id'] === $row['user_id']) echo " author";
+      echo "'>";
+      echo  "<header>";
+      echo    "<h4 class='message__nickname'>From: " . htmlspecialchars($row['nickname']) . "</h4>";
+      echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
+      echo  "</header>";
+      echo  "<p>" . htmlspecialchars($row['content']) . "</p>";
+      if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === (int)$row['user_id']) {
+        printEditeSession($row);
+      }
+      echo "</div>";
+    }
+  }
+}
+
+function printMessage($row, $conn, $sessionStatus) {
   echo "<div class='message'>";
   echo  "<header>";
   echo    "<h3 class='message__nickname'>From: " . htmlspecialchars($row['nickname']) . "</h3>";
@@ -76,7 +105,8 @@ function printMessage($row) {
   if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === (int)$row['user_id']) {
     printEditeSession($row);
   }
-
+  printChildMessage($row, $conn);
+  if ($sessionStatus) printAddComentBtn($row);
   echo "</div>";
 }
 
@@ -91,15 +121,15 @@ function printNav($sessionStatus, $conn) {
   }
 }
 
-function printMessages($page) {
+function printMessages($page, $sessionStatus) {
   require('./conn.php');
 
   $offset = ($page - 1) * 20;
-  $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
+  $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-      printMessage($row);
+      printMessage($row, $conn, $sessionStatus);
     }
   } else die();
 }
@@ -124,9 +154,7 @@ function printMessages($page) {
       <div class="messages">
         <?php 
           $page = isset($_GET['page']) ? $_GET['page'] : 1;
-          // if (()) $page = ;
-          // else $page = 1;
-          printMessages($page);
+          printMessages($page, $sessionStatus);
           printPageBtn($page, countPage($conn));
         ?> 
       </div>

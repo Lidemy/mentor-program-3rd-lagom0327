@@ -85,8 +85,8 @@ input, textarea {
   display: block;
 }
 
-input {
-
+input[name='parentId'] {
+  display: none;
 }
 
 .icon_in_input {
@@ -177,7 +177,31 @@ form > p {
 .message__edite.hidden {
   display: none;
 }
-.btn.edite_btn, .btn.delete_btn,.btn.edite__send_btn,.btn.edite_permission_btn {
+
+.message__edite > .comment_board {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.child_message {
+  background: #241d5d;;
+  margin-bottom: 1em;
+  width: 90%;
+  position: relative;
+  left: 5%;
+}
+
+.child_message > header > h4 {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+
+.child_message.author {
+  background: #101e86;
+  position: relative;
+  left: 0%;
+}
+.btn.edite_btn, .btn.delete_btn,.btn.edite__send_btn,.btn.edite_permission_btn,.btn.add_btn {
   margin: 5px 0px;
   background: none;
   width: auto;
@@ -204,6 +228,11 @@ form > p {
 
 .delete_btn.icon::before {
   content: "\f2ed";
+}
+
+.add_btn.icon::before {
+  /* content: "\f2ed"; */
+  content: "\f0fe";
 }
 
 .edite__send_btn.icon::before {

@@ -9,7 +9,6 @@
     $result = $stmt->get_result();
     if ($result) {
       $row = $result->fetch_assoc();
-      echo "permission : " . $permission;
       $stmt->close();
       if ($row['permission'] === 'admin') return true;
       return false;

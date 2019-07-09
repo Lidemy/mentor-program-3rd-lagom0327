@@ -41,15 +41,49 @@ function printEditeSession ($row) {
   echo "</div>";
 }
 
-function printMessage($row) {
+function printChildMessage($parentData, $conn) {
+  $parentId = $parentData['id'];
+  $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=1 AND A.parent_layer_id=$parentId ORDER BY A.created_at ASC";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      echo "<div class='child_message message";
+      if ($parentData['user_id'] === $row['user_id']) echo " author";
+      echo "'>";
+      echo  "<header>";
+      echo    "<h4 class='message__nickname'>From: " . htmlspecialchars($row['nickname']) . "</h4>";
+      echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
+      echo  "</header>";
+      echo  "<p>" . htmlspecialchars($row['content']) . "</p>";
+      printEditeSession($row);
+      echo "</div>";
+    }
+  }
+}
+
+function printMessage($row, $conn, $sessionStatus) {
   echo "<div class='message'>";
   echo  "<header>";
   echo    "<h3 class='message__nickname'>From: " . htmlspecialchars($row['nickname']) . "</h3>";
   echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
   echo  "</header>";
   echo  "<p>" . htmlspecialchars($row['content']) . "</p>";
-      printEditeSession($row);
+  printEditeSession($row);
+  printChildMessage($row, $conn);
   echo "</div>";
+}
+
+function printMessages($page, $sessionStatus) {
+  require('./conn.php');
+
+  $offset = ($page - 1) * 20;
+  $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      printMessage($row, $conn, $sessionStatus);
+    }
+  } else die();
 }
 ?>
 
@@ -77,17 +111,9 @@ function printMessage($row) {
 
       <div class="messages">
         <?php 
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $offset = ($page - 1) * 20;
-        $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
-
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            printMessage($row);
-          }
-        } else die();
-        printPageBtn($page, countPage($conn));
+          $page = isset($_GET['page']) ? $_GET['page'] : 1;
+          printMessages($page, $sessionStatus);
+          printPageBtn($page, countPage($conn))
         ?> 
       </div>
     </section>
