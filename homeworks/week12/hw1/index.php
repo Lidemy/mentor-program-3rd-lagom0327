@@ -40,23 +40,25 @@ function printCommentBoard() {
 }
 
 function countPage ($conn) {
-$sql = "SELECT count(*) FROM lagom0327_comments WHERE is_deleted=0";
-$result = $conn->query($sql);
-if ($result) {
-  $row = $result->fetch_assoc();
-  return ceil($row['count(*)'] / 20);
-} else {
-  die("fail:" . $conn->error);
-}
+  $stmt = $conn->prepare("SELECT count(*) FROM lagom0327_comments WHERE is_deleted=0");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $stmt->close();
+  if ($result) {
+    $row = $result->fetch_assoc();
+    return ceil($row['count(*)'] / 20);
+  } else {
+    die("fail:" . $conn->error);
+  }
 }
 
 function printPageBtn($pageNow, $totalPage) {
-echo "<section class='page_btn__section'>";
-  for ($i = 1; $i <= $totalPage; $i++) {
-    if ($i === (int)$pageNow) echo "<button class='page_btn btn active' data-page='$i' >$i</button>";
-    else echo "<a href='./index.php?page=$i'><button class='page_btn btn' data-page='$i' >$i</button></a>";
-  }
-echo "</section>";
+  echo "<section class='page_btn__section'>";
+    for ($i = 1; $i <= $totalPage; $i++) {
+      if ($i === (int)$pageNow) echo "<button class='page_btn btn active' data-page='$i' >$i</button>";
+      else echo "<a href='./index.php?page=$i'><button class='page_btn btn' data-page='$i' >$i</button></a>";
+    }
+  echo "</section>";
 }
 
 function printEditeSession ($row) {
@@ -74,9 +76,10 @@ function printAddComentBtn($row) {
   echo "</div>";
 }
 function printChildMessage($parentData, $conn) {
-  $parentId = $parentData['id'];
-  $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=1 AND A.parent_layer_id=$parentId ORDER BY A.created_at ASC";
-  $result = $conn->query($sql);
+  $stmt = $conn->prepare("SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=1 AND A.parent_layer_id=? ORDER BY A.created_at ASC");
+  $stmt->bind_param("i", $parentData['id']);
+  $stmt->execute();
+  $result = $stmt->get_result();
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
       echo "<div class='child_message message";
@@ -125,13 +128,16 @@ function printMessages($page, $sessionStatus) {
   require('./conn.php');
 
   $offset = ($page - 1) * 20;
-  $sql = "SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=0 ORDER BY A.created_at DESC LIMIT  $offset, 20";
-  $result = $conn->query($sql);
+  $stmt = $conn->prepare("SELECT A.id, A.user_id, A.content, A.created_at, A.is_deleted, U.nickname FROM lagom0327_comments as A JOIN lagom0327_users as U ON A.user_id = U.id WHERE A.is_deleted=0 AND A.layer=0 ORDER BY A.created_at DESC LIMIT  ?, 20");
+  $stmt->bind_param("i", $offset);
+  $stmt->execute();
+  $result = $stmt->get_result();
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
       printMessage($row, $conn, $sessionStatus);
     }
-  } else die();
+  }
+  $stmt->close();
 }
 ?>
 

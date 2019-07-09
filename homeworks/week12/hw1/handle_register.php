@@ -1,6 +1,6 @@
 <?php
   $username = $_POST['username'];
-  $nickname =  str_replace("'","''", $_POST['nickname']);
+  $nickname =  $_POST['nickname'];
   $password = $_POST['password'];
   $password2 = $_POST['password2'];
 

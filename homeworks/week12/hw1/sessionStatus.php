@@ -5,9 +5,10 @@ function isSessionInSQL() {
   if(!isset($_SESSION)) session_start(); 
   if (isset($_SESSION) && isset($_SESSION['nickname'])) {
     // die('has nickname');
-    $id = session_id();
-    $sql = "SELECT * FROM lagom0327_users_certificate WHERE id='$id'";
-    $result =$conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM lagom0327_users_certificate WHERE id=?");
+    $stmt->bind_param("s", session_id());
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result) {
         $row = $result->fetch_assoc();
         $userid= $row['user_id'];

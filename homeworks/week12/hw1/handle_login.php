@@ -9,10 +9,10 @@
   // ]);
     $_SESSION['user_id'] = $data['id'];
     $_SESSION['nickname'] = $data['nickname'];
-    $sql = "INSERT INTO lagom0327_users_certificate(id, user_id) VALUES ('$session', {$data['id']})";
-    echo $sql;
-    $result = $conn->query($sql);
-    if (!$result) die('fail : ' . $conn->error);
+    $stmt = $conn->prepare("INSERT INTO lagom0327_users_certificate(id, user_id) VALUES ( ?, ?)");
+    $stmt->bind_param("si", $session, $data['id']);
+    $stmt->execute();
+    $stmt->close();
   }
 
   function setIPSession() {
