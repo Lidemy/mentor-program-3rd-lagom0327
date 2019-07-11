@@ -11,7 +11,7 @@ function printLoginNav($nickname) {
     <li class='nav__list'><a href='./handle_logout.php'>登出</a></li>
   </ul>
   </nav>";
-  echo "<h1 class='notation'>Hello ~ " . $nickname . "</h1>";
+  echo "<h1 class='notation'>Hello ~ " . htmlspecialchars($nickname) . "</h1>";
 }
 
 function countPage ($conn) {

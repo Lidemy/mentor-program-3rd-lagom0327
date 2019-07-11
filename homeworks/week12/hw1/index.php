@@ -14,7 +14,7 @@ function printLoginNav($nickname, $permission) {
   }
   echo "</ul>
       </nav>";
-  echo "<h1 class='notation'>Hello ~ " . $nickname . "</h1>";
+  echo "<h1 class='notation'>Hello ~ " . htmlspecialchars($nickname) . "</h1>";
 }
 
 function printLogoutNav() {
