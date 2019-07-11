@@ -37,7 +37,7 @@ const printAddCommentFram = (target) => {
   section.innerHTML = `    
   <form method='POST' action ='handle_add_child.php'>
   <div class='comment_board_intput'>
-  <input name='parentId' value=${target.dataset.id} >
+  <input type='hideen' name='parentId' value=${target.dataset.id} >
   <textarea name='content' rows='5' placeholder='What do you want to say ?' required></textarea>
   </div>
   <input type='submit' class='btn' value='Send' />
