@@ -11,7 +11,7 @@ function addComment($conn) {
 }
 
 if (empty($_POST['content'])) die('empty data');
-addComment($content, $conn);
+addComment($conn);
 header("Location: ./index.php");
 
 ?>
