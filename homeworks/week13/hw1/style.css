@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row > div {
+  border: 1px solid grey;
+  text-align: center;
+  height: 3em;
+  line-height: 3em;
+}
+
+.container {
+  margin: 1em auto;
+  border: 1px solid grey;
+}
+
+.row:nth-child(even) > div:nth-child(even) {
+  background: pink;
+}
+
+.row:nth-child(odd) > div:nth-child(odd) {
+  background: pink;
+}
+
+.row:nth-child(even) > div:nth-child(odd) {
+  background: rgba(102, 155, 235, 0.603);
+}
+
+.row:nth-child(odd) > div:nth-child(even) {
+  background: rgba(102, 155, 235, 0.603);
+}
+
+.row + .row {
+  margin-top: 1em;
+}
+
+
