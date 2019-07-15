@@ -5,7 +5,7 @@
       $stmt = $conn->prepare("DELETE FROM lagom0327_users_certificate WHERE id=?");
       $stmt->bind_param("s", $sessionId);
       $stmt->execute();
-      session_unset(); 
+      session_unset();
       session_destroy();
     }
   } 

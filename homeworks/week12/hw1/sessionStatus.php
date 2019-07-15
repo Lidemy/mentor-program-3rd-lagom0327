@@ -4,7 +4,6 @@ function isSessionInSQL() {
   include('./conn.php');
   if(!isset($_SESSION)) session_start(); 
   if (isset($_SESSION) && isset($_SESSION['nickname'])) {
-    // die('has nickname');
     $stmt = $conn->prepare("SELECT * FROM lagom0327_users_certificate WHERE id=?");
     $stmt->bind_param("s", session_id());
     $stmt->execute();
@@ -19,10 +18,8 @@ function isSessionInSQL() {
       return false;
     }
   } else if (isset($_SESSION) && !isset($_SESSION['nickname'])) {
-    // die('session in sql but no nick');
     return false;
   }
-
   return false;
 }
 
