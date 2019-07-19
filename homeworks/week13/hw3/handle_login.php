@@ -12,11 +12,13 @@
     $_SESSION['user_ip'] = $user_ip;
   }
 
+
   function setSession($data) { 
     if (!isset($_SESSION)) session_start();
     $_SESSION['user_id'] = $data['id'];
     $_SESSION['nickname'] = $data['nickname'];
     $_SESSION['permission'] = $data['permission'];
+    setcookie("user_id", $data['id'], time()+3600*24);
     setIPSession();
   }
   

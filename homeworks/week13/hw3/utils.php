@@ -25,7 +25,7 @@
     function printEditeSection ($type, $id) {
       echo "<div class='message__edite'>";
       echo   "<button class='edite_btn btn icon' title='edite' data-id={$id}></button>";
-      echo   "<a href='./handle_delete_$type.php?id={$id}'><button title='delete' class='btn delete_btn icon'></button></a>";
+      echo   "<button title='delete' class='btn delete_btn icon' data-id={$id} data-type={$type}></button>";
       echo "</div>";
     }
 
@@ -40,7 +40,9 @@
     // 列印換頁按紐用 ------------------------------
     function countPages ($type, $conn) {
       $tableName = "lagom0327_" . $type;
-      $stmt = $conn->prepare("SELECT count(*) FROM $tableName WHERE is_deleted=0");
+      $sql = "SELECT count(*) FROM $tableName WHERE is_deleted=0";
+      if ($type === 'comments') $sql = $sql . " AND layer=0";
+      $stmt = $conn->prepare($sql);
       $stmt->execute();
       $result = $stmt->get_result();
       $stmt->close();

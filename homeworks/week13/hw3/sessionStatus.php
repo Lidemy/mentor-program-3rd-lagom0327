@@ -7,12 +7,13 @@ function validIp() {
     $user2_ip = $_SERVER["REMOTE_ADDR"];
   }
 
-  if (isset($_SESSION["user_ip"])) echo "<BR />原來 session 的IP:".$_SESSION["user_ip"];
-  echo "<h1 style='display:none;'>目前使用者IP : $user2_ip</h1> ";
+  if (isset($_SESSION["user_ip"]))
+  //  echo "<BR />原來 session 的IP:".$_SESSION["user_ip"];
+  // echo "<h1 style='display:none;'>目前使用者IP : $user2_ip</h1> ";
 
   if (isset($_SESSION["user_ip"]) && $_SESSION["user_ip"] !== $user2_ip ) {
     include('./handle_logout.php');
-    echo "<script>alert('您不是原來登入的 IP，請正常登入!!');</script>";
+    // echo "<script>alert('您不是原來登入的 IP，請正常登入!!');</script>";
     return false;
   }  else return true;
 }

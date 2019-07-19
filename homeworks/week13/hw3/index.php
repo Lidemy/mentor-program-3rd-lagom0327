@@ -6,9 +6,9 @@ require_once('./utils.php');
 function printCommentBoard() {
   echo "<section class='comment_board' >";
   echo "<h1 class='notation'>Hello ~ " . escape($_SESSION['nickname']) . "</h1>";
-  echo "<form method='POST' action='handle_add.php'>
-          <div class='comment_board_input'><textarea name='content' rows='10' placeholder='What do you want to say ?' required></textarea></div>";
-  echo "  <input type='submit' class='btn' value='Send' />";
+  echo "<form method='POST' action='./handle_add.php' >
+          <div class='comment_board_input'><textarea class='comment_board_text' name='content' rows='10' placeholder='What do you want to say ?' required></textarea></div>";
+  echo "  <input type='submit' class='btn comment_board_btn' value='Send' />";
   echo "</form>";
   echo "</section>";
 }
@@ -21,6 +21,8 @@ function printCommentBoard() {
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Message Board</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <link rel="stylesheet" href='./style.css' />
   </head>
   <body>

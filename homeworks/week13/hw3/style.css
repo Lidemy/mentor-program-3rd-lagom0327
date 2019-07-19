@@ -78,7 +78,7 @@ h1.notation {
 input, textarea {
   color: black;
   margin: 0.5em auto;
-  width: 100%;
+  width: 95%;
   background: var(--white);
   border-radius: 2px;
   padding: 5px;
@@ -181,6 +181,10 @@ form > p {
 .message__edite > .comment_board {
   width: 100%;
   margin-bottom: 0em;
+}
+
+.message > .comment_board {
+  height: 140px;
 }
 
 .child_message {
@@ -334,6 +338,21 @@ input.btn:hover {
 
 .user_table__td > .message__edite {
   justify-content: space-around;
+}
+
+.alert {
+  padding: 20px;
+  width: 5%;
+  border-radius: 9px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 
