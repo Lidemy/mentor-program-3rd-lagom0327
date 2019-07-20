@@ -22,7 +22,6 @@ function getCookie(cname) {
 
 const userId = Number(getCookie('user_id'));
 const permission = getCookie('permission');
-// if (!userId) window.location = './handle_logout.php'; 會無限重復
 
 const toggleShowBtn = (div) => {
   $(div).find('.message__edite:first').toggleClass('hidden');
@@ -128,7 +127,6 @@ const whenError = (obj) => {
 const showAlert = (message) => {
   const div = `<div class="alert">${message}</div>`;
   $('body').prepend(div);
-  // setTimeout(hiddenAlert(), 2000);
 };
 
 const hiddenAlert = () => {
@@ -136,8 +134,6 @@ const hiddenAlert = () => {
 };
 
 const reRenderMessages = () => {
-  // const page = $('.page_btn.active').data('page');
-
   const createEditeSectionHtml = (data) => {
     if (data.user_id !== userId && permission !== 'admin') return '';
     return `
@@ -198,13 +194,14 @@ const reRenderMessages = () => {
   });
 };
 
-const deleteMess = (target) => {
-  const id = $(target).data('id');
-  const url = `${messUrl}?id=${id}`;
+const sendRequest = (method, target) => {
+  let url = messUrl;
+  if (method === 'DELETE') url = `${messUrl}?id=${$(target).data('id')}`;
   $.ajax({
-    type: 'DELETE',
+    type: method,
     url,
     dataType: 'json',
+    data: $(target).closest('form').serialize(),
     error: jqXHR => whenError(jqXHR),
     success: () => {
       showAlert('Under processing');
@@ -213,33 +210,13 @@ const deleteMess = (target) => {
   });
 };
 
-const addChildMess = (target) => {
-  $.ajax({
-    type: 'POST',
-    url: messUrl,
-    dataType: 'json',
-    data: $(target).closest('form').serialize(),
-    error: jqXHR => whenError(jqXHR),
-    success: () => {
-      showAlert('Sending ...');
-      reRenderMessages();
-    },
-  });
+// 後端根據是否拿到 parentId ID決定是增加子留言、編輯或新增主留言
+const addChildMess = target => sendRequest('POST', target);
+const updateMess = target => sendRequest('POST', target);
+const addMainMess = (target) => {
+  if (sendRequest('POST', target)) $('.comment_board_text').val('');
 };
-
-const updateMess = (target) => {
-  $.ajax({
-    type: 'POST',
-    url: messUrl,
-    dataType: 'json',
-    data: $(target).closest('form').serialize(),
-    error: jqXHR => whenError(jqXHR),
-    success: () => {
-      showAlert('Sending ...');
-      reRenderMessages();
-    },
-  });
-};
+const deleteMess = target => sendRequest('DELETE', target);
 
 const isEmpty = (target) => {
   const form = $(target).closest('form');
@@ -251,8 +228,9 @@ const isEmpty = (target) => {
 if (messages) {
   messages.addEventListener('click',
     (e) => {
-      if ($(e.target).hasClass('delete_btn')) deleteMess(e.target);
-      else if ($(e.target).hasClass('add_sub_commit_btn')) {
+      if ($(e.target).hasClass('delete_btn')) {
+        if (window.confirm('是否確定刪除 ?'))deleteMess(e.target);
+      } else if ($(e.target).hasClass('add_sub_commit_btn')) {
         e.preventDefault();
         if (!isEmpty(e.target)) addChildMess(e.target);
       } else if ($(e.target).hasClass('edite__send_btn')) {
@@ -269,21 +247,6 @@ if (messages) {
 }
 
 $('.comment_board_btn').click((e) => {
-  const addMainMess = () => {
-    $.ajax({
-      type: 'POST',
-      url: messUrl,
-      dataType: 'json',
-      data: $('.comment_board form').serialize(),
-      error: jqXHR => whenError(jqXHR),
-      success: () => {
-        $('.comment_board_text').val('');
-        showAlert('Sending ...');
-        reRenderMessages();
-      },
-    });
-  };
-
   e.preventDefault();
-  if (!isEmpty(e.target)) addMainMess();
+  if (!isEmpty(e.target)) addMainMess(e.target);
 });

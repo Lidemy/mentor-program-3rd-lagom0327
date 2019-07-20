@@ -33,7 +33,7 @@ button {
 }
 
 .todo__add button:hover > i {
-  color: rgba(95, 158, 160, 0.83);;
+  color: rgba(95, 158, 160, 0.83);
 }
 
 .todo__add button > i {
@@ -107,12 +107,19 @@ input[type="checkbox"] {
 .todo__item:hover input ~.checkmark--checked {
   /* display: block; */
 }
- 
+.todo__item p {
+  display: inline;
+}
+.todo__item input:checked  ~ p{
+  text-decoration:line-through;
+  color: rgba(95, 158, 160, 0.83);
+}
 .todo__item input:checked ~.checkmark {
   display: none;
 }
 
 .todo__item input:checked ~.checkmark--checked {
+  color: rgba(95, 158, 160, 0.83);
   display: block;
 }
 

@@ -18,8 +18,6 @@
     $_SESSION['user_id'] = $data['id'];
     $_SESSION['nickname'] = $data['nickname'];
     $_SESSION['permission'] = $data['permission'];
-    setcookie("user_id", $data['id'], time()+3600*24);
-    setcookie("permission", $data['permission'], time()+3600*24);
     setIPSession();
   }
   
@@ -46,6 +44,8 @@
   checkData();
   $row = isCorrectUser($conn);
   setSession($row);
+  setcookie("user_id", $_SESSION['user_id'], time()+3600*24);
+  if ($_SESSION['permisssion'] === 'admin') setcookie("permission", $_SESSION['permission'], time()+3600*24);
   if (include('./function/isAdmin.php')) header('Location: ./admin.php');
   else if (include('./function/isSuperAdmin.php')) header('Location: ./super_admin.php');
   else header('Location: ./index.php');

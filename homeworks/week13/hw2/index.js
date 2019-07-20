@@ -1,8 +1,8 @@
 const addTodoItem = () => {
   if ($('.todo__add_input').val() === '') return null;
   $('.todo__items').append(`<li class='col-12 todo__item'>
-  <label class=''> ${$('.todo__add_input').val()}
-    <input type='checkbox' >
+  <label class=''> 
+    <input type='checkbox' > <p>${$('.todo__add_input').val()}</p>
     <i class="fas fa-square checkmark"></i>
     <i class="fas fa-check-square checkmark--checked"></i>
   </label>
