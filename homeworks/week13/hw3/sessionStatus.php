@@ -13,7 +13,6 @@ function validIp() {
 
   if (isset($_SESSION["user_ip"]) && $_SESSION["user_ip"] !== $user2_ip ) {
     include('./handle_logout.php');
-    // echo "<script>alert('您不是原來登入的 IP，請正常登入!!');</script>";
     return false;
   }  else return true;
 }

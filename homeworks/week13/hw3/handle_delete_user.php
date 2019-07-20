@@ -1,8 +1,8 @@
 <?php
   require_once('./conn.php'); 
   require_once('./sessionStatus.php');
-  require_once('./isSuperAdmin.php');
-  require_once('./idIsSuperAdmin.php');
+  require_once('./function/isSuperAdmin.php');
+  require_once('./function/idIsSuperAdmin.php');
 
   function deleteUser($conn) {
     $stmt = $conn->prepare("UPDATE lagom0327_users SET is_deleted=1 WHERE id=?");

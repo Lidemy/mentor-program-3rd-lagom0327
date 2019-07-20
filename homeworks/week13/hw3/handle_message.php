@@ -1,8 +1,8 @@
 <?php
 require_once('./conn.php');
 require_once('./sessionStatus.php');
-require_once('./isCommentAuthor.php');
-require_once('./isAdmin.php');
+require_once('./function/isCommentAuthor.php');
+require_once('./function/isAdmin.php');
 
 header('Content-Type: application/json; charset=UTF-8'); 
 

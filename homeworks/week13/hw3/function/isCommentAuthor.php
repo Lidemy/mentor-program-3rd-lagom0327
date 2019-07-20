@@ -1,5 +1,5 @@
 <?php
-require_once('./conn.php');
+require_once(dirname(dirname(__FILE__)) . '/conn.php');
 
 function isCommentAuthor ($conn) {
     $id = isset($_POST['id']) ? $_POST['id'] : $_GET['id'];

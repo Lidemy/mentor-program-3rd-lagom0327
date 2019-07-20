@@ -46,8 +46,8 @@
   checkData();
   $row = isCorrectUser($conn);
   setSession($row);
-  if (include('./isAdmin.php')) header('Location: ./admin.php');
-  else if (include('./isSuperAdmin.php')) header('Location: ./super_admin.php');
+  if (include('./function/isAdmin.php')) header('Location: ./admin.php');
+  else if (include('./function/isSuperAdmin.php')) header('Location: ./super_admin.php');
   else header('Location: ./index.php');
 
 ?>

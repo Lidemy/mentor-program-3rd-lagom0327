@@ -1,8 +1,8 @@
 <?php
   require_once('./conn.php');
   require_once('./sessionStatus.php');
-  require_once('./isAdmin.php');
-  require_once('./isSuperAdmin.php');
+  require_once('./function/isAdmin.php');
+  require_once('./function/isSuperAdmin.php');
 
   function printNav($sessionStatus) {
     function printLoginNav() {

@@ -4,7 +4,6 @@ body {
 
 
 .row > div {
-  border: 1px solid grey;
   text-align: center;
   height: 3em;
   line-height: 3em;
@@ -12,7 +11,7 @@ body {
 
 .container {
   margin: 1em auto;
-  border: 1px solid grey;
+  background-color: #ccc;
 }
 
 .row:nth-child(even) > div:nth-child(even) {

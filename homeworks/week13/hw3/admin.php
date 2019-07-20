@@ -1,7 +1,7 @@
 <?php 
 require_once('./conn.php'); 
 require_once('./sessionStatus.php');
-require_once('./isAdmin.php');
+require_once('./function/isAdmin.php');
 require_once('./utils.php');
 
 if (!isAdmin($conn)) header('Location: ./index.php');
