@@ -2,8 +2,9 @@
 require_once('./conn.php');
 
 function isCommentAuthor ($conn) {
+    $id = isset($_POST['id']) ? $_POST['id'] : $_GET['id'];
     $stmt = $conn->prepare("SELECT user_id FROM lagom0327_comments WHERE id=?");
-    $stmt->bind_param("i", $_GET['id']);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result) {

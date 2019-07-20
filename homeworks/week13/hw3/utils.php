@@ -25,7 +25,8 @@
     function printEditeSection ($type, $id) {
       echo "<div class='message__edite'>";
       echo   "<button class='edite_btn btn icon' title='edite' data-id={$id}></button>";
-      echo   "<button title='delete' class='btn delete_btn icon' data-id={$id} data-type={$type}></button>";
+      echo   "<button title='delete' class='btn delete_btn icon' data-id={$id} data-type={$type}>
+              </button>";
       echo "</div>";
     }
 
@@ -89,7 +90,7 @@
           echo    "<h4 class='message__time'>{$row['created_at']}</h4>";
           echo  "</header>";
           echo  "<p>" . escape($row['content']) . "</p>";
-          if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === (int)$row['user_id']) {
+          if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === (int)$row['user_id'] || isAdmin()) {
             printEditeSection('comment', $row['id']);
           }
           echo "</div>";

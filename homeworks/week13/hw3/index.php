@@ -2,7 +2,7 @@
 require_once('./conn.php'); 
 require_once('./sessionStatus.php');
 require_once('./utils.php');
-
+if($sessionStatus && !isset($_COOKIE["user_id"])) die(header('Location: ./handle_logout.php'));
 function printCommentBoard() {
   echo "<section class='comment_board' >";
   echo "<h1 class='notation'>Hello ~ " . escape($_SESSION['nickname']) . "</h1>";
@@ -27,7 +27,7 @@ function printCommentBoard() {
   </head>
   <body>
   <?php include_once('nav.php'); ?>
-  <p class='notation'>本站為練習用網站，因教學用途刻意忽略資安的實作，註冊時請勿使用任何真實的帳號或密碼</p>"
+  <p class='notation'>本站為練習用網站，因教學用途刻意忽略資安的實作，註冊時請勿使用任何真實的帳號或密碼</p>
     <section class="container">
       <h1>Message board</h1>   
       <?php if ($sessionStatus) printCommentBoard(); ?>

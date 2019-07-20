@@ -2,6 +2,7 @@ const messages = document.querySelector('.messages');
 const usersTable = document.querySelector('.users_table');
 let originTarget;
 let originText = '';
+const messUrl = './handle_message.php';
 
 function getCookie(cname) {
   const name = cname.concat('=');
@@ -20,6 +21,8 @@ function getCookie(cname) {
 }
 
 const userId = Number(getCookie('user_id'));
+const permission = getCookie('permission');
+// if (!userId) window.location = './handle_logout.php'; 會無限重復
 
 const toggleShowBtn = (div) => {
   $(div).find('.message__edite:first').toggleClass('hidden');
@@ -58,6 +61,7 @@ const changeEditeFrame = (type, e) => {
       const newNode = node;
       newNode.querySelector(selector[1]).outerHTML = `
       <form method='POST' action='handle_edite.php?id=${btn.dataset.id}'>
+        <input type='hidden' name='id' value=${btn.dataset.id}>
         <textarea name='content' rows='5' class='edite_comment__board' required>${text}</textarea>
         <p>按下 Esc 可取消</p>
         <button type='submit' class='btn edite__send_btn icon' ></button>
@@ -77,32 +81,32 @@ const changeEditeFrame = (type, e) => {
   };
 
   const reinstate = () => {
-    const reverseShowEditeFrame = (target, text) => {
+    const reverseShowEditeFrame = (text) => {
       const selector = (type === 'user') ? ['.user_data', '.permission__th'] : ['.message', 'form'];
-      const data = target.closest(selector[0]);
+      const data = originTarget.closest(selector[0]);
       toggleShowBtn(data);
       if (type === 'user') data.querySelector(selector[1]).innerHTML = `${text}`;
       else data.querySelector(selector[1]).outerHTML = `<p>${text}</p>`;
     };
 
-    const reverseShowAddFrame = (target) => {
-      const board = target.closest('.message').querySelector('.comment_board');
+    const reverseShowAddFrame = () => {
+      const board = originTarget.closest('.message').querySelector('.comment_board');
       board.outerHTML = '';
-      toggleShowBtn(target.closest('.message_edite_wrapper'));
+      toggleShowBtn(originTarget.closest('.message_edite_wrapper'));
     };
 
     if (!originTarget) return null;
-    if (originTarget.classList.contains('edite_btn')) return reverseShowEditeFrame(type, originTarget, originText);
-    if (originTarget.classList.contains('add_btn')) return reverseShowAddFrame(originTarget);
+    if (originTarget.classList.contains('edite_btn')) return reverseShowEditeFrame(originText);
+    if (originTarget.classList.contains('add_btn')) return reverseShowAddFrame();
     return null;
   };
 
   if (e.target.classList.contains('edite_btn')) {
-    reinstate(type);
+    reinstate();
     originTarget = e.target;
-    originText = showEditeFrame(type, e.target);
+    originText = showEditeFrame(e.target);
   } else if (e.target.classList.contains('add_btn')) {
-    reinstate(type);
+    reinstate();
     originTarget = e.target;
     printAddCommentFram(e.target);
     originText = '';
@@ -110,7 +114,7 @@ const changeEditeFrame = (type, e) => {
   window.addEventListener('keydown',
     (el) => {
       if (el.keyCode === 27) {
-        reinstate(type);
+        reinstate();
         originTarget = null;
       }
     });
@@ -124,6 +128,7 @@ const whenError = (obj) => {
 const showAlert = (message) => {
   const div = `<div class="alert">${message}</div>`;
   $('body').prepend(div);
+  // setTimeout(hiddenAlert(), 2000);
 };
 
 const hiddenAlert = () => {
@@ -131,10 +136,10 @@ const hiddenAlert = () => {
 };
 
 const reRenderMessages = () => {
-  const page = $('.page_btn.active').data('page');
+  // const page = $('.page_btn.active').data('page');
 
   const createEditeSectionHtml = (data) => {
-    if (data.user_id !== userId) return '';
+    if (data.user_id !== userId && permission !== 'admin') return '';
     return `
     <div class="message__edite">
     <button class="edite_btn btn icon" title="edite" data-id="${data.id}"></button>
@@ -181,7 +186,7 @@ const reRenderMessages = () => {
 
   $.ajax({
     type: 'GET',
-    url: `./get_comments.php?page=${page}`,
+    url: messUrl,
     dataType: 'json',
     error: jqXHR => whenError(jqXHR),
     success: (data) => {
@@ -195,12 +200,11 @@ const reRenderMessages = () => {
 
 const deleteMess = (target) => {
   const id = $(target).data('id');
-  const url = './handle_delete_comment.php?id='.concat(id);
+  const url = `${messUrl}?id=${id}`;
   $.ajax({
     type: 'DELETE',
     url,
     dataType: 'json',
-    data: 'id',
     error: jqXHR => whenError(jqXHR),
     success: () => {
       showAlert('Under processing');
@@ -212,7 +216,7 @@ const deleteMess = (target) => {
 const addChildMess = (target) => {
   $.ajax({
     type: 'POST',
-    url: './handle_add_child.php',
+    url: messUrl,
     dataType: 'json',
     data: $(target).closest('form').serialize(),
     error: jqXHR => whenError(jqXHR),
@@ -223,13 +227,37 @@ const addChildMess = (target) => {
   });
 };
 
+const updateMess = (target) => {
+  $.ajax({
+    type: 'POST',
+    url: messUrl,
+    dataType: 'json',
+    data: $(target).closest('form').serialize(),
+    error: jqXHR => whenError(jqXHR),
+    success: () => {
+      showAlert('Sending ...');
+      reRenderMessages();
+    },
+  });
+};
+
+const isEmpty = (target) => {
+  const form = $(target).closest('form');
+  if ($(form).find('textarea').val() !== '') return false;
+  alert('empty');
+  return true;
+};
+
 if (messages) {
   messages.addEventListener('click',
     (e) => {
       if ($(e.target).hasClass('delete_btn')) deleteMess(e.target);
       else if ($(e.target).hasClass('add_sub_commit_btn')) {
         e.preventDefault();
-        addChildMess(e.target);
+        if (!isEmpty(e.target)) addChildMess(e.target);
+      } else if ($(e.target).hasClass('edite__send_btn')) {
+        e.preventDefault();
+        if (!isEmpty(e.target)) updateMess(e.target);
       }
       changeEditeFrame('message', e);
     });
@@ -244,7 +272,7 @@ $('.comment_board_btn').click((e) => {
   const addMainMess = () => {
     $.ajax({
       type: 'POST',
-      url: './handle_add.php',
+      url: messUrl,
       dataType: 'json',
       data: $('.comment_board form').serialize(),
       error: jqXHR => whenError(jqXHR),
@@ -257,5 +285,5 @@ $('.comment_board_btn').click((e) => {
   };
 
   e.preventDefault();
-  addMainMess();
+  if (!isEmpty(e.target)) addMainMess();
 });

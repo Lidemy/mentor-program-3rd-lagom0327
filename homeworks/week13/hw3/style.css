@@ -220,11 +220,15 @@ form > p {
   margin: 5px auto;
 }
 
+.icon {
+  color: rgb(201, 201, 209);
+}
+
 .icon::before {
   font-family: "Font Awesome 5 Free"; 
   font-weight: 900; 
   font-size: 14px;
-  color: rgb(201, 201, 209);
+  
 }
 .edite_btn.icon::before,.edite_permission_btn.icon::before {
   content: "\f044";
@@ -287,6 +291,10 @@ form > p {
   border: 0px solid;
   border-radius: 5px;
   transition: 0.3s all;
+}
+
+.btn.icon:active {
+  color: grey;
 }
 
 input.btn:hover {

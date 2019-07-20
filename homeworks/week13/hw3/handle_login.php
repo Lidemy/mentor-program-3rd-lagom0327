@@ -19,6 +19,7 @@
     $_SESSION['nickname'] = $data['nickname'];
     $_SESSION['permission'] = $data['permission'];
     setcookie("user_id", $data['id'], time()+3600*24);
+    setcookie("permission", $data['permission'], time()+3600*24);
     setIPSession();
   }
   
