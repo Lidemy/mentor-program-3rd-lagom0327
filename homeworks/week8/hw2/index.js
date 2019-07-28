@@ -36,6 +36,7 @@ const loadMessages = (page) => {
   request.addEventListener('load', () => {
     if (request.status >= 200 && request.status < 400) {
       const response = request.responseText;
+      console.log(response);
       const data = JSON.parse(response);
       const totalPage = Math.floor((data.length - 1) / numOfMessages) + 1;
       pageNum('update', page, totalPage);

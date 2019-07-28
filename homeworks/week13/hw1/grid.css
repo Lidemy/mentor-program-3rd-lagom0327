@@ -1,0 +1,71 @@
+:root {
+  --w: calc(100%/12);
+  --w1: calc(var(--w)*1);
+  --w2: calc(var(--w)*2);
+  --w3: calc(var(--w)*3);
+  --w4: calc(var(--w)*4);
+  --w5: calc(var(--w)*5);
+  --w6: calc(var(--w)*6);
+  --w7: calc(var(--w)*7);
+  --w8: calc(var(--w)*8);
+  --w9: calc(var(--w)*9);
+  --w10: calc(var(--w)*10);
+  --w11: calc(var(--w)*11);
+  --w12: 100%;
+}
+
+
+.container {
+  max-width: 960px;
+  margin:0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row > .col-1 {
+  width: var(--w1);
+}
+
+.row > .col-2 {
+  width: var(--w2);
+}
+.row > .col-3 {
+  width: var(--w3);
+}
+.row > .col-4 {
+  width: var(--w4);
+}
+.row > .col-5 {
+  width: var(--w5);
+}
+.row > .col-6 {
+  width: var(--w6);
+}
+.row > .col-7 {
+  width: var(--w7);
+}
+.row > .col-8 {
+  width: var(--w8);
+}
+.row > .col-9 {
+  width: var(--w9);
+}
+.row > .col-10 {
+  width: var(--w10);
+}
+.row > .col-11 {
+  width: var(--w11);
+}
+.row > .col-12 {
+  width: var(--w12);
+}
+/* 要寫 .row > .col-x 乘以 12 次 */
+@media(max-width:760px) {
+  .col-1, .col-2, .col-3, .col-4, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    width: 100%  !important; 
+    display: block;
+  }
+}
