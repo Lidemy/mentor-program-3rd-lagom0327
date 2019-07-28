@@ -45,7 +45,7 @@
   $row = isCorrectUser($conn);
   setSession($row);
   setcookie("user_id", $_SESSION['user_id'], time()+3600*24);
-  if ($_SESSION['permisssion'] === 'admin') setcookie("permission", $_SESSION['permission'], time()+3600*24);
+  if ($_SESSION['permission'] === 'admin') setcookie("permission", $_SESSION['permission'], time()+3600*24);
   if (include('./function/isAdmin.php')) header('Location: ./admin.php');
   else if (include('./function/isSuperAdmin.php')) header('Location: ./super_admin.php');
   else header('Location: ./index.php');
