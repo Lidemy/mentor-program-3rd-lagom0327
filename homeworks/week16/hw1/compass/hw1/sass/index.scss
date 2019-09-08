@@ -1,8 +1,15 @@
 @import 'reset';
 
-@mixin hexToRgb($hex, $op) {
-  
+@mixin icon-content($code) {
+  content: #{'"\\' + $code  + '"'};
 }
+  
+$icons: 
+edite f044,
+delete f2ed,
+add f0fe;
+
+// '\' solved by https://stackoverflow.com/questions/21608762/sass-variable-interpolation-with-backslash-in-output
 $font-color: rgb(201, 201, 209);
 $font-color-active: grey;
 $input-font-color: black;
@@ -146,7 +153,6 @@ form > p {
   > .comment_board {
     height: 140px;
   }
-
 }
 
 .child_message {
@@ -189,7 +195,6 @@ form > p {
   &.icon:active {
     color: $font-color-active;
   }
-
 }
 
 .icon {
@@ -200,20 +205,16 @@ form > p {
     font-weight: 900; 
     font-size: 14px;
   }
-  &.edite_btn::before, &.edite_permission_btn::before {
-    content: "\f044";
-  }
-
-  &.delete_btn::before{
-    content: "\f2ed";
-  }
-  &.add_btn::before{
-    content: "\f0fe";
-  }
 
   &.edite__send_btn::before {
-    content: "\f0c7";
+    @include icon-content("f0c7");
     font-size: 30px;
+  }
+
+  @each $icon in $icons {
+    &.#{nth($icon, 1)}_btn::before {
+      @include icon-content(nth($icon, 2));
+    }
   }
 }
 
@@ -231,7 +232,6 @@ form > p {
     }
   }
 }
-
 
 @media (max-width: 400px) {
   .form {

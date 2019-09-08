@@ -202,7 +202,11 @@ form > p {
   font-weight: 900;
   font-size: 14px;
 }
-.icon.edite_btn::before, .icon.edite_permission_btn::before {
+.icon.edite__send_btn::before {
+  content: "\f0c7";
+  font-size: 30px;
+}
+.icon.edite_btn::before {
   content: "\f044";
 }
 .icon.delete_btn::before {
@@ -210,10 +214,6 @@ form > p {
 }
 .icon.add_btn::before {
   content: "\f0fe";
-}
-.icon.edite__send_btn::before {
-  content: "\f0c7";
-  font-size: 30px;
 }
 
 .page_btn__section {
