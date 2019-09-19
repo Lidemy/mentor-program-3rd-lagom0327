@@ -1,0 +1,240 @@
+@import 'reset';
+
+@mixin icon-content($code) {
+  content: #{'"\\' + $code  + '"'};
+}
+  
+$icons: 
+edite f044,
+delete f2ed,
+add f0fe;
+
+// '\' solved by https://stackoverflow.com/questions/21608762/sass-variable-interpolation-with-backslash-in-output
+$font-color: rgb(201, 201, 209);
+$font-color-active: grey;
+$input-font-color: black;
+$input-bg: $font-color;
+$comment-bg: rgba(26, 14,93, 0.45);
+$comment-border-color: rgba(37, 29,29, 0.65);
+$child-comment-bg: #241d5d;
+$body-bg: #13094b;
+$nav-bg: black;
+
+
+
+* {
+  color: $font-color;
+}
+
+body {
+  background: $body-bg;
+}
+
+
+// nav --------------
+nav {
+  background: $nav-bg;
+}
+
+.nav__list {
+  transition: all 0.3s;
+  &:first-child {
+    float: left;
+    padding: 10px;
+  }
+  &:not(:first-child) {
+    float: right;
+    padding: 10px;
+  }
+  &:hover {
+    border-bottom: 1px solid $font-color;
+  }
+}
+
+//h1 --------------
+
+h1 {
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  text-shadow: 0.1em 0.1em 0.2em black
+}
+
+h1.notation  + p.notation {
+  margin-top: 1em;
+}
+
+h1.notation {
+  margin-top: 55px;
+  text-align: center;
+}
+
+//input textarea 
+input, textarea {
+  color: $input-font-color;
+  margin: 0.5em auto;
+  width: 95%;
+  background: $input-bg;
+  border-radius: 2px;
+  padding: 5px;
+  display: block;
+}
+
+input.btn:hover {
+  font-size: 1.2em;
+}
+
+input[name='parentId'] {
+  display: none;
+}
+
+.container {
+  max-width: 90%;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 2em;
+  > h1 {
+    text-align: center;
+  }
+}
+
+// comment main input
+.form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+form > p {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+
+.comment_board {
+  height: 280px;
+  &_nickname, &_input {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  &_input {
+    margin-top: 10px;
+  }
+}
+
+.message {
+  background: $comment-bg;
+  border: 2px solid $comment-border-color;
+  padding: 0 10px;
+  border-radius: 5px;
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+  
+  &__content {
+    white-space: pre-line;
+  }
+
+  &__edite {
+    display: flex;
+    justify-content: flex-end;
+
+    > .comment_borard {
+      width: 100%;
+      margin-bottom: 0em;
+    }
+    &.hidden {
+      display: none;
+    }
+  }
+  > p {
+    word-wrap: break-word;
+    white-space: pre-line;
+  }
+
+  > .comment_board {
+    height: 140px;
+  }
+}
+
+.child_message {
+  background: $child-comment-bg;
+  margin-bottom: 1em;
+  width: 90%;
+  position: relative;
+  left: 5%;
+  > header > h4 {
+    margin-top: 0.5em;
+    margin-bottom: 0em;
+  }
+  &.author {
+    background: #101e86;
+    position: relative;
+    left: 0%;
+  }
+}
+
+.btn {
+  background: $nav-bg;
+  color: $font-color;
+  width: 4em;
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
+  border: 0px solid;
+  border-radius: 5px;
+  transition: 0.3s all;
+
+  &.edite_btn, &.delete_btn, &.editete__send, &.add_btn {
+    margin: 5px 0px;
+    background: none;
+    width: auto;
+    height: auto;
+  }
+  &.edite__send_btn {
+    margin: 5px auto;
+  }
+  &.icon:active {
+    color: $font-color-active;
+  }
+}
+
+.icon {
+  color: $font-color;
+  background: none;
+  &::before {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    font-size: 14px;
+  }
+
+  &.edite__send_btn::before {
+    @include icon-content("f0c7");
+    font-size: 30px;
+  }
+
+  @each $icon in $icons {
+    &.#{nth($icon, 1)}_btn::before {
+      @include icon-content(nth($icon, 2));
+    }
+  }
+}
+
+.page_btn {
+  &__section {
+    display: flex;
+    justify-content: center;
+  }
+  &.btn {
+    width: 2em;
+    margin: 10px 10px;
+    background: none;
+    &:hover, &.active {
+      background: black;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .form {
+    width: 100%;
+  }
+}
