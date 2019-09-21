@@ -1,88 +1,141 @@
 // eslint 'no-underscore-dangle':  ['error', { 'allow': ['_total'] }]
-let index = 0;
+let pagination = '';
+let paginationForTopGames = '';
 const gamesName = [];
 let isShowStreams = false;
 const input = document.querySelector('input');
 const inputBtn = document.querySelector('.search_btn');
 const nav = document.querySelector('.navbar__nav');
 const loadMoreBtn = document.querySelector('.more_streams__btn');
+const clientId = 's16ay4uu63zxeyd938j2zhld42wmx0';
+let gameInfo = {};
+let index = 0;
+const reset = () => {
+  index = 0;
+  pagination = '';
+  gameInfo = {};
+};
 
-const changeLiBg = (gameName) => {
+function getGameId(gameName) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.onload = () => {
+      if (request.status >= 200 && request.status < 400) {
+        const json = JSON.parse(request.responseText);
+        resolve(json.data[0]);
+      } else {
+        reject(this.status);
+      }
+      request.onerror = () => console.log('error');
+    };
+    request.open('GET', `https://api.twitch.tv/helix/games?name=${encodeURI(gameName)}`);
+    request.setRequestHeader('Client-ID', 's16ay4uu63zxeyd938j2zhld42wmx0');
+    request.send();
+  });
+}
+
+const changeLiBg = () => {
   const li = nav.querySelectorAll('li');
   li.forEach((el) => {
-    if (el.innerText === gameName) el.classList.add('selected');
+    if (el.innerText === gameInfo.name) el.classList.add('selected');
     else el.classList.remove('selected');
   });
 };
+// 現在的總 streams 數在新的 API 沒有了
+// const isStreamsEnd = (offset, totalStreams) => {
+//   if (offset >= totalStreams) loadMoreBtn.classList.add('more_streams__btn__hidden');
+//   else loadMoreBtn.classList.remove('more_streams__btn__hidden');
+// };
 
-const isStreamsEnd = (offset, totalStreams) => {
-  if (offset >= totalStreams) loadMoreBtn.classList.add('more_streams__btn__hidden');
-  else loadMoreBtn.classList.remove('more_streams__btn__hidden');
-};
-
-const showStreams = (data, startIndex, totalStreams) => {
+const showStreams = (data, user) => {
   input.value = '';
   const container = document.querySelector('.display_streams');
   if (data.length === 0) return false;
-  if (startIndex === 0) {
-    index = 0;
+  if (index === 0) {
     container.innerHTML = '';
-    document.querySelector('.game_name').innerHTML = data[0].channel.game;
-    changeLiBg(data[0].channel.game);
+    document.querySelector('.game_name').innerHTML = gameInfo.name;
+    changeLiBg('League of Legends');
   }
   for (let i = 0; i < data.length; i++) {
     const a = document.createElement('a');
+    const tumbnailUrl = data[i].thumbnail_url.replace('{width}x{height}', '272x153');
     a.classList.add('each_stream');
-    a.href = data[i].channel.url;
+    a.href = `https://www.twitch.tv/${data[i].user_name}`;
     a.target = '_blank';
-    a.innerHTML = `<img class="each_stream__preview" src='https://static-cdn.jtvnw.net/previews-ttv/live_user_${data[i].channel.name}-272x153.jpg'>
+    a.innerHTML = `<img class="each_stream__preview" src=${tumbnailUrl}>
     <div class="profile">
-      <img class="profile__logo" src="${data[i].channel.logo}">
-      <div class="profile__info">
-        <div class="profile__status">${data[i].channel.status}</div>
-        <div class="profile__display_name">${data[i].channel.display_name}</div>
+    <img class="profile__logo" src="${user[i].profile_image_url}">
+    <div class="profile__info">
+        <div class="profile__status">${data[i].title}</div>
+        <div class="profile__display_name">${data[i].user_name}</div>
       </div>
     </div>`;
     container.appendChild(a);
   }
   index += data.length;
-  isStreamsEnd(index, totalStreams);
+  // isStreamsEnd(index, totalStreams);
   isShowStreams = true;
   return true;
 };
 
-const getStreams = (gameName, startIndex) => {
+const getUsersImage = (data) => {
+  const request = new XMLHttpRequest();
+  let url = `https://api.twitch.tv/helix/users?id=${data[0].user_id}`;
+  for (let i = 1; i < data.length; i++) {
+    url += `&id=${data[i].user_id}`;
+  }
+
+  request.open('GET', url);
+  request.setRequestHeader('Client-ID', clientId);
+  request.onload = () => {
+    if (request.status >= 200 && request.status < 400) {
+      const user = JSON.parse(request.responseText);
+      showStreams(data, user.data);
+    } else console.log('err', request.status, request.responseText);
+    request.onerror = () => console.log('error');
+  };
+  request.send();
+};
+
+async function getStreams(gameName) {
+  if (!gameInfo.id)gameInfo = await getGameId(gameName);
   const request = new XMLHttpRequest();
   request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
       const json = JSON.parse(request.responseText);
-      console.log(json);
-      const data = json.streams;
-      showStreams(data, startIndex, json._total);
+      // console.log(json);
+      // const data = json.data;
+      pagination = json.pagination.cursor;
+      getUsersImage(json.data);
     } else console.log('err', request.status, request.responseText);
     request.onerror = () => console.log('error');
   };
-  request.open('GET', `https://api.twitch.tv/kraken/streams?client_id=rjwb8zewf0hx6k2wdskymmxmzy7tpa&game=${encodeURI(gameName)}&limit=20&offset=${startIndex}`);
+  request.open('GET', `https://api.twitch.tv/helix/streams?game_id=${gameInfo.id}&limit=20&after=${pagination}`);
+  request.setRequestHeader('Client-ID', 's16ay4uu63zxeyd938j2zhld42wmx0');
   request.send();
-};
+}
 
-const get100GamesName = (num) => {
+const get100GamesName = () => {
   const request = new XMLHttpRequest();
   request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
-      const data = JSON.parse(request.responseText).top;
-      // console.log(request.responseText);
-      data.forEach((el) => { gamesName.push(el.game.name); });
+      const json = JSON.parse(request.responseText);
+      console.log('100g', json);
+      paginationForTopGames = json.pagination.cursor;
+      json.data.forEach((el) => { gamesName.push(el.name); });
     } else console.log('err', request.status, request.responseText);
     request.onerror = () => console.log('error');
   };
-  request.open('GET', `https://api.twitch.tv/kraken/games/top?client_id=rjwb8zewf0hx6k2wdskymmxmzy7tpa&limit=100&offset=${num}`);
+  request.open('GET', `https://api.twitch.tv/helix/games/top?first=100&after=${paginationForTopGames}`);
+  request.setRequestHeader('Client-ID', 's16ay4uu63zxeyd938j2zhld42wmx0');
   request.send();
 };
 
 const getAllGamesName = (totalNum) => {
-  for (let i = 0; i < totalNum / 100; i++) get100GamesName(i * 100);
+  for (let i = 0; i < totalNum / 100; i++) get100GamesName();
 };
+// 使用新的 API 後 因為使用 pagination 不能像原本只接用 FOR 迴圈了 要看 WEEK3 的 作業
+
 // total = 2020 games
 
 const search = (str, data) => {
@@ -103,7 +156,7 @@ const checkInputStatus = (text) => {
 };
 
 const load = (totalNum, callback) => {
-  getStreams('League of Legends', 0);
+  getStreams('League of Legends', '');
   nav.children[0].classList.add('selected');
   callback(totalNum);
 };
@@ -114,7 +167,8 @@ const scrollEvent = () => {
   if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 30 && isShowStreams) {
     // 不然 streams 還沒新增完前也會觸發
     isShowStreams = false;
-    getStreams(document.querySelector('.game_name').innerText, index);
+    // getStreams(document.querySelector('.game_name').innerText);
+    getStreams("document.querySelector('.game_name').innerText");
   }
 };
 
@@ -122,12 +176,14 @@ nav.addEventListener('click',
   (e) => {
     if (e.target.nodeName === 'LI') {
       changeLiBg(e.target.innerText);
-      getStreams(e.target.innerText, index = 0);
+      index = 0;
+      reset();
+      getStreams(e.target.innerText);
     }
   });
 
 loadMoreBtn.addEventListener('click', () => {
-  getStreams(document.querySelector('.game_name').innerText, index);
+  getStreams(document.querySelector('.game_name').innerText);
 });
 
 input.addEventListener('keyup',
@@ -135,15 +191,21 @@ input.addEventListener('keyup',
     if (input.value.length > 2) {
       const result = search(input.value, gamesName);
       if (result.length === 1) input.value = [...result];
-      if (e.keyCode === 13 && checkInputStatus(input.value)) getStreams(input.value, 0);
+      if (e.keyCode === 13 && checkInputStatus(input.value)) {
+        reset();
+        getStreams(input.value);
+      }
     }
   });
 
 inputBtn.addEventListener('click',
   () => {
-    if (input.value && checkInputStatus(input.value)) getStreams(input.value, 0);
+    if (input.value && checkInputStatus(input.value)) {
+      reset();
+      getStreams(input.value);
+    }
   });
 
 window.addEventListener('scroll', scrollEvent);
 
-load(800, getAllGamesName);
+load(100, getAllGamesName);
