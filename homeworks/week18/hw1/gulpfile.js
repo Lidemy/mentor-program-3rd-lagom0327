@@ -4,6 +4,7 @@ const minifyCSS = require('gulp-csso');
 const babel = require('gulp-babel');
 const uglifyJS = require('gulp-uglify');
 const rename = require('gulp-rename');
+const clean = require('gulp-clean');
 
 gulp.task('css', () => (
   gulp.src('*.scss')
@@ -28,5 +29,10 @@ gulp.task('js', () => (
     }))
     .pipe(gulp.dest('./build/js'))
 ));
+// 先清空資料夾
+gulp.task('clean', () => (
+  gulp.src('./build') // 要有 build 這個資料夾 gulp 指令才能成功
+    .pipe(clean())
+));
 
-gulp.task('default', gulp.parallel('css', 'js'));
+gulp.task('default', gulp.series('clean', gulp.parallel('css', 'js')));
