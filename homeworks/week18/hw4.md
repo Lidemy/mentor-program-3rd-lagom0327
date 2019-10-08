@@ -2,5 +2,7 @@
 
 
 ## hw3 把 todo list 這樣改寫，可能會有什麼問題？
+個別做動畫要另外調
+占用記憶體 處理器
 
 ## CSS Sprites 與 Data URI 的優缺點是什麼？

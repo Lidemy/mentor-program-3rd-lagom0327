@@ -12,5 +12,6 @@
 1. 增加進度條
 1. 增加 `all` `Unfinished` `Finished` 三個標籤
 1. 高度不會隨內容增加變高 => 改成溢出變成 `... `
+1. 在 `Finished` 下增加 item 會跳到 `all` 的標籤
 
 

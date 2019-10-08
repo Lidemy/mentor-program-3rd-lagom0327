@@ -11,11 +11,10 @@ const render = (list) => {
   </li>`;
   };
 
-  // 進度條類別
+  // 進度條
   // https://jsnwork.kiiuo.com/archives/2468/css-%E9%80%B2%E5%BA%A6%E6%A2%9D%E5%8B%95%E7%95%AB%E8%A8%AD%E8%A8%88/
   const setPbar = (val) => {
-    let num = val;
-    if (val > 100) num = 100;
+    const num = val > 100 ? 100 : val;
     $('.pbar').find('.progress').css('width', `${num}%`);
   };
 
@@ -65,9 +64,8 @@ class List {
 
   addToDoItem(content) {
     if (content === '') return;
-    this.index += 1;
     const item = {
-      id: this.index,
+      id: this.index += 1,
       createdAt: new Date(),
       content,
       isChecked: false,
@@ -77,30 +75,27 @@ class List {
     if ($('.pickedTag').data('tag') === 'finished') {
       renderTag($('.tag-all'));
     }
-    $('.todo__add_input').val('');
     render(this.list);
+    $('.todo__add_input').val('');
   }
 
   deleteToDoItem(id) {
-    const newList = this.list.map((item) => {
-      if (item.id !== id) return item;
-      const obj = item;
-      obj.isDeleted = true;
-      obj.deletedAt = new Date();
-      return obj;
-    });
-    this.list = newList;
+    this.list = this.list.map(item => (
+      item.id !== id ? item : {
+        ...item,
+        isDeleted: true,
+        deletedAt: new Date(),
+      }));
     render(this.list);
   }
 
   changeChecked(id) {
-    const newList = this.list.map((item) => {
-      if (item.id !== id) return item;
-      const obj = item;
-      obj.isChecked = !item.isChecked;
-      return obj;
-    });
-    this.list = newList;
+    this.list = this.list.map(item => (
+      item.id !== id ? item : {
+        ...item,
+        isChecked: !item.isChecked,
+      }
+    ));
     render(this.list);
   }
 }
