@@ -16,7 +16,7 @@ function getCookie(cname) {
 
 const whenError = (obj) => {
   console.log('error', obj.responseText);
-  alert('發生錯誤: ', obj.status);
+  alert('發生錯誤: ', obj.responseText);
 };
 
 const render = () => {
@@ -75,45 +75,6 @@ const renderTag = (target) => {
   $('.tag button').removeClass('pickedTag');
   $(target).addClass('pickedTag');
 };
-
-// class List {
-//   constructor(listName) {
-//     this.index = 0;
-//     this.list = [];
-//     this.listName = listName;
-//     if (this.listName === 'o') {
-//       this.index = 3;
-//       this.list = [
-//         {
-//           id: 1, createdAt: new Date(), content: 'hw1', isChecked: false, isDeleted: false,
-//         }, {
-//           id: 2, createdAt: new Date(), content: 'hw2', isChecked: true, isDeleted: false,
-//         }, {
-/*          id: 3, createdAt: new Date(), content: 'hw3', isChecked: true,
-isDeleted: true, deletedAt: new Date(), */
-//         },
-//       ];
-//     }
-//     render(this.list);
-//   }
-
-//   getList() {
-//     console.log('list', this.list);
-//   }
-
-//   deleteToDoItem(id) {
-//     this.list = this.list.map(item => (
-//       item.id !== id ? item : {
-//         ...item,
-//         isDeleted: true,
-//         deletedAt: new Date(),
-//       }));
-//     render(this.list);
-//   }
-// }
-
-// const ori = new List('o');
-// ori.addToDoItem('ddd');
 
 const addToDoItem = (content) => {
   if (content === '') return;
@@ -180,7 +141,11 @@ const editeToDoItem = (id, content) => {
 
 let timefn = null;
 $(document).ready(() => {
-  if (getCookie('user_id')) render();
+  $('.todo').hide();
+  if (getCookie('user_id')) {
+    render();
+    $('.todo').show();
+  }
 
   $('.todo__add_input ~ button').click(() => {
     addToDoItem($('.todo__add_input').val());
@@ -214,7 +179,7 @@ $(document).ready(() => {
       // 取消上次單擊時 延時未執行的函式
       clearTimeout(timefn);
 
-      const oldHtml = $(e.target).html();
+      const oldHtml = $(e.target).text();
       const newInput = document.createElement('input');
       const id = $(e.target).closest('.todo__item').data('id');
       newInput.type = 'text';
@@ -252,24 +217,27 @@ $(document).ready(() => {
 
 // 登入功能
 const sendRequest = (method, target) => {
-  // let url = messUrl;
   const url = $(target).closest('form').attr('action');
-  // const data = $('.container.login form').serialize();
-  // if (method === 'DELETE') url = `${messUrl}?id=${$(target).data('id')}`;
   $.ajax({
     type: method,
     url,
     dataType: 'json',
     data: $(target).closest('form').serialize(),
     error: jqXHR => whenError(jqXHR),
-    success: () => {
-      alert('susscess');
-      $('.container.login').hide();
-      $('.container.register').hide();
-      $('.container.todo').show();
-      render();
-      // showAlert('Under processing');
-      // reRenderMessages();
+    success: (res) => {
+      alert(res);
+      if (getCookie('user_id')) {
+        $('.navbar div').hide();
+        $('.navbar__logout').show();
+        $('.container.login').hide();
+        $('.container.register').hide();
+        $('.container.todo').show();
+        render();
+      } else {
+        $('.container.login').show();
+        $('.container.register').hide();
+        $('.container.login input:not([type="submit"])').val('');
+      }
     },
   });
 };

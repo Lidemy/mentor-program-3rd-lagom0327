@@ -32,8 +32,9 @@
         $row = $result->fetch_assoc();
         $stmt->close();
         if (password_verify($_POST['password'], $row['password'])) return $row;
-        else echo json_encode('password is error');
+        else exit(json_encode('password is error'));
       }
+      exit(json_encode('User doesn\'t exist'));
       // die(header('Location: ./index.html?username=' . $name));
     } else die('fail : '. $conn->error);
   }
@@ -49,5 +50,5 @@
   if ($_SESSION['permission'] === 'admin') setcookie("permission", $_SESSION['permission'], time()+3600*24);
 
   // header('Location: ./index.html');
-  echo json_encode('scuss');
+  echo json_encode('sign in suceesfully');
 ?>

@@ -265,9 +265,3 @@ button.pickedTag, .tag button:hover {
   border-radius: 3px;
 }
 
-@media(max-width: 500px) {
-  .todo__items {
-    width: 100vw;
-  }
-}
-
