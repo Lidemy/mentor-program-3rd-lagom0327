@@ -139,12 +139,41 @@ const editeToDoItem = (id, content) => {
   });
 };
 
+// 登入和註冊功能
+const sendRequest = (method, target) => {
+  const url = $(target).closest('form').attr('action');
+  $.ajax({
+    type: method,
+    url,
+    dataType: 'json',
+    data: $(target).closest('form').serialize(),
+    error: jqXHR => whenError(jqXHR),
+    success: (res) => {
+      alert(res);
+      if (getCookie('user_id')) {
+        $('.navbar div').hide();
+        $('.navbar__logout').show();
+        $('.container.login').hide();
+        $('.container.register').hide();
+        $('.container.todo').show();
+        render();
+      } else {
+        $('.container.login').show();
+        $('.container.register').hide();
+        $('.container.login input:not([type="submit"])').val('');
+      }
+    },
+  });
+};
+
 let timefn = null;
 $(document).ready(() => {
   $('.todo').hide();
   if (getCookie('user_id')) {
     render();
     $('.todo').show();
+    $('.navbar div').hide();
+    $('.navbar__logout').show();
   }
 
   $('.todo__add_input ~ button').click(() => {
@@ -160,9 +189,10 @@ $(document).ready(() => {
       render();
     }
   });
-
+  // 修改狀態
   $('.todo__items').on('click', (e) => {
     if ($(e.target).closest('.todo__item__delete_btn').length) {
+      // .length 是為了確定是否存在
       deleteToDoItem($(e.target).closest('.todo__item').data('id'));
     } else if (e.target.type === 'checkbox') {
       // 因為用 label 綁定很多元素 input, p, i，點一次會觸發兩次，其中一次一定是 input[type='checkbox']
@@ -174,6 +204,7 @@ $(document).ready(() => {
       }, 300);
     }
   });
+  // 修改內容
   $('.todo__items').on('dblclick', (e) => {
     if (e.target.nodeName === 'P') {
       // 取消上次單擊時 延時未執行的函式
@@ -201,7 +232,7 @@ $(document).ready(() => {
       });
     }
   });
-
+  // 帳戶相關
   $('.navbar__signin').click(() => {
     $('.container.todo').hide();
     $('.container.login').hide();
@@ -212,37 +243,7 @@ $(document).ready(() => {
     $('.container.register').hide();
     $('.container.login').show();
   });
-});
 
-
-// 登入功能
-const sendRequest = (method, target) => {
-  const url = $(target).closest('form').attr('action');
-  $.ajax({
-    type: method,
-    url,
-    dataType: 'json',
-    data: $(target).closest('form').serialize(),
-    error: jqXHR => whenError(jqXHR),
-    success: (res) => {
-      alert(res);
-      if (getCookie('user_id')) {
-        $('.navbar div').hide();
-        $('.navbar__logout').show();
-        $('.container.login').hide();
-        $('.container.register').hide();
-        $('.container.todo').show();
-        render();
-      } else {
-        $('.container.login').show();
-        $('.container.register').hide();
-        $('.container.login input:not([type="submit"])').val('');
-      }
-    },
-  });
-};
-
-$(document).ready(() => {
   $('.container.login form').on('submit', (e) => {
     e.preventDefault();
     sendRequest('POST', e.target);
@@ -252,8 +253,4 @@ $(document).ready(() => {
     e.preventDefault();
     sendRequest('POST', e.target);
   });
-  if (getCookie('user_id')) {
-    $('.navbar div').hide();
-    $('.navbar__logout').show();
-  }
 });
