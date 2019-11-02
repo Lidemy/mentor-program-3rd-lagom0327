@@ -1,3 +1,4 @@
+const apiUrl = './api.php';
 function getCookie(cname) {
   const name = cname.concat('=');
   const decodedCookie = decodeURIComponent(document.cookie);
@@ -41,10 +42,9 @@ const render = () => {
 
   // 從 API 利用 session 拿到該使用者的資料
   const getTodoList = () => {
-    const url = './todoList.php';
     $.ajax({
       type: 'GET',
-      url,
+      url: apiUrl,
       dataType: 'json',
       error: jqXHR => whenError(jqXHR),
       success: (res) => {
@@ -84,7 +84,7 @@ const addToDoItem = (content) => {
   };
   $.ajax({
     type: 'POST',
-    url: './todoList.php',
+    url: apiUrl,
     dataType: 'json',
     data,
     error: jqXHR => whenError(jqXHR),
@@ -101,7 +101,7 @@ const addToDoItem = (content) => {
 const changeChecked = (id) => {
   $.ajax({
     type: 'POST',
-    url: './todoList.php',
+    url: apiUrl,
     dataType: 'json',
     data: { id },
     error: jqXHR => whenError(jqXHR),
@@ -114,7 +114,7 @@ const changeChecked = (id) => {
 const deleteToDoItem = (id) => {
   $.ajax({
     type: 'DELETE',
-    url: `./todoList.php?id=${id}`,
+    url: `${apiUrl}?id=${id}`,
     dataType: 'json',
     error: jqXHR => whenError(jqXHR),
     success: () => {
@@ -126,7 +126,7 @@ const deleteToDoItem = (id) => {
 const editeToDoItem = (id, content) => {
   $.ajax({
     type: 'POST',
-    url: './todoList.php',
+    url: apiUrl,
     dataType: 'json',
     data: {
       id,
