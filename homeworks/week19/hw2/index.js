@@ -50,19 +50,19 @@ const render = () => {
       success: (res) => {
         let list = res;
         if (list.length !== 0) {
-          const finishedList = list.filter(e => !e.data.is_deleted && e.data.is_completed);
+          const finishedList = list.filter(e => !e.is_deleted && e.is_completed);
           setPbar(finishedList.length * 100 / list.length);
         }
 
         if ($('.pickedTag').data('tag') === 'finished') {
-          list = list.filter(item => item.data.is_completed);
+          list = list.filter(item => item.is_completed);
         } else if ($('.pickedTag').data('tag') === 'unfinished') {
-          list = list.filter(item => !item.data.is_completed);
+          list = list.filter(item => !item.is_completed);
         }
         $('.todo__items').empty();
         list.forEach((item) => {
-          if (item.data.is_completed) $('.todo__items').append(template(item.data));
-          else { $('.todo__items').prepend(template(item.data)); }
+          if (item.is_completed) $('.todo__items').append(template(item));
+          else { $('.todo__items').prepend(template(item)); }
         });
       },
     });
