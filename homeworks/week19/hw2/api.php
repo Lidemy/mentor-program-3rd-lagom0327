@@ -1,6 +1,8 @@
 <?php
   require_once('./conn.php');
   require_once('./isAuthor.php');
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PATCH,DELETE");
   header('Content-Type: application/json; charset=UTF-8'); 
 
   session_start();
@@ -11,8 +13,10 @@
 
 // 拿到目前使用者所有的 Todo Items 
   function getAllTodoItems($conn) {
+    // userId = 63 為 guest 用
+    $userId = !empty($_SESSION['user_id']) ? $_SESSION['user_id'] : 63;
     $stmt = $conn->prepare("SELECT * FROM lagom0327_todoItems WHERE user_id=? AND is_deleted=0");
-    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     $arr = array();
@@ -49,9 +53,9 @@
 }
 
 // 新增 todo item
-function addTodoItem($conn, $content) {
+function addTodoItem($conn, $userId, $content) {
   $stmt = $conn->prepare("INSERT INTO lagom0327_todoItems(user_id, content) VALUES (?, ?)");
-  $stmt->bind_param("is", $_SESSION['user_id'], $content);
+  $stmt->bind_param("is", $userId, $content);
   if ($stmt->execute()) {
     echo json_encode(array('id' => $conn->insert_id));
   }
@@ -77,7 +81,7 @@ function toggleTodoItemStatus($conn, $id) {
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
-
+// exit('method'. $method);
 switch ($method) {
   case 'GET':
     if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -88,18 +92,34 @@ switch ($method) {
     break;
 
   case 'POST':
-      if(isset($_POST['id']) && !isset($_POST['content']) && isItemAuthor($conn)) exit(toggleTodoItemStatus($conn, $_POST['id']));
       if (empty($_POST['content'])) die('empty data');
-      if (isset($_POST['userId']) && !isset($_POST['id']) && (int)$_POST['userId'] === $_SESSION['user_id']) exit(addTodoItem($conn, $_POST['content']));
-      if (isset($_POST['id']) && isItemAuthor($conn)) { // TODO
-        exit(editeTodoItem($conn, $_POST['id'], $_POST['content']));
-      }
+      if (!isset($_POST['id']) && empty($_SESSION['user_id'])) exit(addTodoItem($conn, 63, $_POST['content']));
+      if (isset($_POST['userId']) && !isset($_POST['id']) && (int)$_POST['userId'] === $_SESSION['user_id']) exit(addTodoItem($conn, $_SESSION['user_id'], $_POST['content']));
     break;
+
+  case 'PATCH':
+    $str = file_get_contents("php://input");
+    $data = array();
+    parse_str($str, $data);
+    if(!isItemAuthorForPatch($conn, $data['id'])) exit('You are not author');
+    if (isset($data['id']) && !isset($data['content'])) exit(toggleTodoItemStatus($conn, $data['id']));
+    if (empty($data['content'])) exit('empty cotent');
+    exit(editeTodoItem($conn, $data['id'], $data['content']));
+    break;
+
   case 'DELETE':
     if (!isset($_GET['id']) || empty($_GET['id'])) exit('id');
     if (!isItemAuthor($conn)) exit('author');
     deleteTodoItem($conn);
     break;
+  case 'OPTIONS':
+    // exit('in options');
+    header("HTTP/1.1 200 OK");
+    break;
+  default:
+    header('HTTP/1.1 404 Not Found');
+    break;
+
 }
 
 ?>

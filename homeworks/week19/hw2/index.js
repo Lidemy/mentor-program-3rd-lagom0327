@@ -100,7 +100,7 @@ const addToDoItem = (content) => {
 
 const changeChecked = (id) => {
   $.ajax({
-    type: 'POST',
+    type: 'PATCH',
     url: apiUrl,
     dataType: 'json',
     data: { id },
@@ -125,7 +125,7 @@ const deleteToDoItem = (id) => {
 
 const editeToDoItem = (id, content) => {
   $.ajax({
-    type: 'POST',
+    type: 'PATCH',
     url: apiUrl,
     dataType: 'json',
     data: {

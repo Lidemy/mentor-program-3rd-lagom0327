@@ -5,6 +5,10 @@ GET http://sio2.tw/TodoList/api.php
 GET http://sio2.tw/TodoList/api.php?id=1
 不是作者的話會得到 "You don't have permission to get this Todo Item!"
 ## 新增 Todo Item
+```ssh
+ curl -X POST http://sio2.tw/TodoList/api.php -d "content=curltest"
+```
+get id {"id":52}
 POST http://sio2.tw/TodoList/api.php
 ```
 {
@@ -24,13 +28,12 @@ POST http://sio2.tw/TodoList/api.php
 不是作者不能修改
 
 ## 修改 Todo Item 狀態
-POST http://sio2.tw/TodoList/api.php
-```
-{
-  id: 1,
-}
+
+```ssh
+curl -X POST http://sio2.tw/TodoList/api.php -d "id=48"
 ```
 不是作者不能修改
+"success"
 
 ## 刪除 Todo Item 狀態
 
