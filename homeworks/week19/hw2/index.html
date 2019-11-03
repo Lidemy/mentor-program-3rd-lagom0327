@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./login.css">
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="navbar-brand">Todo List</a>
+      <div>
+        <a class="navbar__login">Login</a>
+        <a class="navbar__signin">Sign</a>
+      </div>
+      <a href="./handle_logout.php" class="navbar__logout">Log out</a>
+
+    </nav>
+
+    <section class="container register">
+        <h1>Register</h1>
+        <form class="form" method="POST" action="./handle_register.php">
+                <label class="form__input_username icon icon_in_input"><input name="username" placeholder="username within 16 chars" required=""></label>
+          <label class="form__input_nickname icon icon_in_input"><input name="nickname" placeholder="nickname within 64 chars" required=""></label>
+          <label class="form__input_password icon icon_in_input"><input name="password" type="password" placeholder="password" required=""></label>
+          <label class="form__input_password icon icon_in_input"><input name="password2" type="password" placeholder="password" required=""></label>
+          <input class="btn" type="submit" value="OK">
+        </form>
+      </section>
+    
+  </section>
+
+    <section class="container login">
+      <h1>Login</h1>
+      
+      <form class="form" method="POST" action="./handle_login.php">
+              <label class="form__input_username icon icon_in_input"><input name="username" placeholder="username" required=""></label>
+        <label class="form__input_password icon icon_in_input"><input name="password" type="password" placeholder="password" required=""></label>
+        <input class="btn" type="submit" value="OK">
+      </form>
+    </section>
+
+    <div class='container todo'>
+        <header class='todo__header'>Todo List</header>
+
+
+      <div class='wrapper'>
+        <section class='todo__add'>
+            <input class='todo__add_input' type='text' placeholder="What needs to be done ?">
+            <button class="icon"><i class="fas fa-plus-square"></i></button>
+        </section>
+        <div class='pbar'>
+          <div class='progress'></div>
+        </div>
+        <section class="tag">
+          <button class='tag-all pickedTag' data-tag='all'>All</button>
+          <button class='tag-unfinished' data-tag='unfinished'>Unfinished</button>
+          <button class='tag-finished' data-tag='finished'>Finished</button>
+        </section>
+        <ul class='row todo__items'>
+          <li class='col-12 todo__item'>
+            <label class=''>
+              <input type='checkbox' > <p>hw1</p>
+              <i class="fas fa-square checkmark"></i>
+              <i class="fas fa-check-square checkmark--checked"></i>
+            </label>
+            <button class="todo__item__delete_btn"><i class="fas fa-times"></i></button>
+          </li>
+          <li class='col-12 todo__item'>
+            <label class=''>
+              <input type='checkbox' > <p>hw2</p>
+              <i class="fas fa-square checkmark"></i>
+              <i class="fas fa-check-square checkmark--checked"></i>
+            </label>
+            <button class="todo__item__delete_btn"><i class="fas fa-times"></i></button>
+          </li>
+          <li class='col-12 todo__item'>
+            <label class=''>
+              <input type='checkbox' > <p>hw3</p>
+              <i class="fas fa-square checkmark"></i>
+              <i class="fas fa-check-square checkmark--checked"></i>
+            </label>
+            <button class="todo__item__delete_btn"><i class="fas fa-times"></i></button>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+    <script src='./index.js'></script>
+    <!-- <script src="./login.js"></script> -->
+  </body>
+</html>

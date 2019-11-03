@@ -1,0 +1,90 @@
+.register, .login {
+  width: 400px;
+  background-color: rgba(95, 158, 160, 0.73);
+  padding: 10px 30px 0px;
+  border-radius: 5px;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align:center;
+  display: none;
+}
+.register h1, .login h1 {
+  font-size: 40px;
+  color: white;
+  text-shadow: 3px 3px 3px gray;
+}
+
+.register > form, .login > form {
+  margin: 10px auto;
+  width: 300px;
+}
+
+.register > form > label, .login > form > label {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.register input, .login input{
+  color: black;
+  margin: 0.5em auto;
+  width: 95%;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+  display: block;
+}
+
+.register input[type="submit"], .login input[type="submit"] {
+  width: 50px;
+  background-color: #04bdc3;
+  color: #ffffff;
+  border: none;
+  /* border: 1px solid rgba(95, 158, 160, 1); */
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.register input[type="submit"]:hover, .login input[type="submit"]:hover {
+  width: 60px;
+  background-color: #03a5aa;
+}
+
+.icon_in_input {
+  position: relative;
+  display:inline-block;
+}
+
+.icon::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 14px;
+}
+
+label.icon_in_input::before {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(69, 129, 131);
+}
+.form__input_username.icon::before {
+  content: "\f007";
+}
+.form__input_password.icon::before {
+  content: "\f084";
+}
+
+.form__input_nickname.icon::before {
+  content: "\f21b";
+}
+
+
+.icon > input {
+  text-indent: 20px;
+}
+
+input:-internal-autofill-selected {
+  /* background: #000; */
+}
