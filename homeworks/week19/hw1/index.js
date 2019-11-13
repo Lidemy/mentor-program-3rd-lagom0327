@@ -1,19 +1,5 @@
-const apiUrl = './api.php';
-function getCookie(cname) {
-  const name = cname.concat('=');
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return '';
-}
+const apiUrl = 'http://sio2.tw/TodoList/api.php';
+
 
 const whenError = (obj) => {
   console.log('error', obj.responseText);
@@ -40,7 +26,6 @@ const render = () => {
     $('.pbar').find('.progress').css('width', `${num}%`);
   };
 
-  // 從 API 利用 session 拿到該使用者的資料
   const getTodoList = () => {
     $.ajax({
       type: 'GET',
@@ -78,15 +63,11 @@ const renderTag = (target) => {
 
 const addToDoItem = (content) => {
   if (content === '') return;
-  const data = {
-    userId: getCookie('user_id'),
-    content,
-  };
   $.ajax({
     type: 'POST',
     url: apiUrl,
     dataType: 'json',
-    data,
+    data: { content },
     error: jqXHR => whenError(jqXHR),
     success: () => {
       if ($('.pickedTag').data('tag') === 'finished') {
@@ -124,58 +105,27 @@ const deleteToDoItem = (id) => {
 };
 
 const editeToDoItem = (id, content) => {
-  $.ajax({
-    type: 'PATCH',
-    url: apiUrl,
-    dataType: 'json',
-    data: {
-      id,
-      content,
-    },
-    error: jqXHR => whenError(jqXHR),
-    success: () => {
-      render();
-    },
-  });
-};
-
-// 登入和註冊功能
-const sendRequest = (method, target) => {
-  const url = $(target).closest('form').attr('action');
-  $.ajax({
-    type: method,
-    url,
-    dataType: 'json',
-    data: $(target).closest('form').serialize(),
-    error: jqXHR => whenError(jqXHR),
-    success: (res) => {
-      alert(res);
-      if (getCookie('user_id')) {
-        $('.navbar div').hide();
-        $('.navbar__logout').show();
-        $('.container.login').hide();
-        $('.container.register').hide();
-        $('.container.todo').show();
+  if (content === '') alert('content empty');
+  else {
+    $.ajax({
+      type: 'PATCH',
+      url: apiUrl,
+      dataType: 'json',
+      data: {
+        id,
+        content,
+      },
+      error: jqXHR => whenError(jqXHR),
+      success: () => {
         render();
-      } else {
-        $('.container.login').show();
-        $('.container.register').hide();
-        $('.container.login input:not([type="submit"])').val('');
-      }
-    },
-  });
+      },
+    });
+  }
 };
 
 let timefn = null;
 $(document).ready(() => {
-  $('.todo').hide();
-  if (getCookie('user_id')) {
-    render();
-    $('.todo').show();
-    $('.navbar div').hide();
-    $('.navbar__logout').show();
-  }
-
+  render();
   $('.todo__add_input ~ button').click(() => {
     addToDoItem($('.todo__add_input').val());
   });
@@ -231,26 +181,5 @@ $(document).ready(() => {
         if (event.keyCode === 13) send();
       });
     }
-  });
-  // 帳戶相關
-  $('.navbar__signin').click(() => {
-    $('.container.todo').hide();
-    $('.container.login').hide();
-    $('.container.register').show();
-  });
-  $('.navbar__login').click(() => {
-    $('.container.todo').hide();
-    $('.container.register').hide();
-    $('.container.login').show();
-  });
-
-  $('.container.login form').on('submit', (e) => {
-    e.preventDefault();
-    sendRequest('POST', e.target);
-  });
-
-  $('.container.register form').on('submit', (e) => {
-    e.preventDefault();
-    sendRequest('POST', e.target);
   });
 });
