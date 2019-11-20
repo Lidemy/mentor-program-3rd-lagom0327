@@ -35,6 +35,9 @@ class App extends Component {
     if (prevState.todos !== todos) {
       window.localStorage.setItem('todoapp', JSON.stringify(todos));
     }
+    if (todos.length === 0) {
+      window.localStorage.removeItem('todoapp');
+    }
   }
 
   handleChange = (e) => {
@@ -91,7 +94,8 @@ class App extends Component {
   render() {
     const { filter } = this.state;
     let { todos } = this.state;
-    const ratio = todos.filter(todo => todo.isCompleted).length / todos.length;
+    const ratio = todos.length === 0
+      ? 0 : todos.filter(todo => todo.isCompleted).length / todos.length;
     if (filter !== 'all') {
       todos = todos.filter(todo => (filter === 'completed' ? todo.isCompleted : !todo.isCompleted));
     }
