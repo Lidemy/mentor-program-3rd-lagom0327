@@ -1,0 +1,152 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+  background: black;
+}
+
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.game-info > div{
+  color: white;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: gray;
+  border: none;
+  float: left;
+  height: 45px;
+  margin-right: -1px;
+  margin-top: -1px;
+  width: 45px; 
+  position: relative;
+}
+
+/* 橫線 */
+.square::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+/* 直線 */
+.square::after {
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+}
+
+.square::before, .square::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background: #000;
+  z-index: 0;
+}
+
+.square:first-child::before {
+  left: 50%;
+}
+
+.square:last-child::before {
+  right: 50%;
+}
+
+.square:first-child::before, .square:last-child::before {
+  width: 50%;
+}
+
+.board-row:first-child .square::after {
+  top: 50%;
+}
+
+.board-row:first-child .square::after, .board-row:last-child .square::after {
+  height: 50%;
+}
+
+.stone {
+  display: none;
+  position: absolute;
+  height: 70%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  margin-right: 0;
+  border-radius: 50%;
+  z-index: 10;
+  box-sizing: border-box;
+  border: 1px solid yellow;
+  transform: translate(-50%, -50%);
+}
+
+.square:hover .stone {
+  display: block;
+  background: red;
+  opacity: 0.5;
+}
+
+.stone.black {
+  background-color: black;
+  display: block;
+}
+
+.stone.white {
+  background-color: white;
+  display: block;
+}
+
+
+/* .stone:before,
+.stone:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: red;
+  width: 50%;
+  height: 1px;
+}
+
+.stone:before {
+  left: 50%; 
+}
+.stone:after {
+  right: 50%;
+} */
+
+
+.square:focus {
+  outline: none;
+}
+
+
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+#root {
+  width: 1200px;
+  margin: 0 auto;
+}
