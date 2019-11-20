@@ -17,12 +17,14 @@ module.exports = {
     },
     ecmaVersion: 2018,
   },
+  parser: "babel-eslint",
   plugins: [
     'react',
   ],
   rules: {
     "no-console": "off",
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
-    'no-underscore-dangle':  ['error', { 'allow': ['_total'] }]
+    'no-underscore-dangle':  ['error', { 'allow': ['_total'] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
   },
 };
