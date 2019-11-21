@@ -13,12 +13,7 @@ class Filters extends Component {
     filters: PropTypes.arrayOf(PropTypes.string).isRequired,
   }
 
-  constructor(props) {
-    super(props);
-    this.change = this.change.bind(this);
-  }
-
-  change = (e) => {
+  handleClick = (e) => {
     const { changeFilter, filter } = this.props;
     if (filter === e.target.dataset.tag) return;
     changeFilter(e.target.dataset.tag);
@@ -35,7 +30,7 @@ class Filters extends Component {
               className={`filters__${filterText} ${filter === filterText ? 'pickedTag' : ''}`}
               data-tag={filterText}
               key={filterText}
-              onClick={this.change}
+              onClick={this.handleClick}
             >
               {firstCharUpperCase(filterText)}
             </button>

@@ -14,9 +14,7 @@ class Square extends PureComponent {
     onClick: PropTypes.func.isRequired,
   }
 
-
   render() {
-    // console.log('squares');
     const { value, onClick } = this.props;
     let stoneColor = '';
     if (value) {

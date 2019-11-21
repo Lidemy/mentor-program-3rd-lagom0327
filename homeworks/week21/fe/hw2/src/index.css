@@ -9,8 +9,21 @@ ol, ul {
   padding-left: 30px;
 }
 
-.game-info > div{
+.player {
+  text-align: center;
   color: white;
+  font-size: 30px;
+  margin-bottom: 0.5em;
+}
+
+.game-info li {
+  margin-top: 0.5em;
+}
+
+.game-info button {
+  border-radius: 5px;
+  outline: none;
+  background-color: #fff;
 }
 
 .board-row:after {
@@ -24,13 +37,13 @@ ol, ul {
 }
 
 .square {
-  background: gray;
+  background: rgb(158, 118, 66);
   border: none;
   float: left;
-  height: 45px;
+  height: 40px;
   margin-right: -1px;
   margin-top: -1px;
-  width: 45px; 
+  width: 40px; 
   position: relative;
 }
 
@@ -77,6 +90,20 @@ ol, ul {
   height: 50%;
 }
 
+.board-row:first-child .square:first-child {
+  border-top-left-radius: 4px;
+}
+
+.board-row:first-child .square:last-child {
+  border-top-right-radius: 4px;
+}
+.board-row:last-child .square:last-child {
+  border-bottom-right-radius: 4px;
+}
+.board-row:last-child .square:first-child {
+  border-bottom-left-radius: 4px;
+}
+
 .stone {
   display: none;
   position: absolute;
@@ -88,14 +115,14 @@ ol, ul {
   border-radius: 50%;
   z-index: 10;
   box-sizing: border-box;
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   transform: translate(-50%, -50%);
 }
 
 .square:hover .stone {
   display: block;
-  background: red;
-  opacity: 0.5;
+  background: none;
+  border: dotted 1px rgb(173, 173, 173);
 }
 
 .stone.black {
@@ -139,7 +166,11 @@ ol, ul {
 
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+.game-wrapper {
+  display: flex;
 }
 
 .game-info {

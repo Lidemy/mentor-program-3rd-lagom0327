@@ -33,6 +33,9 @@
     "eslint": "^5.15.1",
     "js-base64": "^2.5.1",
     "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "request": "^2.88.0",
     "wepack": "0.0.1",
     "wepack-cli": "0.0.1-security"

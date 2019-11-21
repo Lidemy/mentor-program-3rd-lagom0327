@@ -5,10 +5,6 @@ import './reset.css';
 import './index.css';
 
 class Board extends PureComponent {
-  static defaultProps = {
-    // squares: [null],
-  }
-
   static propTypes = {
     squares: PropTypes.arrayOf(PropTypes.oneOfType(
       [null, PropTypes.string],
@@ -20,7 +16,7 @@ class Board extends PureComponent {
     const { squares, onClick } = this.props;
     return (
       <Square
-        key={y}
+        key={`${x}-${y}`}
         value={squares[x][y]}
         onClick={() => onClick(x, y)}
       />
@@ -29,15 +25,15 @@ class Board extends PureComponent {
 
   render() {
     const { squares } = this.props;
-    console.log('board');
     return (
       <section>
         {
-          squares.map((row, x) => (
+          squares.map((row, y) => (
             (
+              // 要用甚麼當 key ?
               // eslint-disable-next-line react/no-array-index-key
-              <div key={x} className="board-row">
-                {row.map((col, y) => this.renderSquare(x, y))}
+              <div key={y} className="board-row">
+                {row.map((col, x) => this.renderSquare(x, y))}
               </div>
             )
           ))

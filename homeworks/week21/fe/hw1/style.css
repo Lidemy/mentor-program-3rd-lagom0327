@@ -147,9 +147,9 @@ input[type="checkbox"] {
   color: rgb(190, 226, 228);
 }
 
-.todo__item:hover input ~.checkmark--checked {
-  /* display: block; */
-}
+/* .todo__item:hover input ~.checkmark--checked {
+  display: block;
+} */
 .todo__item p {
   width: 193px;
   max-width: 400px;

@@ -20,7 +20,6 @@ class App extends Component {
 
   componentDidMount() {
     const todoData = window.localStorage.getItem('todoapp');
-    console.log('getData', todoData);
     if (todoData) {
       const oldTodos = JSON.parse(todoData);
       this.id = oldTodos[oldTodos.length - 1].id + 1;
@@ -99,7 +98,7 @@ class App extends Component {
     if (filter !== 'all') {
       todos = todos.filter(todo => (filter === 'completed' ? todo.isCompleted : !todo.isCompleted));
     }
-    console.log('RENDER');
+
     const { filters, todoText } = this.state;
     return (
       <div className="container">
