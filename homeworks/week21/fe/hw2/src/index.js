@@ -53,9 +53,10 @@ class Game extends Component {
       oneIsNext: true,
       winner: null,
     };
+    // this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(x, y) {
+  handleClick = (x, y) => {
     const { oneIsNext, stepNumber, winner } = this.state;
     let { history } = this.state;
     history = history.slice(0, stepNumber + 1);
@@ -118,7 +119,7 @@ class Game extends Component {
           <div className="game-board">
             <Board
               squares={current.squares}
-              onClick={(x, y) => this.handleClick(x, y)}
+              onClick={this.handleClick}
             />
           </div>
           <div className="game-info">

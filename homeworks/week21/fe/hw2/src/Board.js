@@ -17,13 +17,16 @@ class Board extends PureComponent {
     return (
       <Square
         key={`${x}-${y}`}
+        x={x}
+        y={y}
         value={squares[x][y]}
-        onClick={() => onClick(x, y)}
+        onClick={onClick}
       />
     );
   }
 
   render() {
+    console.log('board');
     const { squares } = this.props;
     return (
       <section>

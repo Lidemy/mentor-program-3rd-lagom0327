@@ -10,12 +10,20 @@ class Square extends PureComponent {
   }
 
   static propTypes = {
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
     value: PropTypes.number,
     onClick: PropTypes.func.isRequired,
   }
 
+  handleClick = () => {
+    const { x, y, onClick } = this.props;
+    onClick(x, y);
+  }
+
   render() {
-    const { value, onClick } = this.props;
+    console.log('square');
+    const { value } = this.props;
     let stoneColor = '';
     if (value) {
       stoneColor = value === 1 ? 'black' : 'white';
@@ -24,7 +32,7 @@ class Square extends PureComponent {
       <button
         type="button"
         className="square"
-        onClick={onClick}
+        onClick={this.handleClick}
       >
         <span className={`stone ${stoneColor}`} />
       </button>
