@@ -7,11 +7,7 @@ class NavItem extends PureComponent {
   static propTypes ={
     children: Proptypes.string.isRequired,
     to: Proptypes.string.isRequired,
-    exact: Proptypes.bool,
-  }
-
-  static defaultProps = {
-    exact: false,
+    exact: Proptypes.bool.isRequired,
   }
 
   render() {

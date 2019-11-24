@@ -25,10 +25,13 @@ const App = () => (
       <Route exact path="/post" component={PostList} />
       <Route path="/post/:postId" component={Article} />
     </Router>
-    <div id="line" />
-    <footer className="wrapper">
-      © Company 2019
-    </footer>
+    <div className="bottom">
+      <div id="line" />
+      <footer>
+        © Company 2019
+      </footer>
+    </div>
+
   </div>
 );
 

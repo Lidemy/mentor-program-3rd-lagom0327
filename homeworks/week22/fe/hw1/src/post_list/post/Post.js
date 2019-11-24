@@ -9,7 +9,7 @@ class Post extends PureComponent {
     body: Proptypes.string.isRequired,
     value: Proptypes.number.isRequired,
     history: Proptypes.objectOf(Proptypes.oneOfType([
-      Proptypes.string, Proptypes.func, Proptypes.object,
+      Proptypes.number, Proptypes.string, Proptypes.func, Proptypes.object,
     ])).isRequired,
   }
 

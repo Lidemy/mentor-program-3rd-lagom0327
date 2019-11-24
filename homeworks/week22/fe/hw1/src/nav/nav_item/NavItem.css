@@ -19,8 +19,7 @@ a {
   color: rgb(201, 192, 192);
 }
 
-#bar {
-  color: rgb(123, 162, 206);
+.nav__button:first-child {
   font-size: 1.3em;
   margin-left: 0.5em;
 }

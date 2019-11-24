@@ -7,7 +7,7 @@ class Article extends Component {
   static propTypes = {
     match: Proptypes.shape({
       isExact: Proptypes.bool.isRequired,
-      params: Proptypes.shape({ postId: Proptypes.number.isRequired }),
+      params: Proptypes.shape({ postId: Proptypes.string.isRequired }),
       path: Proptypes.string.isRequired,
       url: Proptypes.string.isRequired,
     }).isRequired,
