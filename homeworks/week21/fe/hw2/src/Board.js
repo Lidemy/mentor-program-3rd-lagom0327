@@ -5,12 +5,16 @@ import './reset.css';
 import './index.css';
 
 class Board extends PureComponent {
+  static defaultProps = {
+    // ex : 2*2 的棋盤
+    squares: [[null, null], [null, null]],
+  }
+
   static propTypes = {
-    squares: PropTypes.arrayOf(PropTypes.oneOfType(
-      [null, PropTypes.string],
-    )).isRequired,
+    squares: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number]))),
     onClick: PropTypes.func.isRequired,
   }
+
 
   renderSquare(x, y) {
     const { squares, onClick } = this.props;
