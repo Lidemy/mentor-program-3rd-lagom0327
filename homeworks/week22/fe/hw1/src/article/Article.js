@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Article.css';
 
 class Article extends Component {
   static propTypes = {
-    // id: Proptypes.number.isRequired,
+    match: Proptypes.shape({
+      isExact: Proptypes.bool.isRequired,
+      params: Proptypes.shape({ postId: Proptypes.number.isRequired }),
+      path: Proptypes.string.isRequired,
+      url: Proptypes.string.isRequired,
+    }).isRequired,
     // handleClickOnArticle: Proptypes.func.isRequired,
   }
 
@@ -16,9 +22,8 @@ class Article extends Component {
   }
 
   componentDidMount() {
-    console.log('props', this.props.match.params.postId)
-    const  id  = this.props.match.params.postId;
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    const { match: { params: { postId } } } = this.props;
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
       .then(res => res.json())
       .then((data) => {
         this.setState({
@@ -44,13 +49,13 @@ class Article extends Component {
           </address>
         </header>
         <p className="article__text">{body}</p>
-
-          <Link 
-            type="button"
-            className="article__button button"
-            to="/post">
-            Return
-          </Link>
+        <Link
+          type="button"
+          className="article__button button"
+          to="/post"
+        >
+          Return
+        </Link>
       </section>
     );
   }

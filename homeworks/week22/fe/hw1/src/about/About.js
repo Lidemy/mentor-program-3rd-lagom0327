@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+/* eslint-disable max-len */
+import React from 'react';
 
-class About extends Component {
-  render() {
-    return (
-      <article className="about wrapper">
-      I am about page. I am about page. I  I am about page.I am about page. I am
-      about page. am about page. I am about page. I am about page. I am about page. I am about page. I am about page. I am about page.
-    </article>
-    )
-  }
-}
+const About = () => (
+  <article className="about wrapper">
+    I am about page. I am about page. I  I am about page.I am about page. I am
+    about page. am about page. I am about page. I am about page. I am about page. I am about page. I am about page. I am about page.
+  </article>
+);
 
 export default About;

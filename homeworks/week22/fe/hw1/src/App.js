@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import React, { Component } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Article from './article';
 import PostList from './post_list';
 import Nav from './nav';
@@ -16,26 +16,20 @@ const Header = () => (
   </header>
 );
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Router>
-            <Nav/>
-            <Route exact path="/" component={Header} />
-            <Route path="/about" component={About} />
-            <Route exact path="/post" component={PostList} />
-            <Route path="/post/:postId" component={Article} />
-        </Router>
-        <div id="line" />
-        <section className=" wrapper">
-        </section>
-        <footer className="wrapper">
-          © Company 2019
-        </footer>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <Router>
+      <Nav />
+      <Route exact path="/" component={Header} />
+      <Route path="/about" component={About} />
+      <Route exact path="/post" component={PostList} />
+      <Route path="/post/:postId" component={Article} />
+    </Router>
+    <div id="line" />
+    <footer className="wrapper">
+      © Company 2019
+    </footer>
+  </div>
+);
 
 export default App;
