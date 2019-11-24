@@ -8,7 +8,9 @@ class Post extends PureComponent {
     title: Proptypes.string.isRequired,
     body: Proptypes.string.isRequired,
     value: Proptypes.number.isRequired,
-    // handleClickOnPost: Proptypes.func.isRequired,
+    history: Proptypes.objectOf(Proptypes.oneOfType([
+      Proptypes.string, Proptypes.func, Proptypes.object,
+    ])).isRequired,
   }
 
   render() {
@@ -23,7 +25,7 @@ class Post extends PureComponent {
         <button
           type="button"
           className="post__button button"
-          onClick={() => {history.push('/post/' + value)}}
+          onClick={() => { history.push(`/post/${value}`); }}
         >
           View details
         </button>
