@@ -1,0 +1,29 @@
+.article__info {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+.article__title {
+  font-size: 30px;
+}
+.article__author {
+  margin-top: 0.5em;
+}
+.article__text {
+  white-space: pre-wrap;
+  line-height: 1.5rem;
+}
+.article__button {
+  display: block;
+  color: white;
+  margin-top: 1em;
+  width: 7em;
+}
+
+.waiting {
+  width: 300px;
+  background-color: rgba(31, 120, 192, 0.486);
+  border-radius: 5px;
+  margin: 2em auto;
+  padding: 1em;
+  text-align: center;
+}
