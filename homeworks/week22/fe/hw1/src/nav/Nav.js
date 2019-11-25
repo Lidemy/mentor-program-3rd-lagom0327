@@ -10,6 +10,7 @@ const Nav = () => (
       <NavItem exact to="/">Home</NavItem>
       <NavItem exact={false} to="/post">PostList</NavItem>
       <NavItem exact={false} to="/about">About</NavItem>
+      <NavItem exact={false} to="/addpost">AddPost</NavItem>
     </ul>
   </nav>
 );

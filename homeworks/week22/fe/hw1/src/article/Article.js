@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Article.css';
+import Loading from '../loading';
 
 class Article extends Component {
   static propTypes = {
@@ -17,13 +18,18 @@ class Article extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
+      data: {
+        author: '',
+        boyd: '',
+        createdAt: 1573649501347,
+        title: '',
+      },
     };
   }
 
   componentDidMount() {
     const { match: { params: { postId } } } = this.props;
-    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+    fetch(`https://qootest.com/posts/${postId}`)
       .then(res => res.json())
       .then((data) => {
         this.setState({
@@ -34,19 +40,23 @@ class Article extends Component {
 
   render() {
     const { data } = this.state;
-    const { title, userId, body } = data;
+    const {
+      title, author, body, createdAt,
+    } = data;
+    if (!title) return <Loading />;
+    const date = new Date(createdAt);
     return (
+
       <section className="article wrapper">
-        {!title && <h1 className="waiting">Waiting...</h1>}
+        <h1 className="article__title">
+          {title}
+        </h1>
         <header className="article__info">
-          <h1 className="article__title">
-            {!title && 'Title:'}
-            {title}
-          </h1>
           <address className="article__author">
             Author:
-            {` ${userId}`}
+            {` ${author}`}
           </address>
+          <time className="article__time">{date.toDateString()}</time>
         </header>
         <p className="article__text">{body}</p>
         <Link

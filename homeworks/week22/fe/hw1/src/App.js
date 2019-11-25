@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import AddPost from './add_post';
 import Article from './article';
 import PostList from './post_list';
 import Nav from './nav';
@@ -16,6 +17,7 @@ const Header = () => (
   </header>
 );
 
+
 const App = () => (
   <div className="App">
     <Router>
@@ -24,6 +26,7 @@ const App = () => (
       <Route path="/about" component={About} />
       <Route exact path="/post" component={PostList} />
       <Route path="/post/:postId" component={Article} />
+      <Route path="/addpost" component={AddPost} />
     </Router>
     <div className="bottom">
       <div id="line" />

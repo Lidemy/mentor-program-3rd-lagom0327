@@ -1,3 +1,5 @@
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,7 +11,17 @@
   font-size: 1em;
   list-style-type:none;
   color: black;
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Arvo', 'Noto Sans TC', sans-serif;
+}
+
+.addPost input, .addPost textarea {
+  font-family: 'Arvo', 'Noto Sans TC', sans-serif;
 }
 
 footer.wrapper {
@@ -24,7 +36,8 @@ footer.wrapper {
 .wrapper {
   max-width: 960px;
   margin: 0 auto;
-  margin-bottom: 2em;
+  
+  /* margin-bottom: 2em; */
 }
 
 .header {
@@ -35,7 +48,7 @@ footer.wrapper {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 87vh;
+  height: calc(100vh - 100px);
   background: rgba(178, 229, 250,0.3);
   /* margin-top:  1em; */
 }
@@ -82,12 +95,6 @@ section > ul {
   flex-wrap: wrap;
 }
 
-
-.about {
-  font-size: 20px;
-  margin-top: 2em;
-}
-
 #line {
   background: rgb(184, 182, 182);
   height: 1px;
@@ -103,8 +110,10 @@ footer {
 }
 
 .bottom {
-  position: fixed;
-  bottom: 0px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  /* z-index: 1; */
 }
 
 @media (max-width:960px) {
