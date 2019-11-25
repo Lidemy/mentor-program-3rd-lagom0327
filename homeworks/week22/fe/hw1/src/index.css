@@ -1,18 +1,18 @@
 
 
-* {
+/* *:not(pre, figure) {
   box-sizing: border-box;
   margin: 0;
   margin-block-start: 0;
   margin-block-end: 0;
   padding: 0;
-  /* ul padding-left @ IE */
+
   font-weight: normal;
   font-size: 1em;
   list-style-type:none;
   color: black;
-  /* font-family: sans-serif; */
-}
+  /* font-family: sans-serif;
+} */
 
 .App {
   position: relative;

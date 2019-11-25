@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
 import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './Article.css';
 import Loading from '../loading';
+import CodeBlock from '../code_block';
+import './Article.css';
 
 class Article extends Component {
   static propTypes = {
@@ -12,7 +14,6 @@ class Article extends Component {
       path: Proptypes.string.isRequired,
       url: Proptypes.string.isRequired,
     }).isRequired,
-    // handleClickOnArticle: Proptypes.func.isRequired,
   }
 
   constructor(props) {
@@ -58,7 +59,17 @@ class Article extends Component {
           </address>
           <time className="article__time">{date.toDateString()}</time>
         </header>
-        <p className="article__text">{body}</p>
+        <div className="article__text">
+          <div>
+            <ReactMarkdown
+              source={body}
+              escapeHtml={false}
+              renderers={{
+                code: CodeBlock,
+              }}
+            />
+          </div>
+        </div>
         <Link
           type="button"
           className="article__button button"
