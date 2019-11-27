@@ -6,6 +6,7 @@ import Article from './article';
 import PostList from './post_list';
 import Nav from './nav';
 import About from './about';
+import repository from './repository';
 
 const Header = () => (
   <header className="header">
@@ -22,11 +23,11 @@ const App = () => (
   <div className="App">
     <Router>
       <Nav />
-      <Route exact path="/" component={Header} />
-      <Route path="/about" component={About} />
-      <Route exact path="/post" component={PostList} />
-      <Route path="/post/:postId" component={Article} />
-      <Route path="/addpost" component={AddPost} />
+      <Route exact path={`/${repository}`} component={Header} />
+      <Route path={`/${repository}/about`} component={About} />
+      <Route exact path={`/${repository}/post`} component={PostList} />
+      <Route path={`/${repository}/post/:postId`} component={Article} />
+      <Route path={`/${repository}/addpost`} component={AddPost} />
     </Router>
     <div className="bottom">
       <div id="line" />

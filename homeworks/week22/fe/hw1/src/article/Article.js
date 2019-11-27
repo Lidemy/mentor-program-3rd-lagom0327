@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../loading';
 import CodeBlock from '../code_block';
 import './Article.css';
+import repository from '../repository';
 
 class Article extends Component {
   static propTypes = {
@@ -73,7 +74,7 @@ class Article extends Component {
         <Link
           type="button"
           className="article__button button"
-          to="/post"
+          to={`/${repository}/post`}
         >
           Return
         </Link>

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import Proptypes from 'prop-types';
 import './Post.css';
+import repository from '../../repository';
 
 class Post extends PureComponent {
   static propTypes ={
@@ -25,7 +26,7 @@ class Post extends PureComponent {
         <button
           type="button"
           className="post__button button"
-          onClick={() => { history.push(`/post/${value}`); }}
+          onClick={() => { history.push(`/${repository}/post/${value}`); }}
         >
           View details
         </button>

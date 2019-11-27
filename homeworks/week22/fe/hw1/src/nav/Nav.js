@@ -3,14 +3,16 @@
 import React from 'react';
 import './Nav.css';
 import NavItem from './nav_item';
+import repository from '../repository';
+
 
 const Nav = () => (
   <nav>
     <ul>
-      <NavItem exact to="/">Home</NavItem>
-      <NavItem exact={false} to="/post">PostList</NavItem>
-      <NavItem exact={false} to="/about">About</NavItem>
-      <NavItem exact={false} to="/addpost">AddPost</NavItem>
+      <NavItem exact to={`/${repository}`}>Home</NavItem>
+      <NavItem exact={false} to={`/${repository}/post`}>PostList</NavItem>
+      <NavItem exact={false} to={`/${repository}/about`}>About</NavItem>
+      <NavItem exact={false} to={`/${repository}/addpost`}>AddPost</NavItem>
     </ul>
   </nav>
 );
