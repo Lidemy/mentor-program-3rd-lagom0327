@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Demo](https://lagom0327.github.io/react-blog)
 
-## Available Scripts
+- 只顯示有標題的文章
+- 可顯示 markdowon 格式，但有些 tag 的 css 被我 reset 了，所以看不出差別
+- 使用 `BrowserRouter` 後， 刷新網頁會找不到，把 404.html 內容改成  index.html 的內容
+  - `package.json` 內 `build` 的指令加上 `cp build/index.html build/404.html`，就會自動複製過去
 
-In the project directory, you can run:
+- 直接在 `mentor-program-3rd-lagom0327` 資料夾中使用 create-react-app 建立此檔案，需在 `hw1` 中新增 `.env`， 文件中寫 `SKIP_PREFLIGHT_CHECK=true` 用來忽略套件衝突
 
-### `npm start`
+## 部屬
+1. `npm install gh-pages --save-dev`
+1. `package.json` 加上 `homepage` 屬性
+    ```json 
+    "homepage": "http://lagom0327github.io/react-blog"
+    ```
+1. `package.json` 的 `scripts` 中加上
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    ```json
+    "scripts": {
+    //...
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+    }
+    ```
+1. `git init` 
+    -> `git remote add origin https://github.com/lagom0327/react-blog.git` 
+    -> `npm run deploy` 會要求輸入 github 帳號密碼，
+    成功後會在 `react-blog` 的 repository 新增名為 `gh-pages` 的 branch。
+1. 到 github 的 repository 的 setting 中 `Github Pages` 來源為 `gh-pages branch`
+ 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+  ### 參考資料
+  - [React-router 在 github page 的問題](https://blog.hidana.me/20190813.html)
+  - [react-markdown 使用总结](https://segmentfault.com/a/1190000020294373)

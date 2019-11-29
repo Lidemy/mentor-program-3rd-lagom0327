@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Loading from '../loading';
 import CodeBlock from '../code_block';
 import './Article.css';
@@ -31,13 +32,13 @@ class Article extends Component {
 
   componentDidMount() {
     const { match: { params: { postId } } } = this.props;
-    fetch(`https://qootest.com/posts/${postId}`)
-      .then(res => res.json())
-      .then((data) => {
+    axios.get(`https://qootest.com/posts/${postId}`)
+      .then((res) => {
         this.setState({
-          data,
+          data: res.data,
         });
-      });
+      })
+      .catch(error => console.log('error', error));
   }
 
   render() {
