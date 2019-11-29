@@ -26,15 +26,6 @@
   width: 7em;
 }
 
-.waiting {
-  width: 300px;
-  background-color: rgba(31, 120, 192, 0.486);
-  border-radius: 5px;
-  margin: 2em auto;
-  padding: 1em;
-  text-align: center;
-}
-
 .article code {
   font-family: 'Consolas';
   padding: .2em .4em;

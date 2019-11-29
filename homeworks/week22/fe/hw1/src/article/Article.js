@@ -24,6 +24,7 @@ class Article extends Component {
       data: {
         author: '',
         boyd: '',
+        // createdAt 為空字串 畫面會出現 "invalid number"
         createdAt: 1573649501347,
         title: '',
       },
@@ -38,7 +39,7 @@ class Article extends Component {
           data: res.data,
         });
       })
-      .catch(error => console.log('error', error));
+      .catch(() => alert('系統忙碌中'));
   }
 
   render() {
