@@ -24,22 +24,18 @@ class PostList extends Component {
   render() {
     const { posts } = this.state;
     if (!posts[0]) return <Loading />;
+    const newPosts = posts.filter(post => post.title);
     return (
       <ul className="posts wrapper">
         {
-          posts.map((post) => {
-            if (post.title) {
-              return (
-                <Post
-                  title={post.title}
-                  body={post.body}
-                  value={post.id}
-                  key={post.id}
-                />
-              );
-            }
-            return null;
-          })
+          newPosts.map(post => (
+            <Post
+              title={post.title}
+              body={post.body}
+              value={post.id}
+              key={post.id}
+            />
+          ))
         }
       </ul>
     );

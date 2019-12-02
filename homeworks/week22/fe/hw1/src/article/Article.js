@@ -24,8 +24,7 @@ class Article extends Component {
       data: {
         author: '',
         boyd: '',
-        // createdAt 為空字串 畫面會出現 "invalid number"
-        createdAt: 1573649501347,
+        createdAt: 0,
         title: '',
       },
     };
@@ -43,10 +42,12 @@ class Article extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    // const { data } = this.state;
     const {
-      title, author, body, createdAt,
-    } = data;
+      data: {
+        title, author, body, createdAt,
+      },
+    } = this.state;
     if (!title) return <Loading />;
     const date = new Date(createdAt);
     return (
@@ -66,7 +67,6 @@ class Article extends Component {
           <div>
             <ReactMarkdown
               source={body}
-              escapeHtml={false}
               renderers={{
                 code: CodeBlock,
               }}
