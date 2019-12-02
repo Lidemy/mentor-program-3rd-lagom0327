@@ -1,0 +1,7 @@
+nav {
+  background: rgb(10, 22, 59);
+  top: 0px;
+  position: sticky;
+  z-index: 2;
+  /* float: left; */
+}

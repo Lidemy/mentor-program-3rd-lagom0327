@@ -1,0 +1,109 @@
+
+
+.App {
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Arvo', 'Noto Sans TC', sans-serif;
+}
+
+.addPost input, .addPost textarea {
+  font-family: 'Arvo', 'Noto Sans TC', sans-serif;
+}
+
+footer.wrapper {
+  margin-bottom: 0em;
+  bottom: 0px;
+  position: sticky;
+  z-index: 2;
+  padding-bottom: 2em;
+}
+
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  background: rgba(178, 229, 250,0.3);
+}
+
+
+.header__title {
+  font-size: 5em;
+  margin-bottom: 0.2em;
+}
+
+.header__text {
+  margin-bottom: 1em;
+}
+
+.button {
+  background: rgb(163, 163, 163);
+  width: 9em;
+  height: 2.5em;
+  border-radius: 5px;
+  border:0px  solid;
+  line-height: 2.5em;
+  text-align: center;
+  color: white;
+}
+
+.button:hover {
+  background: rgb(119, 118, 118);
+  cursor:pointer;
+}
+
+.header__button {
+  background: rgb(79, 129, 236);
+  font-size:1.25em;
+}
+
+.header > .wrapper > .button:hover {
+  background: rgb(54, 88, 161);
+  cursor:pointer;
+}
+
+section > ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#line {
+  background: rgb(184, 182, 182);
+  height: 1px;
+  width: 100vw;
+
+}
+
+footer {
+
+  padding-top:1.5em;
+  padding-bottom:1.5em;
+  padding-left: 2em;
+}
+
+.bottom {
+  background-color: #fff;
+  position: absolute;
+}
+
+@media (max-width:960px) {
+  .wrapper {
+    width: 90%;
+  }
+}
+
+@media (max-width:750px) {
+.wrapper {
+    width: 85%;
+}
+}
+
+
